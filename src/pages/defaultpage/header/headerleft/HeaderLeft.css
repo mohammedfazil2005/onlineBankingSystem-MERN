@@ -1,0 +1,53 @@
+.header-left-parent{
+    display: flex;
+    flex-direction: column;
+    margin: 60px;
+    gap: 30px;
+}
+.header-left-parent h1{
+    color: white;
+    font-size: 52px;
+    width: 80%;
+}
+.header-left-parent p{
+   width: 80%;
+   color: lightgray;
+   
+}
+
+.header-left-button-div{
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.header-left-button-div button{
+    width: 150px;
+    padding: 16px 15px;
+    border: none;
+    color: white;
+    background: transparent;
+}
+
+#signup-btn{
+    background-color: blueviolet;
+}
+#signup-btn:hover{
+    background-color: white;
+    border: 1px solid blueviolet;
+    color: black;
+}
+.header-left-button-div button:hover{
+    background-color: white;
+    border: 1px solid blueviolet;
+    color: black;
+}
+.header-left-box-div{
+    display: flex;
+    gap: 15px;
+}
+.header-left-box-div div{
+    padding: 40px;
+    border: 1px solid blueviolet;
+    color: white;
+}

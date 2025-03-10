@@ -1,0 +1,27 @@
+.de-nav-div{
+    background: rgb(24,20,60);
+}
+.de-nav-div nav{
+    margin: 0px 80px;
+}
+.de-nav-div nav img{
+    width: 50px;
+}
+
+.de-nav-div nav ul li a{
+    color: white;
+    margin: 0px 10px;
+}
+
+.de-nav-div nav form {
+    display: flex;
+    gap: 10px;
+}
+
+.de-nav-div nav form button{
+    padding: 10px 15px;
+    width: 100px;
+    border: none;
+    background-color: transparent;
+    color: white;
+}

@@ -1,0 +1,57 @@
+.default-ads{
+    display: flex;
+    justify-content: space-between;
+    margin: 100px 60px;
+    align-items: center;
+}
+
+.default-ads div img{
+    width: 80%;
+}
+.default-ads div{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.default-ads div h1{
+    width: 520px;
+    font-weight: bold;
+    font-size: 45px;
+}
+.default-ads div p{
+    font-weight: 300;
+}
+.default-ads div button{
+    padding: 12px;
+    width: 200px;
+    border: none;
+    background-color: blueviolet;
+    color: white;
+}
+
+.default-ads div button:hover{
+    border: 1px solid blueviolet;
+    background-color: white ;
+    color: black;
+}
+
+@media screen and (max-width:799px) {
+    .default-ads{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .default-ads div img{
+        width: 100%;
+    }
+    .default-ads div{
+        align-items: center;
+    }
+    .default-ads div h1{
+        width: 100%;
+        text-align: center;
+    }
+    .default-ads div p{
+        text-align: center;
+    }
+}

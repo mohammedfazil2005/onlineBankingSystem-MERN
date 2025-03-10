@@ -1,0 +1,15 @@
+.default-history{
+    display: flex;
+    margin: 40px 60px;
+    justify-content: space-around;
+    margin-top: 70px;
+}
+
+.default-history div h1{
+    font-weight: bold;
+    color: rgb(24,20,60);
+}
+.default-history div p{
+    font-weight: 300;
+    color: rgb(24,20,60);
+}

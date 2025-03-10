@@ -1,0 +1,12 @@
+.header-parent{
+    background: rgb(24,20,60);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen  and (max-width:780px){
+    .header-parent{
+        flex-direction: column;
+    }
+}
