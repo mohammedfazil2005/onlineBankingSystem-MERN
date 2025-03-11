@@ -23,7 +23,7 @@ const DefaultNavbar = () => {
       </ul>
       <form className="" role="search">
         <button>Contact</button>
-        <button style={{border:'1px solid white'}}>Login</button>
+        <Link to={'/login'}><button style={{border:'1px solid white'}}>Login</button></Link>
       </form>
     </div>
   </div>

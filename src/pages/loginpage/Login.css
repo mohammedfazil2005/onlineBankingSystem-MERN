@@ -1,0 +1,85 @@
+.login-parent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    
+}
+
+.login-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 700px;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.login-child h1{
+    letter-spacing: 1px;
+}
+.login-child input{
+    width: 100%;
+}
+.login-child div{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+.login-parent img{
+    width: 150px;
+}
+.cursor-pointer{
+    border: 1px solid rgba(137, 43, 226, 0.26);
+}
+
+.login-child button{
+    padding: 10px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+}
+
+.login-child button:hover{
+    background-color: white;
+    border: 1px solid blueviolet;
+    color: black;
+}
+.login-child h6{
+    font-weight: 300;
+    color: rgb(24,20,60);
+    cursor: pointer;
+    margin: 1px 0px;
+}
+
+.google-auth-div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.google-auth-div h4{
+    font-size: 15px;
+}
+#google-bnt{
+  
+    border: 1px solid blueviolet;
+    color: black;
+    background-color: white;
+    
+}
+#google-bnt:hover{
+    background-color: blueviolet;
+    color: white;
+}
+#google-bnt img{
+    width: 20px;
+    margin-right: 20px;
+}
+
+@media screen and (max-width:702px) {
+    .login-child{
+        width: 100%;
+    }
+}

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import DefaultPage from "./pages/defaultpage/DefaultPage"
-import Footer from "./components/footer/Footer"
+import Login from "./pages/loginpage/Login"
 
 function App() {
 
@@ -10,9 +10,9 @@ function App() {
     {/* <Navbar/> */}
      <Routes>
       <Route path="/" element={<DefaultPage/>}/>
+      <Route path="/login" element={<Login/>}/>
      </Routes>
      <hr />
-     <Footer/>
     </>
     
   )

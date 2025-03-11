@@ -1,5 +1,6 @@
 import React from 'react'
 import './DefaultCard.css'
+import { Link } from 'react-router-dom'
 
 const DefaultCard = () => {
   return (
@@ -10,7 +11,7 @@ const DefaultCard = () => {
       <div>
         <h1>Explore the unexplored with Bankai</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, provident. Voluptate vel, et minima aperiam debitis quod at cumque nostrum quae id ducimus ex, animi doloremque officia odio? Perferendis, consectetur.</p>
-        <button>Signup Now</button>
+       <Link to={'/login'}> <button>Signup Now</button></Link>
       </div>
     </div>
   )

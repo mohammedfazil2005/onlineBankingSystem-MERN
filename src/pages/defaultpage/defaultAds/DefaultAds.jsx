@@ -1,5 +1,6 @@
 import React from 'react'
 import './DefaultAds.css'
+import { Link } from 'react-router-dom'
 
 const DefaultAds = () => {
   return (
@@ -10,7 +11,7 @@ const DefaultAds = () => {
       <div>
         <h1>Choose your own Unique Credit Card</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore minus labore sed, accusantium rem vero veniam ducimus nesciunt aspernatur non officiis similique mollitia error consequuntur impedit. Eos officia consectetur iusto.</p>
-        <button>Sign Up Now</button>
+       <Link to={'/login'}><button>Sign Up Now</button></Link>
       </div>
 
     </div>

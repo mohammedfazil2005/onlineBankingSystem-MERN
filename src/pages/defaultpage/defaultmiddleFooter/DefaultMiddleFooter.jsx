@@ -1,5 +1,6 @@
 import React from 'react'
 import './DefaultMiddleFooter.css'
+import { Link } from 'react-router-dom'
 
 const DefaultMiddleFooter = () => {
   return (
@@ -10,7 +11,7 @@ const DefaultMiddleFooter = () => {
       <div>
         <h1>Ready to join Bankai?</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed modi unde nihil, beatae fugiat eius, veniam neque velit exercitationem incidunt est minus eveniet ipsam non mollitia odit sunt laboriosam optio?</p>
-        <button>Get started</button>
+       <Link to={'/login'}><button>Get started</button></Link>
       </div>
     </div>
   )

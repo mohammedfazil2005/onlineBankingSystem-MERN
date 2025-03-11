@@ -1,5 +1,6 @@
 import React from 'react'
 import './HeaderLeft.css'
+import { Link } from 'react-router-dom'
 
 const HeaderLeft = () => {
   return (
@@ -7,8 +8,8 @@ const HeaderLeft = () => {
     <h1> You Can Do more with Right Card</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tempora non ipsam Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tempora non ipsam</p>
     <div className='header-left-button-div'>
-        <button id='signup-btn'>Signup</button>
-        <button>Get started</button>
+       <Link to={'/login'}> <button id='signup-btn'>Signup</button></Link>
+       <Link to={'/login'}> <button>Get started</button></Link>
     </div>
     <div className='header-left-box-div'>
         <div>
