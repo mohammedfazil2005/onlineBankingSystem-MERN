@@ -1,0 +1,38 @@
+.home-parent{
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-left{
+    position: fixed;
+    width: 300px;
+    overflow-y: scroll;
+  
+   
+}
+.home-right{
+    margin-left: 330px;
+    width: 75%;
+   
+}
+
+@media screen and (max-width:909px) {
+    .home-left{
+        width: 200px;
+    }
+    .home-right{
+        margin-left: 230px;
+    }
+}
+
+
+@media screen and (max-width:810px) {
+    .home-left{
+        width: 150px;
+    }
+    .home-right{
+        margin-left: 160px;
+        width: 100%;
+    }
+    
+}

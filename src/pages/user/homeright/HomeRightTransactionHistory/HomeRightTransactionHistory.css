@@ -1,0 +1,62 @@
+.user-transaction-history-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.user-transaction-history-heading{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items: center;
+}
+.user-transaction-history-heading h1{
+    letter-spacing: 1px;
+}
+
+.user-transaction-account-details{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    background: rgb(24,20,60);
+    border-radius: 10px;
+    color: white;
+}
+.user-transaction-account-details div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.user-transaction-account-details h1{
+    font-size: 17px;
+}
+
+.user-transaction-account-details h6{
+    font-weight: lighter;
+}
+
+.user-transaction-account-details-right-div{
+    border: 3px solid  white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.user-transaction-account-details-right-div h4{
+
+    font-weight: 300;
+}
+
+.user-transaction-history-full{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.user-transaction-history-list-heading{
+    display: flex;
+    justify-content: space-between;
+
+}
+.user-transaction-history-list-heading button{
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    padding: 5px;
+}

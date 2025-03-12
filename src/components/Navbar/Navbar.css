@@ -1,0 +1,30 @@
+.nav-div{
+    background: rgb(24,20,60);
+}
+.nav-div nav{
+    margin: 0px 80px;
+}
+.nav-div nav img{
+    width: 50px;
+}
+
+.nav-div nav ul li a{
+    color: white;
+    margin: 0px 10px;
+}
+
+.nav-div nav form {
+    display: flex;
+    gap: 2px;
+}
+
+.nav-div nav form button{
+    padding: 10px 15px;
+    width: 100px;
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+.nav-div nav form button i{
+    font-size: 22px;
+}

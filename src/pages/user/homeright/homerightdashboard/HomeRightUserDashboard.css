@@ -1,0 +1,158 @@
+.user-dashboard-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  
+}
+.userdashboard-heading{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.userdashboard-heading h1{
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+.userdashboard-heading h1 span{
+    color: blueviolet;
+}
+
+.user-dashboard-balance{
+    display: flex;
+    justify-content: space-between;
+}
+.balance-left{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.balance-left div{
+    display: flex;
+    flex-direction: column;
+
+}
+.balance-left h2{
+    font-size: 17px;
+    
+}
+.balance-left h6{
+    font-size: 15px;
+    color: gray;
+    margin-top: 20px;
+}
+.balance-right button{
+    width: 120px;
+    background-color: blueviolet;
+    border: 1px solid blueviolet;
+    padding: 5px;
+    color: white;
+}
+
+.user-dashboard-transactions{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-dashboard-transactions-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-dashboard-transactions-heading button{
+    width: 90px;
+    background-color: blueviolet;
+    border: 1px solid blueviolet;
+    padding: 5px;
+    color: white;
+}
+.user-dashboard-transactions-heading h1{
+    font-size: 22px;
+}
+.user-banks-name{
+    display: flex;
+    gap: 20px;
+   
+}
+.user-banks-name button{
+    background-color: white;
+    border: none;
+    color: gray;
+}
+
+.user-bank-balance{
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-bank-balance-heading{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.user-bank-balance-heading p{
+    font-weight: bold;
+}
+.user-bank-balance-heading img{
+    width: 100px;
+}
+.user-bank-balance button{
+    width: 90px;
+    background-color: blueviolet;
+    border: 1px solid blueviolet;
+    padding: 5px;
+    color: white;
+}
+.user-transaction-list{
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr; 
+    padding: 10px;
+    align-items: center;
+  
+}
+.user-transaction-list button{
+    width: 90px;
+    background-color: blueviolet;
+    border: 1px solid blueviolet;
+    padding: 5px;
+    color: white;
+}
+
+@media screen and (max-width:703px) {
+    .balance-left{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .user-transaction-list p{
+        font-size: 15px;
+    }
+    .user-transaction-list{
+        padding: 0px;
+    }
+    .user-transaction-list button{
+        
+        background-color: blueviolet;
+        border: 1px solid blueviolet;
+        padding: 0px;
+        color: white;
+    }
+
+}
+
+
+
+
+
+@media screen and (max-width:565px) {
+    .user-transaction-list p{
+        font-size: 11px;
+    }
+    .user-dashboard-balance{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}

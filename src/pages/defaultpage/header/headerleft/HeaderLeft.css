@@ -34,12 +34,12 @@
 }
 #signup-btn:hover{
     background-color: white;
-    border: 1px solid blueviolet;
+    border: 2px solid blueviolet;
     color: black;
 }
 .header-left-button-div button:hover{
     background-color: white;
-    border: 1px solid blueviolet;
+    border: 2px solid blueviolet;
     color: black;
 }
 .header-left-box-div{
