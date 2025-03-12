@@ -1,0 +1,73 @@
+.home-user-cards-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.home-user-card-heading{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 10px;
+}
+.home-user-card-heading h1{
+    letter-spacing: 1px;
+}
+.home-user-card-heading p{
+   
+        color: gray;
+        font-size: 15px;
+    
+}
+
+.user-card-div-main{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.main-card{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid blueviolet;
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgb(24,20,60);
+    color: white;
+}
+
+.main-card-heading{
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-card-user-details{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 120px;
+}
+.main-card-user-details h4{
+    font-size: 17px;
+}
+.main-card-user-details p{
+    letter-spacing: 3px;
+}
+
+.main-card-card-details{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    align-items: center;
+    
+
+}
+.main-card-card-details img{
+    width: 50px;
+}
+
+.main-card-card-details p span{
+    margin: 0px 10px;
+    letter-spacing: 5px;
+}

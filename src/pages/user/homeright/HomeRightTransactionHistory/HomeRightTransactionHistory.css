@@ -13,6 +13,7 @@
     letter-spacing: 1px;
 }
 
+
 .user-transaction-account-details{
     display: flex;
     justify-content: space-between;
@@ -25,6 +26,9 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+.user-transaction-account-details div p{
+    letter-spacing: 5px;
 }
 .user-transaction-account-details h1{
     font-size: 17px;
@@ -59,4 +63,16 @@
     color: white;
     border: none;
     padding: 5px;
+}
+
+.user-transaction-history-heading div p{
+    color: gray;
+    font-size: 15px;
+}
+
+@media screen and (max-width:610px) {
+    .user-transaction-history-heading{
+        flex-direction: column;
+        align-items: start;
+    }
 }

@@ -17,6 +17,10 @@
 .userdashboard-heading h1 span{
     color: blueviolet;
 }
+.userdashboard-heading p{
+    color: gray;
+        font-size: 15px;
+}
 
 .user-dashboard-balance{
     display: flex;

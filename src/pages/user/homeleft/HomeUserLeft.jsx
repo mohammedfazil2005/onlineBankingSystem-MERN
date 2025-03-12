@@ -9,13 +9,15 @@ const HomeUserLeft = ({setCategoryName}) => {
     { name: "Dashboard", fontClass: "fas fa-tachometer-alt" },
     { name: "Transactions", fontClass: "fas fa-exchange-alt" },
     { name: "Accounts", fontClass: "fas fa-wallet" },
+    { name: "Payment Transfer", fontClass: "fa-solid fa-money-bill-transfer" },
     { name: "Investments", fontClass: "fas fa-chart-line" },
-    { name: "Credit Cards", fontClass: "fas fa-credit-card" },
+    
     { name: "Loans", fontClass: "fas fa-hand-holding-usd" },
     { name: "Settings", fontClass: "fas fa-cog" },
     { name: "Logout", fontClass: "fas fa-sign-in-alt" }
    
   ]
+  
 
   const onCategoryClick=(categoryname)=>{
     setCategory(categoryname)

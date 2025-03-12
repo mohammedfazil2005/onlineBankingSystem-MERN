@@ -1,0 +1,94 @@
+.home-user-payment-parent{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+.home-user-payment-heading{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+.home-user-payment-heading h1{
+    letter-spacing: 1px;
+}
+.home-user-payment-heading p{
+    color: gray;
+        font-size: 15px;
+}
+.home-user-transfer-details{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.transfer-details-heading{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.transfer-details-heading p{
+    color: gray;
+    font-size: 15px;
+}
+
+.transfer-details-input-div{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.transfer-details-input-div p{
+    color: gray;
+    font-size: 15px;
+}
+.transfer-details-input-div div{
+    width: 100%;
+}
+
+.home-bank-account-details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bank-account-details-inputs{
+    display: flex;
+    gap:0px;
+    width: 100%;
+    align-items: center;
+}
+.bank-account-details-inputs div{
+    width: 100%;
+}
+.transfer-btn-div{
+    margin: 10px 0px;
+}
+.transfer-btn-div button{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: rgba(137, 43, 226, 0.503);
+    color: white;
+}
+
+.bank-account-details-heading{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.bank-account-details-heading p{
+    color: gray;
+    font-size: 15px;
+}
+
+@media screen and (max-width:750px) {
+    .transfer-details-input-div{
+        flex-direction: column;
+    }
+    .bank-account-details-inputs{
+        flex-direction: column;
+    }
+    .home-user-payment-parent{
+        margin: 0px 10px;
+    }
+}

@@ -1,6 +1,8 @@
 import React from 'react'
 import HomeRightUserDashboard from './homerightdashboard/HomeRightUserDashboard'
 import HomeRightTransactionHistory from './HomeRightTransactionHistory/HomeRightTransactionHistory'
+import HomeUserCards from './homerightUserCards/HomeUserCards'
+import HomeRightPayment from './homeRightPayment/HomeRightPayment'
 
 const HomeUserRight = ({categoryName}) => {
   console.log(categoryName)
@@ -8,8 +10,8 @@ const HomeUserRight = ({categoryName}) => {
     <div>
       {categoryName=="Dashboard"?<HomeRightUserDashboard/>:""}
       {categoryName=="Transactions"?<HomeRightTransactionHistory/>:""}
-      {categoryName=="Accounts"?<HomeRightUserDashboard/>:""}
-      {categoryName=="Loans"?<HomeRightUserDashboard/>:""}
+      {categoryName=="Accounts"?<HomeUserCards/>:""}
+      {categoryName=="Payment Transfer"?<HomeRightPayment/>:""}
       {categoryName=="Settings"?<HomeRightUserDashboard/>:""}
      
     </div>
