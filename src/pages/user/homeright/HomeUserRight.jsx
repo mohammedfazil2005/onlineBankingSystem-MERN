@@ -3,6 +3,7 @@ import HomeRightUserDashboard from './homerightdashboard/HomeRightUserDashboard'
 import HomeRightTransactionHistory from './HomeRightTransactionHistory/HomeRightTransactionHistory'
 import HomeUserCards from './homerightUserCards/HomeUserCards'
 import HomeRightPayment from './homeRightPayment/HomeRightPayment'
+import HomeRightLoans from './homerightloans/HomeRightLoans'
 
 const HomeUserRight = ({categoryName}) => {
   console.log(categoryName)
@@ -12,7 +13,8 @@ const HomeUserRight = ({categoryName}) => {
       {categoryName=="Transactions"?<HomeRightTransactionHistory/>:""}
       {categoryName=="Accounts"?<HomeUserCards/>:""}
       {categoryName=="Payment Transfer"?<HomeRightPayment/>:""}
-      {categoryName=="Settings"?<HomeRightUserDashboard/>:""}
+      {categoryName=="Loans"?<HomeRightLoans/>:""}
+      {categoryName=="Investments"?<HomeRightPayment/>:""}
      
     </div>
   )
