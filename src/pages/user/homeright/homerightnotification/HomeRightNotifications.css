@@ -1,0 +1,41 @@
+.home-right-notifications-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.home-right-notification-heading{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 10px;
+}
+
+.home-right-notification-heading h4{
+    letter-spacing: 1px;
+}
+.home-right-notification-heading p{
+    font-size: 15px;
+    color: gray;
+}
+
+.notfication-table-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.notification-table-main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.notification-table-main div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.notification-table-main div button{
+    padding: 5px;
+    border: 1px solid blueviolet;
+    width: 80px;
+}

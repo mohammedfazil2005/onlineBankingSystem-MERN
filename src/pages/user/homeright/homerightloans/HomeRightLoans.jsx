@@ -15,14 +15,31 @@ const HomeRightLoans = () => {
                 </div>
                 <div className="transfer-details-input-div">
                     <div>
+                        <h6>Select Card</h6>
+                        <p>Choose the card you want to apply from.</p>
+                    </div>
+                    <div>
+                        <Form.Select aria-label="Select card">
+                            <option>Select Card</option>
+                            <option value="debit">Debit Card</option>
+                            <option value="credit">Credit Card</option>
+
+                        </Form.Select>
+                    </div>
+                </div>
+                <div className="transfer-details-input-div">
+                    <div>
                         <h6>Select Loan Type</h6>
                         <p>Select the type of loan you want to apply for.</p>
                     </div>
                     <div>
                         <Form.Select aria-label="Default select example">
-                            <option>Select card</option>
-                            <option value="1">DEBIT</option>
-                            <option value="2">CREDIT</option>
+                            <option>Select Loan Type</option>
+                            <option value="1">Personal Loan</option>
+                            <option value="2">Home Loan</option>
+                            <option value="3">Auto Loan</option>
+                            <option value="4">Business Loan</option>
+                            <option value="5">Education Loan</option>
 
                         </Form.Select>
                     </div>
@@ -40,11 +57,11 @@ const HomeRightLoans = () => {
                 </div>
                 <div className="transfer-details-input-div">
                     <div>
-                    <h6>Loan Duration</h6>
-                    <p>Please select a loan duration: 12 months, 24 months,<br /> 5 years, or 10 years.</p>
+                        <h6>Loan Duration</h6>
+                        <p>Please select a loan duration: 12 months, 24 months,<br /> 5 years, or 10 years.</p>
                     </div>
                     <div>
-                    <Form.Select aria-label="Default select example">
+                        <Form.Select aria-label="Default select example">
                             <option>Select Duration</option>
                             <option value="1">12 months</option>
                             <option value="2">24 months</option>
@@ -56,20 +73,20 @@ const HomeRightLoans = () => {
                 </div>
                 <div className="transfer-details-input-div">
                     <div>
-                    <h6>Interest Rate (%)</h6>
-                    <p>interest rate for this loan is set by the bank.</p>
+                        <h6>Interest Rate (%)</h6>
+                        <p>interest rate for this loan is set by the bank.</p>
                     </div>
                     <div>
-                    <p>15%</p>
+                        <p>15%</p>
                     </div>
                 </div>
                 <div className="transfer-details-input-div">
                     <div>
-                    <h6>EMI Amount </h6>
-                    <p>Your next EMI is scheduled as per the bank's loan repayment plan.</p>
+                        <h6>EMI Amount </h6>
+                        <p>Your next EMI is scheduled as per the bank's loan repayment plan.</p>
                     </div>
                     <div>
-                    <p>3000/month</p>
+                        <p>3000/month</p>
                     </div>
                 </div>
                 <button>Request</button>

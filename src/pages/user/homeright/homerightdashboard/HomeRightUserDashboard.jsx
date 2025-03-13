@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './HomeRightUserDashboard.css'
 import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Form } from 'react-bootstrap';
+
 
 // ✅ Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -54,9 +56,9 @@ const HomeRightUserDashboard = () => {
             <button>View all</button>
         </div>
         <div className="user-banks-name">
-            <button style={{borderBottom:'2px solid blueviolet'}}>Chase Bank</button>
-            <button>Bank of America</button>
-            <button>First Playypus Bank</button>
+            <button style={{borderBottom:'2px solid blueviolet'}}>All Transactions</button>
+            <button>Income </button>
+            <button>Expense </button>
         </div>
         <div className="user-bank-balance">
             <div className='user-bank-balance-heading'>
@@ -67,7 +69,12 @@ const HomeRightUserDashboard = () => {
                 </div>
             </div>
             <div>
-                <button>Savings</button>
+            <Form.Select aria-label="Select card">
+                           
+                            <option value="debit">Debit Card</option>
+                            <option value="credit">Credit Card</option>
+
+                        </Form.Select>
             </div>
         </div>
         <div className="user-transaction-list">

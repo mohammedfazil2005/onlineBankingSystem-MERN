@@ -6,8 +6,9 @@
 .home-left{
     position: fixed;
     width: 300px;
-    overflow-y: scroll;
-  
+    overflow: scroll;
+
+    height: 100vh;
    
 }
 .home-right{

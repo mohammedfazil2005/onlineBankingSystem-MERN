@@ -1,6 +1,7 @@
 import React from 'react'
 import './HomeRightTransactionHistory.css'
 import Dropdown from 'react-bootstrap/Dropdown';
+import { Form } from 'react-bootstrap';
 const HomeRightTransactionHistory = () => {
     return (
         <div className='user-transaction-history-parent'>
@@ -10,17 +11,11 @@ const HomeRightTransactionHistory = () => {
                     <p>Gain insights and Track Your Transactions Over Time</p>
                 </div>
                 <div>
-                    <Dropdown>
-                        <Dropdown.Toggle style={{backgroundColor:'blueviolet'}} id="dropdown-basic">
-                            Dropdown Button
-                        </Dropdown.Toggle>
+                <Form.Select aria-label="Default select example">
+                            <option value="1">DEBIT</option>
+                            <option value="2">CREDIT</option>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                        </Form.Select>
                 </div>
             </div>
             <div className="user-transaction-account-details">
@@ -39,7 +34,7 @@ const HomeRightTransactionHistory = () => {
             <div className="user-transaction-history-full">
                 <div className="user-transaction-history-list-heading">
                     <h2>Transaction history</h2>
-                    <button>Apply filter</button>
+                    {/* <button>Apply filter</button> */}
                 </div>
 
             <div className="user-transaction-list">

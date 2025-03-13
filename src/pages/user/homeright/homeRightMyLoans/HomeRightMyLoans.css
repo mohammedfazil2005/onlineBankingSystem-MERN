@@ -1,0 +1,64 @@
+.home-right-my-loans-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.home-right-my-loans-heading{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
+.home-right-my-loans-heading h1{
+    letter-spacing: 1px;
+}
+.home-right-my-loans-heading p{
+    color: gray;
+    font-size: 15px;
+}
+
+.my-loans-cards-parent{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.my-loans-card-main{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid blueviolet;
+    border-radius: 10px;
+}
+.my-loans-card-main div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.my-loans-card-main h4{
+    font-size: 16px;
+    color: gray;
+}
+.my-loans-card-main h4 span{
+    margin-left: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: blueviolet;
+}
+.my-loans-card-main main{
+    display: flex;
+    gap: 10px;
+    margin: 10px 0px;
+}
+.my-loans-card-main main button{
+    border-radius: 10px;
+    padding: 6px;
+    background-color: white;
+    border: 1px solid blueviolet;
+}
+#download-loan-recipet{
+    border-radius: 10px;
+    padding: 7px;
+    background-color: white;
+    border: 1px solid blueviolet;
+}
