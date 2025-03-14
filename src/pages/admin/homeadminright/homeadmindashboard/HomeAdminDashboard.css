@@ -27,7 +27,7 @@
     flex-direction: column;
     gap: 10px;
     width: 400px;
-    border: 2px solid blueviolet;
+    border: 1px solid blueviolet;
     border-radius: 10px;
     padding: 10px;
 }

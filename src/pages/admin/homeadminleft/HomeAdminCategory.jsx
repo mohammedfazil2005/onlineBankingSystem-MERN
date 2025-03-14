@@ -8,13 +8,7 @@ const HomeAdminCategory = ({setCategoryName}) => {
     const categoryDetails = [
         { name: "Admin Dashboard", fontClass: "fas fa-chart-pie" },
         { name: "User Management", fontClass: "fas fa-users-cog" }, 
-        { name: "Transaction Management", fontClass: "fas fa-exchange-alt" },
-        { name: "Accounts Management", fontClass: "fas fa-wallet" },
-        { name: "Loan Approvals", fontClass: "fas fa-hand-holding-usd" },
-        { name: "Payments & Transfers", fontClass: "fa-solid fa-money-bill-transfer" },
-        { name: "Reports & Analytics", fontClass: "fas fa-chart-line" }, 
-        { name: "Audit Logs", fontClass: "fas fa-file-alt" }, 
-        { name: "System Settings", fontClass: "fas fa-cogs" },  
+        { name: "Loan Approvals", fontClass: "fas fa-hand-holding-usd" }, 
         { name: "Notifications", fontClass: "fa-solid fa-bell" },
         { name: "Logout", fontClass: "fas fa-sign-out-alt" }  
       ];

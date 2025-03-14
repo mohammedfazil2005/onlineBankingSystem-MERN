@@ -1,0 +1,78 @@
+.home-admin-loan-requests-parent{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    gap: 30px;
+}
+.home-admin-loan-requests-heading{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.home-admin-loan-requests-heading h1{
+    letter-spacing: 1px;
+}
+.home-admin-loan-main{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.home-admin-loan-parent-box{
+    display: flex;
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid blueviolet;
+    box-shadow: 0px 0px 2px;
+}
+
+.home-admin-loan-left{
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    width: 100%;
+}
+
+.home-admin-loan-left img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.home-admin-loan-left h5{
+    font-size: 16px;
+    color: gray;
+    font-weight: 400;
+}
+.home-admin-loan-left h5 span{
+    font-weight: 600;
+    color: blueviolet;
+}
+
+.home-admin-loan-left button{
+    padding: 7px;
+    background-color: white;
+    border: 1px solid blueviolet;
+    border-radius: 8px;
+}
+
+.button-div-loan-admin{
+    display: flex;
+    gap: 10px;
+}
+
+.button-div-loan-admin button{
+    width: 90px;
+}
+
+.home-loan-profile-admin{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-loan-profile-admin button{
+    border: none;
+    color: blueviolet;
+    font-size: 23px;
+}

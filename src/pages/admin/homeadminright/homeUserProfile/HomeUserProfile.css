@@ -4,3 +4,55 @@
     gap: 30px;
     margin-right: 20px;
 }
+.home-user-details-heading{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: space-between;
+}
+.home-user-details-heading div button{
+    padding: 8px;
+    border: none;
+    background-color: white;
+    color: black;
+    border: 1px solid blueviolet;
+    border-radius: 10px;
+}
+.home-user-details-heading div h6{
+    font-size: 22px;
+}
+.home-user-details-heading img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.user-card-admin-main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.user-card-admin-details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.user-card-admin-main h1{
+    font-size: 25px;
+    font-weight: bolder;
+    color: blueviolet;
+
+}
+
+.user-card-admin-details div{
+    display: flex;
+    gap: 10px;
+}
+.user-card-admin-details div button{
+    padding: 7px;
+    border: 1px solid blueviolet;
+    background-color: white;
+    border-radius: 7px;
+}
