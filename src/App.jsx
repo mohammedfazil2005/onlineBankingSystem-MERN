@@ -4,6 +4,7 @@ import DefaultPage from "./pages/defaultpage/DefaultPage"
 import Login from "./pages/loginpage/Login"
 import HomeUser from "./pages/user/HomeUser"
 import HomeAdmin from "./pages/admin/HomeAdmin"
+import HomeUserProfile from "./pages/admin/homeadminright/homeUserProfile/HomeUserProfile"
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/userdashboard" element={<HomeUser/>}/>
       <Route path="/admindashboard" element={<HomeAdmin/>}/>
+    
      </Routes>
    
     </>

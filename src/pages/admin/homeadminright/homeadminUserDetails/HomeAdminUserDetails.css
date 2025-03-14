@@ -1,0 +1,72 @@
+
+.home-admin-userdetails-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-right: 20px;
+}
+
+.home-admin-user-details-heading{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.home-admin-user-details-heading p{
+    font-size: 15px;
+    color: gray;
+}
+.home-admin-user-details-heading h1{
+    letter-spacing: 1px;
+}
+
+.home-admin-user-details-heading button{
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+}
+
+.home-admin-user-details-table-parent{
+    display: flex;
+    flex-direction: column;
+}
+
+.user-details-table-card-main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-details-table-card-main div{
+    display: flex;
+    gap: 10px;
+}
+.user-details-table-card-main div img{
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+}
+.user-details-table-card-main div h2{
+    font-size: 19px;
+}
+.user-details-table-card-main div h6{
+    font-size: 12px;
+    margin-top: 10px;
+    color: gray;
+}
+
+.user-details-table-card-main main{
+    display: flex;
+    gap: 10px;
+}
+.user-details-table-card-main main button{
+    width: 80px;
+    padding: 3px;
+    color: black;
+    border: 1px solid blueviolet;
+    background-color: white;
+}
+.user-details-table-card-main main p{
+    padding: 3px;
+}

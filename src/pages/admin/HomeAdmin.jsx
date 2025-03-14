@@ -17,7 +17,7 @@ const HomeAdmin = () => {
             <HomeAdminCategory setCategoryName={setCategoryName}/>
         </div>
         <div className='home-rights'>
-           <HomeAdminRight categoryName={categoryName}/>
+           <HomeAdminRight categoryName={categoryName} setCategoryName={setCategoryName}/>
         </div>
     </div>
     </>

@@ -105,7 +105,7 @@ const Login = () => {
 
               </Form.Select>
             </div>
-            <FloatingLabel controlId="Salary Amount (₹)" label="Salary Amount (₹)" className="mb-3">
+            <FloatingLabel controlId="Salary Amount (₹)" label="Monthly Income Amount (₹)" className="mb-3">
               <Form.Control type="number" placeholder="Enter your email" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, monthlySalary: e.target.value })} required />
             </FloatingLabel>
             <FloatingLabel controlId="email" label="Email" className="mb-3">

@@ -30,14 +30,14 @@ const HomeAdminDashboard = () => {
                                             data: [
                                                 { id: 0, value: 10, label: 'series A' },
                                                 { id: 1, value: 15, label: 'series B' },
-                                       
+
                                             ]
-                                            
+
                                         },
                                     ]}
                                     width={220}
                                     height={100}
-                                    
+
                                 />
                             </div>
                         </div>
@@ -56,14 +56,14 @@ const HomeAdminDashboard = () => {
                                             data: [
                                                 { id: 0, value: 10, label: 'series A' },
                                                 { id: 1, value: 15, label: 'series B' },
-                                       
+
                                             ]
-                                            
+
                                         },
                                     ]}
                                     width={220}
                                     height={100}
-                                    
+
                                 />
                             </div>
                         </div>
@@ -82,16 +82,36 @@ const HomeAdminDashboard = () => {
             </div>
             <div className="admin-chart-parent">
                 <BarChart
-                    series={[
-                        { data: [35, 44, 24, 34] },
-                        { data: [51, 6, 49, 30] },
-                        { data: [15, 25, 30, 50] },
-                        { data: [60, 50, 15, 25] },
-                    ]}
-                    height={290}
-                    xAxis={[{ data: ['Q1', 'Q2', 'Q3', 'Q4'], scaleType: 'band' }]}
-                    margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+                    xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C'] }]}
+                    series={[{ data: [4, 3, 5] }, { data: [1, 6, 3] }, { data: [2, 5, 6] }]}
+                    width={800}
+                    height={300}
                 />
+            </div>
+            <div className="admin-recent-transactions">
+            <div className="user-transaction-history-full">
+                <div className="user-transaction-history-list-heading">
+                    <h2>Transaction history</h2>
+                    {/* <button>Apply filter</button> */}
+                </div>
+
+            <div className="user-transaction-list">
+            <p>#</p>
+            <p>Transactions</p>
+            <p>Amount</p>
+            <p>Status</p>
+            <p>Date</p>
+            <p>Details</p>
+        </div>
+        <div className="user-transaction-list">
+            <p>1</p>
+            <p>Kumar</p>
+            <p>200</p>
+            <p>Processing</p>
+            <p>Wed 11:00pm</p>
+           <button>Details</button>
+        </div>
+            </div>
             </div>
         </div>
     )
