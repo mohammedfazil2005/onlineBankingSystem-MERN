@@ -5,6 +5,7 @@ import Login from "./pages/loginpage/Login"
 import HomeUser from "./pages/user/HomeUser"
 import HomeAdmin from "./pages/admin/HomeAdmin"
 import HomeUserProfile from "./pages/admin/homeadminright/homeUserProfile/HomeUserProfile"
+import Deposit from "./pages/depositpage/Deposit"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/userdashboard" element={<HomeUser/>}/>
       <Route path="/admindashboard" element={<HomeAdmin/>}/>
+      <Route path="/deposit" element={<Deposit/>}/>
     
      </Routes>
    

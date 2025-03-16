@@ -4,6 +4,7 @@ import HomeAdminUserDetails from './homeadminUserDetails/HomeAdminUserDetails'
 import HomeUserProfile from './homeUserProfile/HomeUserProfile'
 import HomeAdminLoanRequests from './homeadminloanrequests/HomeAdminLoanRequests'
 import HomeAdminTransactions from './homeadminallTransactions/HomeAdminTransactions'
+import HomeAdminNotifications from './homeadminNotifications/HomeAdminNotifications'
 
 
 const HomeAdminRight = ({categoryName,setCategoryName}) => {
@@ -14,6 +15,7 @@ const HomeAdminRight = ({categoryName,setCategoryName}) => {
      {categoryName=="ViewProfile"?<HomeUserProfile/>:""}
      {categoryName=="Loan Approvals"?<HomeAdminLoanRequests/>:""}
      {categoryName=="Transactions"?<HomeAdminTransactions/>:""}
+     {categoryName=="Notifications"?<HomeAdminNotifications/>:""}
     </div>
   )
 }

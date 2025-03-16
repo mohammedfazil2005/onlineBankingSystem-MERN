@@ -22,8 +22,8 @@
     width: 400px;
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid blueviolet;
-    box-shadow: 0px 0px 2px;
+    border: 1px solid lightgray;
+    box-shadow: 0px 0px 1px;
 }
 
 .home-admin-loan-left{
@@ -34,8 +34,8 @@
 }
 
 .home-admin-loan-left img{
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 
@@ -54,6 +54,10 @@
     background-color: white;
     border: 1px solid blueviolet;
     border-radius: 8px;
+}
+.home-admin-loan-left button:hover{
+    background-color: blueviolet;
+    color: white;
 }
 
 .button-div-loan-admin{

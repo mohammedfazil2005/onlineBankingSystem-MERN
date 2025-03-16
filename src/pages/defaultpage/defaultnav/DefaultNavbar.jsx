@@ -15,7 +15,11 @@ const DefaultNavbar = () => {
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
       <li className="nav-item">
       <Link>Home</Link>
-        </li>   
+        </li> 
+        <li className="nav-item">
+        <Link>Deposit</Link>
+        </li>
+         
         <li className="nav-item">
         <Link>About</Link>
         </li>

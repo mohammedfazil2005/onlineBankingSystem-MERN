@@ -1,5 +1,6 @@
 import React from 'react'
 import './DefaultMiddle.css'
+import { Link } from 'react-router-dom'
 
 const DefaultMiddle = () => {
     const boxDetails=[
@@ -13,7 +14,9 @@ const DefaultMiddle = () => {
       <div className='defaultmiddle-left'>
         <h1>A Right Choice changes everything</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora enim quam eos cupiditate pariatur voluptatum harum </p>
-        <button>Learn more</button>
+        <div className='deposit-btn-div'>
+      <Link to={'/deposit'}><button>Deposit</button></Link>
+    </div>
       </div>
       <div className='defaultmiddle-right'>
         {boxDetails.map((a,index)=>(

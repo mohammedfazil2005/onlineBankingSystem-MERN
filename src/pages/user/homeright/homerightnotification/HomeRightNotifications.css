@@ -37,5 +37,14 @@
 .notification-table-main div button{
     padding: 5px;
     border: 1px solid blueviolet;
+    background-color: white;
+    width: 80px;
+}
+
+.notification-table-main div button:hover{
+    padding: 5px;
+    border: 1px solid blueviolet;
+    background-color: blueviolet;
+    color: white;
     width: 80px;
 }

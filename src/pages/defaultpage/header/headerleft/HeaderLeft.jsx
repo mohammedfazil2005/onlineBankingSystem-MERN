@@ -11,6 +11,7 @@ const HeaderLeft = () => {
        <Link to={'/login'}> <button id='signup-btn'>Signup</button></Link>
        <Link to={'/login'}> <button>Get started</button></Link>
     </div>
+  
     <div className='header-left-box-div'>
         <div>
             <h2>30k+</h2>

@@ -1,0 +1,39 @@
+.home-admin-notifications-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-right: 20px;
+}
+
+.heading-dashboard-not{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.heading-dashboard-not button{
+    padding: 10px;
+    border: none;
+    background-color: blueviolet;
+    color: white;
+}
+.heading-dashboard-not button:hover{
+    background-color: white;
+    border: 1px solid blueviolet;
+    color: black;
+}
+
+.notification-modal-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification-modal-parent div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.notification-modal-parent p{
+    color: gray;
+    font-size: 15px;
+}
