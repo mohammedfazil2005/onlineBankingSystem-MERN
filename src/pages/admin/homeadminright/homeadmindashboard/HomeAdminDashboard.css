@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
  
 }
 .heading-dashboard{
@@ -11,4 +12,60 @@
 .heading-dashboard P{
     color: grey;
     font-size: 15px;
+}
+
+.home-dashboard-bank-details{
+    display: flex;
+    gap: 10px;
+    overflow: hidden;
+    overflow:auto;
+   
+    height: 150px;
+}
+
+.home-dashboard-bank-main-card{
+    display: flex;
+    width: 300px;
+    border: 1px solid lightgray;
+    padding: 20px;
+    gap: 10px;
+    justify-content: center;
+    border-radius: 2px;
+    box-shadow: 0px 0px 1px;
+    align-items: center;
+}
+
+.home-dashboard-bank-main-card button{
+    background-color: white;
+    border: none;
+}
+.home-dashboard-bank-main-card button i{
+    font-size: 29px;
+}
+.home-dashboard-bank-main-card h5{
+    font-weight: 400;
+    font-size: 17px;
+
+}
+.home-dashboard-bank-main-card p{
+    font-weight: 300;
+    color: blueviolet;
+    font-size: 25px;
+}
+
+.home-dashboard-bank-pie-charts{
+    display: flex;
+    margin-top: 30px;
+}
+
+.home-dashboard-bank-pie-charts div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid lightgray;
+    gap: 10px;
+}
+.home-dashboard-bank-pie-charts div h5{
+    font-weight: 300;
+    margin-top: 10px;
 }
