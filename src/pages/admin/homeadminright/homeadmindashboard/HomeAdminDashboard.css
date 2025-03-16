@@ -55,7 +55,7 @@
 
 .home-dashboard-bank-pie-charts{
     display: flex;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .home-dashboard-bank-pie-charts div {
@@ -65,7 +65,26 @@
     border: 1px solid lightgray;
     gap: 10px;
 }
-.home-dashboard-bank-pie-charts div h5{
-    font-weight: 300;
+
+.home-dashboard-loan-heading{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
     margin-top: 10px;
+}
+
+.home-dashboard-loan-heading h3{
+    font-size: 22px;        
+}
+.home-dashboard-loan-heading p{
+    font-size: 13px;
+    color: gray;
+}
+
+@media screen and (max-width:817px) {
+    .home-dashboard-bank-pie-charts{
+        display: flex;
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
 }

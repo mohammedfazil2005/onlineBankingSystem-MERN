@@ -4,3 +4,24 @@
     overflow: hidden;
    
 }
+
+@media screen and (max-width:909px) {
+    .home-left{
+        width: 200px;
+    }
+    .home-rights{
+        margin-left: 230px;
+    }
+}
+
+
+@media screen and (max-width:810px) {
+    .home-left{
+        width: 150px;
+    }
+    .home-rights{
+        margin-left: 160px;
+        width: 100%;
+    }
+    
+}

@@ -1,0 +1,28 @@
+.home-admin-transactions-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.home-admin-dashboard-transaction-table{
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+    gap: 2px;
+ 
+
+}
+
+
+.home-admin-dashboard-transaction-table  img{
+    width: 50px;
+    height: 40px;
+}
+.home-admin-dashboard-transaction-table button{
+    width: 80px;
+    background-color: red;
+    color: white;
+    border: none;
+
+}
