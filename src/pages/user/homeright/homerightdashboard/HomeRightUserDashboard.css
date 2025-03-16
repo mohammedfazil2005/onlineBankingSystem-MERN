@@ -22,36 +22,71 @@
         font-size: 15px;
 }
 
-.user-dashboard-balance{
+.user-balance-dashboard{
     display: flex;
-    justify-content: space-between;
-}
-.balance-left{
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-.balance-left div{
-    display: flex;
-    flex-direction: column;
+  
 
 }
-.balance-left h2{
-    font-size: 17px;
-    
+
+.user-balance-card-parent{
+    display: flex;
+    gap: 10px;
 }
-.balance-left h6{
-    font-size: 15px;
-    color: gray;
-    margin-top: 20px;
-}
-.balance-right button{
-    width: 120px;
-    background-color: blueviolet;
-    border: 1px solid blueviolet;
-    padding: 5px;
+.user-balance-dashboard-main-card{
+    display: flex;
+   justify-content: space-between;
+    gap: 10px;
+    border: 1px solid lightgray;
+    padding: 10px;
+    width: 320px;
+    background: rgba(24, 20, 60, 0.466);
+    height: 190px;
     color: white;
+    border-radius: 10px;
+    background-image: url('https://img.freepik.com/free-vector/gradient-dynamic-blue-lines-background_23-2148995756.jpg');
 }
+.user-balance-dashboard-main-card p{
+    font-size: 25px;
+}
+
+
+.user-balance-dashboard-main-card div img,.user-balance-dashboard-main-card-2 div img{
+    width: 60px;
+}
+
+
+
+.user-balance-dashboard-main-card-2{
+    display: flex;
+    justify-content: space-between;
+     gap: 10px;
+     border: 1px solid lightgray;
+     padding: 10px;
+     width: 320px;
+     background: rgba(24, 20, 60, 0.466);
+     height: 190px;
+     color: white;
+     border-radius: 10px;
+     background-image: url('https://img.freepik.com/free-vector/red-wavy-background_1189-269.jpg?t=st=1742144590~exp=1742148190~hmac=58499faebca52b4edf5bbae339e2b93062d3cbd7b10432b9bf782e4c4da83de8&w=826');
+}
+
+.user-balance-dashboard-main-card-2 p{
+    font-size: 25px;
+}
+
+.pie-chart-user-div{
+
+    padding: 4px;
+   
+}
+
+
+
+
+
+
+
+
 
 .user-dashboard-transactions{
     display: flex;
@@ -66,9 +101,13 @@
 }
 .user-dashboard-transactions-heading button{
     width: 90px;
-    background-color: blueviolet;
+    background-color: white;
     border: 1px solid blueviolet;
     padding: 5px;
+    color: black;
+}
+.user-dashboard-transactions-heading button:hover{
+    background-color: blueviolet;
     color: white;
 }
 .user-dashboard-transactions-heading h1{

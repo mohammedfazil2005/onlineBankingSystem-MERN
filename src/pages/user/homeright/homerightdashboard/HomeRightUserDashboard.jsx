@@ -1,31 +1,35 @@
 import React, { useState } from 'react'
 import './HomeRightUserDashboard.css'
-import { Doughnut } from 'react-chartjs-2'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Form } from 'react-bootstrap';
+import { Line, Pie } from 'react-chartjs-2';
+import { Chart as ChartJS ,CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement} from 'chart.js';
 
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
-// ✅ Register Chart.js components
-ChartJS.register(ArcElement, Tooltip, Legend);
 
 
 const HomeRightUserDashboard = () => {
 
-    const [balance, setBalance] = useState(1000); // Example balance
-  const [expenses, setExpenses] = useState(400); // Example expenses
+    const lineData={
+        labels:["Credit Card","Debit Card"],
+        datasets:[
+            {
+                label:"Credit Card Transactions",
+                data:["100","200"],
+                borderColor: "rgba(153, 102, 255, 1)", // Purple
+                backgroundColor: [
+                    "#347deb", // Sky Blue
+                    "#a11010"  // Dark Red (Shaded Red)
+                ],
+                tension: 0.4
+            },
+        ]
+    }
 
-  const chartData = {
-    labels: ["Available Balance", "Spent"],
-    datasets: [
-      {
-        label: "Bank Balance",
-        data: [balance, expenses],
-        backgroundColor: ["#36A2EB", "#FF6384"],
-        hoverBackgroundColor: ["#36A2EB", "#FF6384"],
-      },
-    ],
-  };
-
+    const Lineoptions = {
+        responsive: true,  // Enables responsiveness
+        maintainAspectRatio: false, // Allows custom width & height
+      };
 
 
   return (
@@ -34,26 +38,40 @@ const HomeRightUserDashboard = () => {
         <h1>Welcome,<span>Adrian</span></h1>
         <p>Access & manage your account and transactions efficiently</p>
      </div>
-     <div className="user-dashboard-balance">
-        <div className="balance-left">
+     <div className="user-balance-dashboard">
+        <div className="user-balance-card-parent">
+        <div className="user-balance-dashboard-main-card">
             <div>
-                <Doughnut data={chartData} options={{ responsive: true, maintainAspectRatio: false }}   
-                />
+            <h5>Your Balance</h5>
+            <p>₹3989</p>
             </div>
             <div>
-                <h2>2 Bank Accounts</h2>
-                <h6>Total Current Balance</h6>
-                <h1>₹2,599</h1>
+                <h6>Credit card</h6>
+                <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />    
+            </div>
+            
+        </div>
+        <div className="user-balance-dashboard-main-card-2">
+            <div>
+            <h5>Your Balance</h5>
+            <p>₹43,989</p>
+            </div>
+            <div>
+                <h6>Debit card</h6>
+                <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
             </div>
         </div>
-        <div className="balance-right">
-            <button>+ Add Bank</button>
         </div>
+        
+
+       
      </div>
+
+    
      <div className="user-dashboard-transactions">
         <div className="user-dashboard-transactions-heading">
             <h1>Recent transactions</h1>
-            <button>View all</button>
+            <button>View all <i className="fa-solid fa-arrow-right"></i></button>
         </div>
         <div className="user-banks-name">
             <button style={{borderBottom:'2px solid blueviolet'}}>All Transactions</button>
@@ -62,9 +80,9 @@ const HomeRightUserDashboard = () => {
         </div>
         <div className="user-bank-balance">
             <div className='user-bank-balance-heading'>
-                <img src="https://logowik.com/content/uploads/images/bank3801.jpg" alt="image-logo" />
+            <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
                 <div>
-                    <h6>Chase Bank</h6>
+                    <h6>Balance</h6>
                     <p>₹2993</p>
                 </div>
             </div>

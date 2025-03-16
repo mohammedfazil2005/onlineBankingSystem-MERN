@@ -22,7 +22,7 @@
 
 .user-card-div-main{
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 20px;
 }
 
@@ -35,6 +35,7 @@
     border-radius: 10px;
     background: rgb(24,20,60);
     color: white;
+    background: url('https://img.freepik.com/free-vector/gradient-dynamic-blue-lines-background_23-2148995756.jpg');
 }
 
 .main-card-heading{

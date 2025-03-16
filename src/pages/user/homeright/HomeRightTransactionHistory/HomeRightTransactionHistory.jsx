@@ -18,11 +18,11 @@ const HomeRightTransactionHistory = () => {
                         </Form.Select>
                 </div>
             </div>
-            <div className="user-transaction-account-details">
+            {/* <div className="user-transaction-account-details">
                 <div>
-                    <h1>Chase</h1>
-                    <h6>Chase Growth Savings Account</h6>
-                    <p>*******960</p>
+                <h1>Debit Card</h1>
+                <h6>Secure and Convenient Transactions</h6>
+                    <p><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i>960</p>
                 </div>
                 <div>
                     <div className='user-transaction-account-details-right-div'>
@@ -30,10 +30,10 @@ const HomeRightTransactionHistory = () => {
                         <h1>₹41,000</h1>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="user-transaction-history-full">
                 <div className="user-transaction-history-list-heading">
-                    <h2>Transaction history</h2>
+                    {/* <h2>Transaction history</h2> */}
                     {/* <button>Apply filter</button> */}
                 </div>
 

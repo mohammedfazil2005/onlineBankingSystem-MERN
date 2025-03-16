@@ -65,9 +65,9 @@ const HomeAdminDashboard = () => {
         label: "Loan status",
         data: ['10', '5', '3'],
         backgroundColor: [
-          "#4CAF50", // Green
-          "#FF9800", // Orange
-          "#F44336"
+        "#81C784", // Light Green (Lighter version of #4CAF50)
+    "#FFB74D", // Light Orange (Lighter version of #FF9800)
+    "#E57373"  
         ],
         hoverOffset: 4,
       }

@@ -112,12 +112,12 @@ const Login = () => {
               <Form.Control type="email" placeholder="Enter your email" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, email: e.target.value })} required />
             </FloatingLabel>
 
-            <FloatingLabel controlId="password" label="Password" className="mb-3">
-              <Form.Control type="password" placeholder="Enter your password" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, password: e.target.value })} required />
+            <FloatingLabel controlId="password" label="Enter your 4 Digit password" className="mb-3">
+              <Form.Control type="number" placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, password: e.target.value })} required />
             </FloatingLabel>
 
             <FloatingLabel controlId="confirmPassword" label="Confirm Password" className="mb-3">
-              <Form.Control type="password" placeholder="Enter password again" className="cursor-pointer" />
+              <Form.Control type="number" placeholder="Enter password again" className="cursor-pointer" />
             </FloatingLabel>
           </>
 
