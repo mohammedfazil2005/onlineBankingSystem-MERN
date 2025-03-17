@@ -7,6 +7,10 @@ const HomeAdminTransactions = () => {
         <h1>All Transactions</h1>
         <p>Overview of all transactions made within the banking system.</p>
       </div>
+      <div className="home-admin-user-details-search">
+                <input type="text" placeholder='Search Transaction' />
+                <button>Search</button>
+            </div>
             <div className="home-admin-dashboard-transaction-table">
                 <p>#</p>
                 <p>Name</p>

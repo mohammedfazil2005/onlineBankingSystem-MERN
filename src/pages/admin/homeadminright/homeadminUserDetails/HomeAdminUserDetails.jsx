@@ -8,9 +8,14 @@ const HomeAdminUserDetails = ({setCategoryName}) => {
     }
     return (
         <div className='home-admin-userdetails-parent'>
+
             <div className="home-admin-user-details-heading">
                 <h1>User Management</h1>
                 <p>Manage user details</p>
+            </div>
+            <div className="home-admin-user-details-search">
+                <input type="text" placeholder='Search user' />
+                <button>Search</button>
             </div>
             <div className="home-admin-user-details-table-parent">
                <div className="user-details-table-card-main">

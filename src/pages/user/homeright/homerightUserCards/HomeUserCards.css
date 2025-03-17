@@ -150,6 +150,11 @@
 .main-card-right-account-holder-details p span{
     margin-left: 9px;
 }
+.card-buttons-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .card-buttons-div button{
     padding: 9px;
@@ -165,4 +170,21 @@
     background-color: blueviolet;
     border-radius: 8px;
     color: white;
+}
+
+.credit-card-details-modal{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.credit-card-details-modal h1{
+    font-size: 20px;
+    font-weight: 300;
+    color: blueviolet;
+    letter-spacing: 1px;
+}
+.credit-card-details-modal p{
+    text-align: justify;
+    font-size: 14px;
 }
