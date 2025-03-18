@@ -6,6 +6,7 @@ import HomeUser from "./pages/user/HomeUser"
 import HomeAdmin from "./pages/admin/HomeAdmin"
 import HomeUserProfile from "./pages/admin/homeadminright/homeUserProfile/HomeUserProfile"
 import Deposit from "./pages/depositpage/Deposit"
+import HomePayLoan from "./pages/user/homeright/homepayloan/HomePayLoan"
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/userdashboard" element={<HomeUser/>}/>
       <Route path="/admindashboard" element={<HomeAdmin/>}/>
       <Route path="/deposit" element={<Deposit/>}/>
+      
     
      </Routes>
    

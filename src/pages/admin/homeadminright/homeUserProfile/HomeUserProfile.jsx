@@ -1,37 +1,89 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import './HomeUserProfile.css'
-import { BarChart } from '@mui/x-charts'
-import { ResponsiveChartContainer } from '@mui/x-charts/ResponsiveChartContainer';
-
+import { Line } from 'react-chartjs-2'
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
 
 const HomeUserProfile = () => {
+
+    const lineData = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [
+            {
+                label: "Credit",
+                data: [20, 20, 7, 30],
+                borderColor: "rgba(255, 99, 132, 1)", // Red
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                tension: 0.4
+            },
+            {
+                label: "Debit",
+                data: [5, 8, 12, 10],
+                borderColor: "rgba(54, 162, 235, 1)", // Blue
+                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                tension: 0.4
+            }
+        ]
+    }
+
+    const Lineoptions = {
+        responsive: true,  // Enables responsiveness
+        maintainAspectRatio: false, // Allows custom width & height
+    };
+
+
+
+
+
+
     return (
         <div className='home-user-profile-parent'>
             <div className="home-user-profile-heading">
                 {/* <h2>User profile</h2> */}
             </div>
             <div className="home-user-details-heading">
-                <div className='d-flex align-items-center'>
+                    <div className='home-user-profile-details-left'>
                     <img src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" alt="" />
-                    <div className='ms-3'>
-                        <h6>Raw jhoncy</h6>
-                        <p>Kerala</p>
+                        {/* <h6><span>Raw jhoncy</span></h6> */}
+                        <button>Send a Notification</button>
                     </div>
-                </div>
-                <div>
-                    <button>Send a Message</button>
+        
+                <div className='home-user-profile-details-right'>
+                    <main>
+                    <div>
+                        <h6>Name :<span>Jhoncy</span></h6>
+                    </div>
+                    <div>
+                        <h6>Gender :<span>Male</span></h6>
+                    </div>
+                    <div>
+                        <h6>Date of birth :<span>12/25/1999</span></h6>
+                    </div>
+                    </main>
+                    <main>
+                    <div>
+                        <h6>State :<span>Kerala</span></h6>
+                    </div>
+                    <div>
+                        <h6>Email :<span>jhoncy@gmail.com</span></h6>
+                    </div>
+                    <div>
+                        <h6>Phone :<span>+91 9961423960</span></h6>
+                    </div>
+                    </main>
+                
                 </div>
             </div>
             <div className="home-user-details-parent">
                 <div className="user-dashboard-transactions-heading">
-                    <h1>Card details</h1>
+
                 </div>
                 <div className="user-card-admin-main">
                     <div className='user-card-admin-details'>
                         <h1>DEBIT</h1>
-                        <h6>Select Card (Debit / Credit)</h6>
+
                         <p>Available Balance: ₹3,999</p>
 
                         <p>Bank Name: MyBank</p>
@@ -74,7 +126,7 @@ const HomeUserProfile = () => {
                 <div className="user-card-admin-main">
                     <div className='user-card-admin-details'>
                         <h1>CREDIT</h1>
-                        <h6>Select Card (Debit / Credit)</h6>
+
                         <p>Available Balance: ₹3,999</p>
 
                         <p>Bank Name: MyBank</p>
@@ -91,7 +143,7 @@ const HomeUserProfile = () => {
 
                     <div>
                         <div className="user-card-div-main">
-                            <div className='main-card'>
+                            <div className='main-card' style={{ background: 'url(https://img.freepik.com/free-vector/red-wavy-background_1189-269.jpg?t=st=1742144590~exp=1742148190~hmac=58499faebca52b4edf5bbae339e2b93062d3cbd7b10432b9bf782e4c4da83de8&w=826)' }}>
                                 <div className='main-card-heading'>
                                     <h5>Bank Ai</h5>
                                     <p>Debit</p>
@@ -112,14 +164,13 @@ const HomeUserProfile = () => {
                         </div>
                     </div>
                 </div>
-
-                    <BarChart
-                        xAxis={[{ scaleType: "band", data: ["Debit", "Credit", ] }]}
-                        series={[{ data: [4, 3] }, { data: [1, 3] }]}
-                        height={300}  // No need for width; it adapts automatically!
-                        width={600}
-                    />
-            \
+                <div className="heading-dashboard" style={{marginTop:'50px'}}>
+                    <h1 style={{fontSize:'24px'}}>User Transaction Analysis</h1>
+                    <p>Review and analyze user credit and debit card transactions.</p>
+                </div>
+                <div>
+                    <Line data={lineData} options={Lineoptions} style={{ minHeight: '300px' }} />
+                </div>
 
 
 
@@ -135,13 +186,7 @@ const HomeUserProfile = () => {
                         <button>Expense </button>
                     </div>
                     <div className="user-bank-balance">
-                        <div className='user-bank-balance-heading'>
-                            <img src="https://logowik.com/content/uploads/images/bank3801.jpg" alt="image-logo" />
-                            <div>
-                                <h6>Chase Bank</h6>
-                                <p>₹2993</p>
-                            </div>
-                        </div>
+
                         <div>
                             <Form.Select aria-label="Select card">
                                 <option value="">Select Card</option>

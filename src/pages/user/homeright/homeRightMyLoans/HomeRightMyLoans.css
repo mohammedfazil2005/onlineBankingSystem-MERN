@@ -27,7 +27,8 @@
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    border: 1px solid blueviolet;
+    border: 1px solid lightgray;
+    border-radius: 0px 0px 1px;
     border-radius: 10px;
 }
 .my-loans-card-main div{
@@ -56,9 +57,21 @@
     background-color: white;
     border: 1px solid blueviolet;
 }
+.my-loans-card-main button:hover{
+    background-color: blueviolet;
+    color: white;
+}
 #download-loan-recipet{
     border-radius: 10px;
     padding: 7px;
     background-color: white;
+    border: 1px solid blueviolet;
+}
+
+#download-loan-recipet:hover{
+    border-radius: 10px;
+    padding: 7px;
+    background-color: blueviolet;
+    color: black;
     border: 1px solid blueviolet;
 }

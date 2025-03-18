@@ -1,6 +1,6 @@
 import React from 'react'
 import './HomeRightMyLoans.css'
-const HomeRightMyLoans = () => {
+const HomeRightMyLoans = ({setCategoryName}) => {
   return (
     <div className='home-right-my-loans-parent'>
         <div className="home-right-my-loans-heading">
@@ -14,9 +14,11 @@ const HomeRightMyLoans = () => {
                 <h4>Loan Amount :<span>₹3000</span></h4>
                 <h4>Loan Duration :<span>12months</span></h4>
                 <h4>Interest Rate (%):<span>15%</span></h4>
+                <h4>Remaining Loan Balance: <span>₹2,700</span></h4> 
+                <h4>Next EMI Due: <span>15th March 2025</span></h4> 
                  <main>
-                    <button>Pay EMI</button>
-                    <button>Pay Full Loan Amount</button>
+                    <button onClick={()=>setCategoryName("payloan")}>Pay EMI</button>
+                    <button onClick={()=>setCategoryName("payloan")}>Pay Full Loan Amount</button>
                  </main>
                 </div>
                 <div>
@@ -33,7 +35,7 @@ const HomeRightMyLoans = () => {
         </div>
 
         <div className="my-loans-cards-parent">
-            <div className="my-loans-card-main" style={{border:'1px solid red',width:'400px'}}>
+            <div className="my-loans-card-main" style={{border:'1px solid #660e19',width:'400px'}}>
                 <div>
                 <h4>Loan type :<span style={{color:'gray'}}>Personal</span></h4>
                 <h4>Loan Amount :<span style={{color:'gray'}}>₹3000</span></h4>

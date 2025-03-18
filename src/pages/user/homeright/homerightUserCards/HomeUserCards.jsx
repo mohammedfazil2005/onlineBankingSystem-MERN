@@ -8,7 +8,7 @@ import { Form } from 'react-bootstrap';
 
 
 
-const HomeUserCards = () => {
+const HomeUserCards = ({setCategoryName}) => {
 
   const [show, setShow] = useState(false);
 
@@ -154,7 +154,7 @@ const HomeUserCards = () => {
 
         <div className="card-buttons-div">
           <button>Delete Card</button>
-          <button>Repay</button>
+          <button onClick={()=>setCategoryName("repay")}>Repay</button>
         </div>
 
 

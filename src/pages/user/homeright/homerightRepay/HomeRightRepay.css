@@ -1,0 +1,77 @@
+.repay-details-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.login-childs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 700px;
+    gap: 5px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#repay-desc{
+    font-size: 15px;
+    color: gray;
+}
+
+
+.repay-details-div{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.repay-details-div div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.repay-details-div h6{
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.repay-details-div p{
+    color: red
+}
+
+.repay-input-div{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.repay-input-div div{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.login-childs button{
+    padding: 10px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+}
+.login-childs button:hover{
+
+        background-color: white;
+        border: 1px solid blueviolet;
+        color: black;
+    
+}
+
+.debit-card-fill-details{
+    margin-top: -10px;
+    margin-bottom: 4px;
+}
+
+.debit-card-fill-details p{
+    color: blueviolet;
+    cursor: pointer;
+    padding: 2px;
+    letter-spacing: 0.2px;
+}

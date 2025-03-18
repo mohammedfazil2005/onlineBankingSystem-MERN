@@ -4,10 +4,10 @@
     gap: 20px;
 }
 
-.home-user-card-heading{
+.home-user-card-headings{
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 5px;
     margin-top: 10px;
 }
 .home-user-card-headings h6{
@@ -16,6 +16,10 @@
     color: blueviolet;
     cursor: pointer;
 
+}
+.home-user-card-headings p{
+    font-size: 15px;
+    color: gray;
 }
 
 .home-user-card-headings h6:hover{

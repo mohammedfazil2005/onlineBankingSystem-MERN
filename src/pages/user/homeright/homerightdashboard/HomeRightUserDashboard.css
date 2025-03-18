@@ -6,7 +6,7 @@
 }
 .userdashboard-heading{
     display: flex;
-    gap: 10px;
+    gap: 4px;
     flex-direction: column;
 }
 
@@ -38,9 +38,9 @@
     gap: 10px;
     border: 1px solid lightgray;
     padding: 10px;
-    width: 320px;
+    width: 360px;
     background: rgba(24, 20, 60, 0.466);
-    height: 190px;
+    height: 230px;
     color: white;
     border-radius: 10px;
     background-image: url('https://img.freepik.com/free-vector/gradient-dynamic-blue-lines-background_23-2148995756.jpg');
@@ -62,9 +62,9 @@
      gap: 10px;
      border: 1px solid lightgray;
      padding: 10px;
-     width: 320px;
+     width: 360px;
      background: rgba(24, 20, 60, 0.466);
-     height: 190px;
+     height: 230px;
      color: white;
      border-radius: 10px;
      background-image: url('https://img.freepik.com/free-vector/red-wavy-background_1189-269.jpg?t=st=1742144590~exp=1742148190~hmac=58499faebca52b4edf5bbae339e2b93062d3cbd7b10432b9bf782e4c4da83de8&w=826');

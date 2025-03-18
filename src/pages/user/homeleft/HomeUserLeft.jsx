@@ -13,6 +13,7 @@ const HomeUserLeft = ({setCategoryName}) => {
     { name: "Loans", fontClass: "fas fa-hand-holding-usd" },
     { name: "My Loans", fontClass: "fa-solid fa-server" },
     { name: "Notifications", fontClass: "fa-solid fa-bell" },
+    { name: "Profile", fontClass: "fa-solid fa-user" },
     { name: "Logout", fontClass: "fas fa-sign-in-alt" }
    
   ]

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './HomeRightUserDashboard.css'
 import { Form } from 'react-bootstrap';
 import { Line, Pie } from 'react-chartjs-2';
-import { Chart as ChartJS ,CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
@@ -10,65 +10,82 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const HomeRightUserDashboard = () => {
 
-    const lineData={
-        labels:["Credit Card","Debit Card"],
-        datasets:[
+    const lineData = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [
             {
-                label:"Credit Card Transactions",
-                data:["100","200"],
-                borderColor: "rgba(153, 102, 255, 1)", // Purple
-                backgroundColor: [
-                    "#347deb", // Sky Blue
-                    "#a11010"  // Dark Red (Shaded Red)
-                ],
+                label: "Income",
+                data: [10, 400, 50, 90],
+                borderColor: "rgba(255, 99, 132, 1)", // Red
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
                 tension: 0.4
             },
+            {
+                label: "expence",
+                data: [100, 600, 200, 30],
+                borderColor: "rgba(54, 162, 235, 1)", // Blue
+                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                tension: 0.4
+
+            }
         ]
     }
 
     const Lineoptions = {
         responsive: true,  // Enables responsiveness
         maintainAspectRatio: false, // Allows custom width & height
-      };
+    };
 
 
-  return (
-    <div className='user-dashboard-parent'>
-     <div className="userdashboard-heading">
-        <h1>Welcome,<span>Adrian</span></h1>
-        <p>Access & manage your account and transactions efficiently</p>
-     </div>
-     <div className="user-balance-dashboard">
-        <div className="user-balance-card-parent">
-        <div className="user-balance-dashboard-main-card">
-            <div>
-            <h5>Your Balance</h5>
-            <p>₹3989</p>
+    return (
+        <div className='user-dashboard-parent'>
+            <div className="userdashboard-heading">
+                <h1>Welcome,<span>Adrian</span></h1>
+                <p>Access & manage your account and transactions efficiently</p>
             </div>
-            <div>
-                <h6>Credit card</h6>
-                <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />    
-            </div>
-            
-        </div>
-        <div className="user-balance-dashboard-main-card-2">
-            <div>
-            <h5>Your Balance</h5>
-            <p>₹43,989</p>
-            </div>
-            <div>
-                <h6>Debit card</h6>
-                <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
-            </div>
-        </div>
-        </div>
-        
+            <div className="user-balance-dashboard">
+                <div className="user-balance-card-parent">
+                    <div className="user-balance-dashboard-main-card">
+                        <div>
+                            <h5>Your Balance</h5>
+                            <p>₹3989</p>
+                        </div>
+                        <div>
+                            <h6>Credit card</h6>
+                            <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
+                        </div>
 
-       
-     </div>
+                    </div>
+                    <div className="user-balance-dashboard-main-card-2">
+                        <div>
+                            <h5>Your Balance</h5>
+                            <p>₹43,989</p>
+                        </div>
+                        <div>
+                            <h6>Debit card</h6>
+                            <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
+                        </div>
+                    </div>
+                </div>
 
-    
-     <div className="user-dashboard-transactions">
+
+
+            </div>
+
+            <div className="home-user-card-headings">
+
+            <h2>Income & Expense</h2>
+            <p>Track your earnings and spending with real-time insights.</p>
+
+            </div>
+
+            <div className="line-chart-user-dashboard" style={{ minHeight: '300px' }}>
+
+                <Line data={lineData} options={Lineoptions} />
+            </div>
+
+
+            <div className="user-dashboard-transactions">
         <div className="user-dashboard-transactions-heading">
             <h1>Recent transactions</h1>
             <button>View all <i className="fa-solid fa-arrow-right"></i></button>
@@ -80,11 +97,8 @@ const HomeRightUserDashboard = () => {
         </div>
         <div className="user-bank-balance">
             <div className='user-bank-balance-heading'>
-            <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
-                <div>
-                    <h6>Balance</h6>
-                    <p>₹2993</p>
-                </div>
+           
+               
             </div>
             <div>
             <Form.Select aria-label="Select card">
@@ -112,8 +126,8 @@ const HomeRightUserDashboard = () => {
            <button>Download</button>
         </div>
      </div>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default HomeRightUserDashboard

@@ -14,7 +14,7 @@ const HomeUser = () => {
             <HomeUserLeft setCategoryName={setCategoryName}/>
         </div>
         <div className='home-right'>
-            <HomeUserRight categoryName={categoryName}/>
+            <HomeUserRight categoryName={categoryName} setCategoryName={setCategoryName}/>
         </div>
     </div>
     </>

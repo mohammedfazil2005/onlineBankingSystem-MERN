@@ -6,27 +6,63 @@
 }
 .home-user-details-heading{
     display: flex;
-    align-items: center;
     gap: 30px;
-    justify-content: space-between;
-}
-.home-user-details-heading div button{
-    padding: 8px;
-    border: none;
-    background-color: white;
-    color: black;
-    border: 1px solid blueviolet;
-    border-radius: 10px;
-}
-.home-user-details-heading div h6{
-    font-size: 22px;
-}
-.home-user-details-heading img{
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+  
 }
 
+.home-user-profile-details-left{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.home-user-profile-details-left img{
+    width: 300px;
+}
+.home-user-profile-details-left h6{
+    text-align: center;
+}
+.home-user-profile-details-left h6 i{
+    margin-right: 5px;
+    font-size: 16px;
+    font-weight: 400;
+}
+.home-user-profile-details-left h6 span{
+    font-weight: 400;
+    font-size: 28px;
+
+}
+
+.home-user-profile-details-left button{
+    padding: 6px;
+    background-color: white;
+    color: white;
+    border: 1px solid blueviolet;
+    border-radius: 7px;
+    color: black
+
+}
+
+.home-user-profile-details-right{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.home-user-profile-details-right main{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.home-user-profile-details-right main div h6{
+    font-weight: 400;
+    color: gray;
+}
+.home-user-profile-details-right main div h6 span{
+    color: blueviolet;
+    margin-left: 20px;
+}
 .user-card-admin-main{
     display: flex;
     justify-content: space-between;
@@ -41,7 +77,8 @@
 }
 .user-card-admin-main h1{
     font-size: 25px;
-    font-weight: bolder;
+    font-weight: 400;
+    letter-spacing: 1px;
     color: blueviolet;
 
 }
