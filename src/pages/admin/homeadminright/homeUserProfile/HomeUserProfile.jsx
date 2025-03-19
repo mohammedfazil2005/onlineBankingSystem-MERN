@@ -63,17 +63,79 @@ const HomeUserProfile = () => {
                     </main>
                 </div>
                 <div className="home-user-profile-admin-details">
-                    <div>
-                        <h6><i class="fa-solid fa-house"></i> Kerala</h6>
+                    <div className="admin-profile-detail">
+                        <h6>
+                            <i class="fa-solid fa-user"></i>
+                            <span> Name: John Doe </span>
+                        </h6>
                     </div>
+
+                
+                    <div className="admin-profile-detail">
+                        <h6>
+                            <i class="fa-solid fa-user-shield"></i>
+                            <span> Role: Customer </span>
+                        </h6>
+                    </div>
+
+                  
+                    <div className="admin-profile-detail">
+                        <h6>
+                            <i class="fa-solid fa-envelope"></i>
+                            <span> Email: john.doe@example.com </span>
+                        </h6>
+                    </div>
+
+                 
+                    <div className="admin-profile-detail">
+                        <h6>
+                            <i class="fa-solid fa-phone"></i>
+                            <span> Phone: +91 98765 43210 </span>
+                        </h6>
+                    </div>
+
+                    
+                    <div className="admin-profile-detail">
+                        <h6>
+                            <i class="fa-solid fa-toggle-on"></i>
+                            <span> Status: Active </span>
+                        </h6>
+                    </div>
+
+                    
+                    <div className="admin-profile-detail">
+                        <h6>
+                            <i class="fa-solid fa-wallet"></i>
+                            <span> Monthly Income: ₹5000 </span>
+                        </h6>
+                    </div>
+
+                
+                    <div className="admin-profile-detail">
+                        <h6>
+                            <i class="fa-solid fa-clock"></i>
+                            <span> Last Login: 18 March 2025, 10:30 AM </span>
+                        </h6>
+                    </div>
+
+                    
+                    <div className="admin-profile-detail">
+                        <h6>
+                            <i class="fa-solid fa-map-marker-alt"></i>
+                            <span> Address: Kerala, India </span>
+                        </h6>
+                    </div>
+
+                    
+                   
                 </div>
             </div>
 
 
 
 
-            
-           
+
+
             <div className="home-user-details-parent">
                 <div className="user-dashboard-transactions-heading">
 
@@ -162,8 +224,8 @@ const HomeUserProfile = () => {
                         </div>
                     </div>
                 </div>
-                <div className="heading-dashboard" style={{marginTop:'50px'}}>
-                    <h1 style={{fontSize:'24px'}}>User Transaction Analysis</h1>
+                <div className="heading-dashboard" style={{ marginTop: '50px' }}>
+                    <h1 style={{ fontSize: '24px' }}>User Transaction Analysis</h1>
                     <p>Review and analyze user credit and debit card transactions.</p>
                 </div>
                 <div>

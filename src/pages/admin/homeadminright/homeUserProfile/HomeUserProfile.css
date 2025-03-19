@@ -86,3 +86,19 @@
     background-color: blueviolet;
     color: white;
 }
+
+.home-user-profile-admin-details{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    width: 80%;
+}
+.home-user-profile-admin-details div{
+    border-bottom: 1px solid lightgray;
+}
+.home-user-profile-admin-details div h6{
+    font-weight: 400;
+}
+.home-user-profile-admin-details div h6 span{
+    margin-left: 10px;
+}
