@@ -43,39 +43,37 @@ const HomeUserProfile = () => {
             <div className="home-user-profile-heading">
                 {/* <h2>User profile</h2> */}
             </div>
-            <div className="home-user-details-heading">
-                    <div className='home-user-profile-details-left'>
-                    <img src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" alt="" />
-                        {/* <h6><span>Raw jhoncy</span></h6> */}
-                        <button>Send a Notification</button>
-                    </div>
-        
-                <div className='home-user-profile-details-right'>
+
+            <div className="home-user-profile-admin-parent">
+                <div className="home-user-profile-admin-heading">
                     <main>
-                    <div>
-                        <h6>Name :<span>Jhoncy</span></h6>
-                    </div>
-                    <div>
-                        <h6>Gender :<span>Male</span></h6>
-                    </div>
-                    <div>
-                        <h6>Date of birth :<span>12/25/1999</span></h6>
-                    </div>
+                        <div>
+                            <img src="https://plus.unsplash.com/premium_photo-1690579805307-7ec030c75543?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29uJTIwaWNvbnxlbnwwfHwwfHx8MA%3D%3D" alt="" />
+                        </div>
+                        <div>
+                            <h6>Cameron Willamson</h6>
+                            <p>Kerala</p>
+                        </div>
                     </main>
                     <main>
-                    <div>
-                        <h6>State :<span>Kerala</span></h6>
-                    </div>
-                    <div>
-                        <h6>Email :<span>jhoncy@gmail.com</span></h6>
-                    </div>
-                    <div>
-                        <h6>Phone :<span>+91 9961423960</span></h6>
-                    </div>
+                        <div>
+                            <h5>Employement type</h5>
+                            <h4>Full time employee</h4>
+                        </div>
                     </main>
-                
+                </div>
+                <div className="home-user-profile-admin-details">
+                    <div>
+                        <h6><i class="fa-solid fa-house"></i> Kerala</h6>
+                    </div>
                 </div>
             </div>
+
+
+
+
+            
+           
             <div className="home-user-details-parent">
                 <div className="user-dashboard-transactions-heading">
 

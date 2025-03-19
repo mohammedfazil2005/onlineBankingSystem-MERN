@@ -140,10 +140,10 @@ const HomeAdminDashboard = () => {
       </div>
 
       <div className="home-dashboard-bank-pie-charts">
-        <div style={{ height: '300px' }}>
+        <div style={{ height: '330px',borderRadius:'10px' }}>
           <Pie data={PieData} />
         </div>
-        <div className='w-100'>
+        <div className='w-100' style={{borderRadius:'10px'}}>
           <Line data={Linedata} options={Lineoptions} />
         </div>
       </div>

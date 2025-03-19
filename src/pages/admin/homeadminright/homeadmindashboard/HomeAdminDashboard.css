@@ -68,6 +68,7 @@
 .home-dashboard-bank-pie-charts{
     display: flex;
     margin-top: 10px;
+    gap: 10px;
 }
 
 .home-dashboard-bank-pie-charts div {

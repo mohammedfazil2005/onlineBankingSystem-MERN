@@ -1,0 +1,61 @@
+.home-admin-credit-card-req-parent{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.home-admin-credit-req-table{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.home-admin-credit-req-table div{
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.home-admin-credit-card-req-parent div img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.home-admin-credit-card-req-parent div button{
+    background-color: white;
+    border: 1px solid blueviolet;
+    padding: 4px 6px;
+    
+}
+.heading-req-content {
+    margin-bottom: 20px;
+    border-bottom: 1px solid lightgray;
+}
+.heading-req-table p{
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    color: gray;
+    font-size: 14px;
+   
+}
+
+.heading-req-content p{
+    font-size: 14px;
+
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.heading-req-content h6{
+    text-transform: uppercase;
+    font-weight: 400;
+    color: blueviolet;
+    font-size: 15px;
+}
+
+.heading-req-content a{
+    text-decoration: underline;
+    font-weight: 400;
+    font-size: 14px;
+}

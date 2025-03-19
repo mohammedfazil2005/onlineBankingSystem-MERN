@@ -1,0 +1,90 @@
+.user-profile-page-parent{
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.user-profile-page-left-input-div{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.user-profile-page-left-input-div div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.user-profile-page-left-input-div section{
+    display: flex;
+    gap: 10px;
+}
+
+.user-profile-page-left-input-div section main{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.user-profile-page-left-input-div div h6{
+    font-weight: 400;
+    color: gray;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.user-profile-page-left-input-div div input{
+    padding: 4px;
+    border-radius: 7px;
+    border: 1px solid lightgray;
+    outline: none;
+}
+
+.user-profile-page-left-input-div div main button{
+    background-color: blueviolet;
+    color: white;
+    border: 1px solid blueviolet;
+    padding: 7px;
+    border-radius: 8px;
+    
+}
+
+.user-profile-page-left-input-div div main button:hover{
+    background-color: white;
+    color: black;
+    border: 1px solid blueviolet;
+
+    
+}
+
+
+
+
+
+.user-profile-page-right{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+}
+.user-profile-page-right button{
+    background-color: white;
+    color: black;
+    border: 1px solid blueviolet;
+    padding: 7px;
+    border-radius: 8px;
+}
+
+.user-profile-page-right button:hover{
+    background-color: blueviolet;
+    color: white;
+    border: 1px solid blueviolet;
+    padding: 7px;
+    border-radius: 8px;
+}
+.user-profile-page-right img{
+    width: 250px;
+    height: 300px;
+    border-radius: 7px;
+}
+

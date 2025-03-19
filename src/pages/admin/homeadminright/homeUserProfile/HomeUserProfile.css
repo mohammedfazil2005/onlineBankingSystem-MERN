@@ -4,65 +4,54 @@
     gap: 30px;
     margin-right: 20px;
 }
-.home-user-details-heading{
-    display: flex;
-    gap: 30px;
-  
-}
 
-.home-user-profile-details-left{
+.home-user-profile-admin-parent{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
-.home-user-profile-details-left img{
-    width: 300px;
-}
-.home-user-profile-details-left h6{
-    text-align: center;
-}
-.home-user-profile-details-left h6 i{
-    margin-right: 5px;
-    font-size: 16px;
-    font-weight: 400;
-}
-.home-user-profile-details-left h6 span{
-    font-weight: 400;
-    font-size: 28px;
-
-}
-
-.home-user-profile-details-left button{
-    padding: 6px;
-    background-color: white;
-    color: white;
-    border: 1px solid blueviolet;
-    border-radius: 7px;
-    color: black
-
-}
-
-.home-user-profile-details-right{
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
     gap: 20px;
 }
 
-.home-user-profile-details-right main{
+.home-user-profile-admin-heading{
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+    justify-content: space-between;
 
-.home-user-profile-details-right main div h6{
+}
+.home-user-profile-admin-heading main{
+    display: flex;
+    gap: 10px;
+}
+.home-user-profile-admin-heading main div{
+   display: flex;
+   flex-direction: column;
+   gap: 3px;
+}
+.home-user-profile-admin-heading main div img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.home-user-profile-admin-heading main div h6{
+    font-weight: bold;
+}
+.home-user-profile-admin-heading main div p{
     font-weight: 400;
     color: gray;
 }
-.home-user-profile-details-right main div h6 span{
-    color: blueviolet;
-    margin-left: 20px;
+
+
+.home-user-profile-admin-heading main div h5{
+    font-weight: 400;
+    color: gray;
+    font-size: 15px;
 }
+
+.home-user-profile-admin-heading main div h4{
+    font-weight: 500;
+    color: black;
+    font-size: 15px;
+}
+
+
 .user-card-admin-main{
     display: flex;
     justify-content: space-between;
@@ -92,4 +81,8 @@
     border: 1px solid blueviolet;
     background-color: white;
     border-radius: 7px;
+}
+.user-card-admin-details div button:hover{
+    background-color: blueviolet;
+    color: white;
 }
