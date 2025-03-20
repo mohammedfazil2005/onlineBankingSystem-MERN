@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import './Login.css'
 import { FloatingLabel, Form } from 'react-bootstrap'
 import { data, Link } from 'react-router-dom'
+import { GoogleLogin } from '@react-oauth/google'
+import { jwtDecode } from 'jwt-decode'
+
 
 
 const Login = () => {
@@ -34,6 +37,24 @@ const Login = () => {
       setLogin("Login")
     }
   }
+
+
+
+  const handleSuccess=(responce)=>{
+    const token=responce.credential
+    const userData=jwtDecode(token)
+    console.log(userData)
+  }
+
+  const handlError=()=>{
+    console.log("Login Failed")
+  }
+
+
+
+
+
+
 
 
 
@@ -124,8 +145,9 @@ const Login = () => {
 
         }
         <h6 onClick={onStateChange}>{login == "Login" ? "Dosen't have an account?" : "Already have an account?"}</h6>
-        <button>Signup</button>
-        {login == "Login" ? <button id='google-bnt'><img src="https://pngimg.com/d/google_PNG19630.png" alt="" />Sign in with Google</button> : ""}
+       {login=="Login"? <button>Login</button>:<button>Signup</button>}
+        <GoogleLogin onSuccess={handleSuccess} onError={handlError}/>
+        
 
       </div>
     </div>
