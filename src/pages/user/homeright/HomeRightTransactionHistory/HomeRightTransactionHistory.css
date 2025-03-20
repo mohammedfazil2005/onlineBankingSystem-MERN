@@ -14,66 +14,23 @@
 }
 
 
-.user-transaction-account-details{
-    display: flex;
-    justify-content: space-between;
-    padding: 30px;
-    background: rgb(24,20,60);
-    border-radius: 10px;
-    color: white;
-    background: url('https://img.freepik.com/free-vector/gradient-dynamic-blue-lines-background_23-2148995756.jpg');
+.user-page-transaction-table{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    place-items: center ;
+    align-items: center;
 }
-.user-transaction-account-details div{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.head-user-trans {
+    border-bottom: 1px solid lightgray;
 }
-.user-transaction-account-details div p{
-    letter-spacing: 5px;
+.head-user-trans p{
+    text-transform: uppercase;
+    font-size: 13px;
 }
-.user-transaction-account-details h1{
-    font-size: 17px;
-}
-
-.user-transaction-account-details h6{
-    font-weight: lighter;
-}
-
-.user-transaction-account-details-right-div{
-    border: 1px solid  white;
-    padding: 25px;
-    border-radius: 10px;
-}
-.user-transaction-account-details-right-div h4{
-    font-size: 20px;
-    font-weight: 300;
-}
-
-.user-transaction-history-full{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.user-transaction-history-list-heading{
-    display: flex;
-    justify-content: space-between;
-
-}
-.user-transaction-history-list-heading button{
-    background-color: blueviolet;
-    color: white;
-    border: none;
-    padding: 5px;
-}
-
-.user-transaction-history-heading div p{
-    color: gray;
-    font-size: 15px;
-}
-
-@media screen and (max-width:610px) {
-    .user-transaction-history-heading{
-        flex-direction: column;
-        align-items: start;
-    }
+.user-page-transaction-table button{
+    width: 80px;
+    padding: 4px;
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid blueviolet;
 }
