@@ -9,6 +9,7 @@ const HomeAdminCategory = ({setCategoryName}) => {
         { name: "Admin Dashboard", fontClass: "fas fa-chart-pie" },
         { name: "User Management", fontClass: "fas fa-users-cog" }, 
         { name: "Transactions", fontClass: "fas fa-exchange-alt" }, 
+        {name:"Manage Credit Cards",fontClass:" fas fa-id-card"},
         { name: "Credit Card Requests", fontClass: "fa-solid fa-credit-card" },
         { name: "Loan Approvals", fontClass: "fas fa-hand-holding-usd" }, 
         { name: "Notifications", fontClass: "fa-solid fa-bell" },

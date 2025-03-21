@@ -38,12 +38,13 @@
 }
 .my-loans-card-main h4{
     font-size: 16px;
+    font-weight: 300;
     color: gray;
 }
 .my-loans-card-main h4 span{
     margin-left: 10px;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 300;
     color: blueviolet;
 }
 .my-loans-card-main main{

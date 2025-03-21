@@ -109,22 +109,27 @@ const HomeRightUserDashboard = () => {
                         </Form.Select>
             </div>
         </div>
-        <div className="user-transaction-list">
-            <p>#</p>
-            <p>Transactions</p>
-            <p>Amount</p>
-            <p>Status</p>
-            <p>Date</p>
-            <p>Download</p>
-        </div>
-        <div className="user-transaction-list">
-            <p>1</p>
-            <p>Kumar</p>
-            <p>200</p>
-            <p>Processing</p>
-            <p>Wed 11:00pm</p>
-           <button>Download</button>
-        </div>
+        <div className="user-page-transaction-table head-user-trans">
+         
+         <p>Name</p>
+         <p>Date</p>
+         <p>CARD</p>
+         <p>Transaction Type</p>
+       
+         <p>Amount</p>
+         <p>Export</p>
+      </div>
+
+      <div className="user-page-transaction-table mb-2" style={{marginTop:'3px'}}>
+        
+         <p>MohammedFazil</p>
+         <p>20/2/2024</p>
+         <p>Debit</p>
+         <p>Credited</p>
+       
+         <p>₹460</p>
+         <button>Export</button>
+      </div>
      </div>
         </div>
     )

@@ -44,6 +44,8 @@
 .user-card-div-main{
     display: flex;
     gap: 50px;
+    flex-wrap: wrap;
+   
 }
 
 .main-card{

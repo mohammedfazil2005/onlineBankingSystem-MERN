@@ -1,0 +1,5 @@
+.home-admin-credit-manage-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

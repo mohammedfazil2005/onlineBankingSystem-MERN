@@ -6,6 +6,7 @@ import HomeAdminLoanRequests from './homeadminloanrequests/HomeAdminLoanRequests
 import HomeAdminTransactions from './homeadminallTransactions/HomeAdminTransactions'
 import HomeAdminNotifications from './homeadminNotifications/HomeAdminNotifications'
 import HomeAdminCreditCardReq from './homeadmincreditCardRequests/HomeAdminCreditCardReq'
+import HomeAdminCreditCardManage from './homeadmincreditCardManage/HomeAdminCreditCardManage'
 
 
 const HomeAdminRight = ({categoryName,setCategoryName}) => {
@@ -18,6 +19,7 @@ const HomeAdminRight = ({categoryName,setCategoryName}) => {
      {categoryName=="Transactions"?<HomeAdminTransactions/>:""}
      {categoryName=="Notifications"?<HomeAdminNotifications/>:""}
      {categoryName=="Credit Card Requests"?<HomeAdminCreditCardReq/>:""}
+     {categoryName=="Manage Credit Cards"?<HomeAdminCreditCardManage/>:""}
     </div>
   )
 }
