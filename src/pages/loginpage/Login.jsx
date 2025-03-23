@@ -5,6 +5,7 @@ import { FloatingLabel, Form } from 'react-bootstrap'
 import { data, Link } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google'
 import { jwtDecode } from 'jwt-decode'
+import { datas } from '../randomdata/data'
 
 
 
@@ -20,8 +21,8 @@ const Login = () => {
     postalCode: "",
     DOB: "",
     phone: "",
-    salarySource:"",
-    monthlySalary:"",
+    salarySource: "",
+    monthlySalary: "",
     email: "",
     password: ""
 
@@ -40,13 +41,13 @@ const Login = () => {
 
 
 
-  const handleSuccess=(responce)=>{
-    const token=responce.credential
-    const userData=jwtDecode(token)
+  const handleSuccess = (responce) => {
+    const token = responce.credential
+    const userData = jwtDecode(token)
     console.log(userData)
   }
 
-  const handlError=()=>{
+  const handlError = () => {
     console.log("Login Failed")
   }
 
@@ -88,32 +89,50 @@ const Login = () => {
                 <Form.Control type="text" placeholder="ex: Mathew" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, lastName: e.target.value })} required />
               </FloatingLabel>
             </div>
-            <div>
-              <FloatingLabel controlId="address" label="Address" className="mb-3">
-                <Form.Control type="text" placeholder="Enter your specific address" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, address: e.target.value })} required />
-              </FloatingLabel>
-              <FloatingLabel controlId="state" label="State" className="mb-3">
-                <Form.Control type="text" placeholder="ex: Kerala" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, state: e.target.value })} required />
-              </FloatingLabel>
-            </div>
 
             <div>
 
 
-              <FloatingLabel controlId="postalCode" label="Postal Code" className="mb-3">
-                <Form.Control type="number" placeholder="ex: 1101" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, postalCode: e.target.value })} required />
-              </FloatingLabel>
+
 
               <FloatingLabel controlId="dob" label="Date of Birth" className="mb-3">
                 <Form.Control type="date" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, DOB: e.target.value })} required />
               </FloatingLabel>
-            </div>
 
-            <div>
               <FloatingLabel controlId="phoneNumber" label="Phone Number" className="mb-3">
                 <Form.Control type="number" maxLength={10} placeholder="Enter your 10-digit number" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, phone: e.target.value })} required />
               </FloatingLabel>
-              <Form.Select aria-label="Default select example" style={{height:'60px'}} onChange={(e)=>setUserData({...userData,salarySource:e.target.value})}>
+            </div>
+            <div>
+
+              <Form.Select
+                aria-label="Default select example"
+                style={{ height: '60px' }}
+                onChange={(e)=>{
+                  const selectedData=datas.find((a)=>a['state']==e.target.value)
+                  if(selectedData){
+                    setUserData({...userData,state:selectedData.state,postalCode:selectedData.pincode})
+                  }
+                }}
+              
+              >
+                <option disabled selected>Select State</option>
+                {datas.map((a)=>(
+                  <option value={a.state} key={a.pincode}>{a.state}</option>
+                ))}
+              </Form.Select>
+
+
+              <FloatingLabel controlId="postalCode" label="PIN Code" className="mb-3">
+                <Form.Control type="number" placeholder="ex: 1101" readOnly className="cursor-pointer" value={userData.postalCode} required />
+              </FloatingLabel>
+            </div>
+
+
+
+            <div>
+
+              <Form.Select aria-label="Default select example" style={{ height: '60px' }} onChange={(e) => setUserData({ ...userData, salarySource: e.target.value })}>
                 <option>Select Salary Source</option>
                 <option value="1">Monthly Salary</option>
                 <option value="2">Freelancing Income</option>
@@ -125,13 +144,17 @@ const Login = () => {
                 <option value="8">Other</option>
 
               </Form.Select>
-            </div>
-            <FloatingLabel controlId="Salary Amount (₹)" label="Monthly Income Amount (₹)" className="mb-3">
+
+              <FloatingLabel controlId="Salary Amount (₹)" label="Monthly Income Amount (₹)" className="mb-3">
               <Form.Control type="number" placeholder="Enter your email" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, monthlySalary: e.target.value })} required />
             </FloatingLabel>
+            </div>
+           
             <FloatingLabel controlId="email" label="Email" className="mb-3">
               <Form.Control type="email" placeholder="Enter your email" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, email: e.target.value })} required />
             </FloatingLabel>
+
+            <div>
 
             <FloatingLabel controlId="password" label="Enter your 4 Digit password" className="mb-3">
               <Form.Control type="number" placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, password: e.target.value })} required />
@@ -140,14 +163,15 @@ const Login = () => {
             <FloatingLabel controlId="confirmPassword" label="Confirm Password" className="mb-3">
               <Form.Control type="number" placeholder="Enter password again" className="cursor-pointer" />
             </FloatingLabel>
+            </div>
           </>
 
 
         }
         <h6 onClick={onStateChange}>{login == "Login" ? "Dosen't have an account?" : "Already have an account?"}</h6>
-       {login=="Login"? <button>Login</button>:<button>Signup</button>}
-        <GoogleLogin onSuccess={handleSuccess} onError={handlError}/>
-        
+        {login == "Login" ? <button>Login</button> : <button>Signup</button>}
+        <GoogleLogin onSuccess={handleSuccess} onError={handlError} />
+
 
       </div>
     </div>
