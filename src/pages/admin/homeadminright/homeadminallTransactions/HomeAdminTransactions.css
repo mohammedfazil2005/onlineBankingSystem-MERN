@@ -28,3 +28,18 @@
     padding: 5px;
 
 }
+
+@media screen and (max-width:617px) {
+    .home-admin-dashboard-transaction-table p{
+        font-size: 9px;
+    }
+    .home-admin-dashboard-transaction-table img{
+        width: 20px;
+        height: 20px;
+    }
+    .home-admin-dashboard-transaction-table button{
+        padding: 1px;
+        width: 40px;
+        font-size: 8px;
+    }
+}

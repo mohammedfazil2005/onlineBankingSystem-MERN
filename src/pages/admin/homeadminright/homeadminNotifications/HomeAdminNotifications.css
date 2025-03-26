@@ -37,3 +37,10 @@
     color: gray;
     font-size: 15px;
 }
+
+@media screen and (max-width:736px) {
+    .heading-dashboard-not{
+        flex-direction: column;
+        align-items: start;
+    }
+}

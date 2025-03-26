@@ -91,3 +91,20 @@
     color: white;
     border: none;
 }
+
+
+@media screen and (max-width:575px) {
+    .user-details-table-card-main div h2{
+        font-size: 14px;
+    }
+
+    .user-details-table-card-main main button{
+        width: 40px;
+        padding: 3px;
+        font-size: 14px;
+        color: black;
+        border: 1px solid blueviolet;
+        background-color: white;
+    }
+    
+}

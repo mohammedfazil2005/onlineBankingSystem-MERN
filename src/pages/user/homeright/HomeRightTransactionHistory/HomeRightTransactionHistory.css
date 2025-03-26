@@ -34,3 +34,14 @@
     border-radius: 6px;
     border: 1px solid blueviolet;
 }
+
+@media screen and (max-width:773px) {
+    .user-page-transaction-table p{
+        font-size: 10px;
+    }
+    .user-page-transaction-table button{
+        width: 60px;
+        padding: 1px;
+        font-size: 10px;
+    }
+}

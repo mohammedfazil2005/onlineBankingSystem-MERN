@@ -11,7 +11,8 @@ const HomeRightTransactionHistory = () => {
                     <p>Gain insights and Track Your Transactions Over Time</p>
                 </div>
                 <div>
-                <Form.Select aria-label="Default select example">
+                <Form.Select aria-label="Default select example" value={''}>
+                           <option value="" disabled>Select card</option>
                             <option value="1">DEBIT</option>
                             <option value="2">CREDIT</option>
 

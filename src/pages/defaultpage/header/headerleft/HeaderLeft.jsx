@@ -6,7 +6,7 @@ const HeaderLeft = () => {
   return (
     <div className='header-left-parent'>
     <h1> You Can Do more with Right Card</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tempora non ipsam Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tempora non ipsam</p>
+    <p>Discover the benefits of having the right card for your needs. Enjoy exclusive rewards, seamless transactions, and financial flexibility tailored for you.</p>
     <div className='header-left-button-div'>
        <Link to={'/login'}> <button id='signup-btn'>Signup</button></Link>
        <Link to={'/login'}> <button>Get started</button></Link>

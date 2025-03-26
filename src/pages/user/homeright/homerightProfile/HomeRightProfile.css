@@ -38,6 +38,7 @@
     border-radius: 7px;
     border: 1px solid lightgray;
     outline: none;
+    width: 100%;
 }
 
 .user-profile-page-left-input-div div main button{
@@ -88,3 +89,22 @@
     border-radius: 7px;
 }
 
+
+
+@media screen and (max-width:633px) {
+    .user-profile-page-right img{
+        width: 150px;
+        height: 190px;
+        border-radius: 7px;
+    }
+    
+}
+
+@media screen and (max-width:584px) {
+    .user-profile-page-parent{
+        flex-direction: column-reverse;
+        align-items: start;
+        gap: 2px;
+    }
+    
+}

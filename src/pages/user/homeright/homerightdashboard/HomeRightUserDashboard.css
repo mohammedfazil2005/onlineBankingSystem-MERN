@@ -31,6 +31,8 @@
 .user-balance-card-parent{
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+
 }
 .user-balance-dashboard-main-card{
     display: flex;
