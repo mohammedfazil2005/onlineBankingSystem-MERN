@@ -14,10 +14,10 @@ const DefaultNavbar = () => {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
       <li className="nav-item">
-      <Link>Home</Link>
+      <Link to={'/'}>Home</Link>
         </li> 
         <li className="nav-item">
-        <Link>Deposit</Link>
+        <Link to={'/deposit'}>Deposit</Link>
         </li>
          
         <li className="nav-item">
