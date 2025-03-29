@@ -69,14 +69,35 @@
     background-color: white;
     
 }
-#google-bnt:hover{
-    background-color: blueviolet;
-    color: white;
-}
+
 #google-bnt img{
     width: 20px;
     margin-right: 20px;
 }
+.login-profile-div{
+    display: flex;
+    gap: 3px;
+
+}
+.login-profile-div img{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+}
+
+.loader-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.loader-div img{
+    width: 300px;
+    margin-top: 00px;
+
+}
+
 
 @media screen and (max-width:702px) {
     .login-child{
