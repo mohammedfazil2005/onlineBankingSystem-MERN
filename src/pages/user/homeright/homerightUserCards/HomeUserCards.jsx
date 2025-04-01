@@ -97,7 +97,7 @@ const HomeUserCards = ({setCategoryName}) => {
       <h2 style={{ letterSpacing: '1px', fontSize: '17px' }}>Credit Card</h2>
 
       <div className="user-card-div-main">
-        <div className='main-card' style={{ background: 'url(https://img.freepik.com/free-vector/red-wavy-background_1189-269.jpg?t=st=1742144590~exp=1742148190~hmac=58499faebca52b4edf5bbae339e2b93062d3cbd7b10432b9bf782e4c4da83de8&w=826)' }}>
+        <div className='main-card' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
           <div className='main-card-heading'>
             <h5>Bank Ai</h5>
             <p>Debit</p>
@@ -113,7 +113,7 @@ const HomeUserCards = ({setCategoryName}) => {
         </div>
 
         <div className="main-card-right">
-          <div className='main-card-right-money-details-div' style={{ background: 'url(https://img.freepik.com/free-vector/red-wavy-background_1189-269.jpg?t=st=1742144590~exp=1742148190~hmac=58499faebca52b4edf5bbae339e2b93062d3cbd7b10432b9bf782e4c4da83de8&w=826)' }}>
+          <div className='main-card-right-money-details-div' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
             <div>
               <p>Received</p>
               <h6>₹299</h6>
@@ -128,7 +128,7 @@ const HomeUserCards = ({setCategoryName}) => {
             </div>
           </div>
 
-          <div className="main-card-right-account-holder-details" style={{ background: 'url(https://img.freepik.com/free-vector/red-wavy-background_1189-269.jpg?t=st=1742144590~exp=1742148190~hmac=58499faebca52b4edf5bbae339e2b93062d3cbd7b10432b9bf782e4c4da83de8&w=826)' }}>
+          <div className="main-card-right-account-holder-details" style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
             <div>
               <h6>Cardholder Name</h6>
               <p><i class="fa-solid fa-user" style={{ fontSize: '14px' }}></i> James DENIS</p>
@@ -205,12 +205,12 @@ const HomeUserCards = ({setCategoryName}) => {
 
           <div className="transfer-details-input-div mt-4">
                     <div>
-                        <h6>Select Card</h6>
+                        <h6>Select Card Type</h6>
                         <p>Choose the card you want to apply</p>
                     </div>
                     <div>
                         <Form.Select aria-label="Select card">
-                            <option>Select Card</option>
+                            <option>Select Card Type</option>
                             <option value="debit">Basic Card</option>
                             <option value="credit">Sliver Card</option>
 

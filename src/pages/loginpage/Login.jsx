@@ -51,6 +51,7 @@ const Login = () => {
 
 
 
+
   const onStateChange = () => {
     if (login == "Login") {
       setLogin('Register')
@@ -115,18 +116,6 @@ const Login = () => {
         setValid({ ...valid, password: true })
       }
     }
-
-    // if(e.name=="DOB"){
-    //   // let currentYear=new Date().getFullYear()
-    //   // let splitYear=e.value.split('-')[0]
-    //   // if(currentYear-splitYear>=21){
-    //   //   setUserData({...userData,DOB:e.value})
-    //   //   setValid({...valid,DOB:false})
-    //   // }else{
-    //   //   setValid({...valid,DOB:true})
-    //   // }
-    //   console.log(e.year())
-    // }
 
   }
 
