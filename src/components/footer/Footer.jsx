@@ -6,8 +6,8 @@ const Footer = () => {
     <footer>
       <div className='footer-heading-details'>
         <img src="https://askproject.net/bankai/wp-content/uploads/sites/32/2021/10/logo_Asset-4_4-2048x688.png" alt="" />
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore impedit adipisci fuga, asperiores eaque atque minima, possimus pariatur, vel temporibus praesentium? Cumque doloremque nostrum porro architecto iste vero ullam possimus.</p>
-        <div>
+        <p>Secure, seamless, and smart banking at your fingertips. Experience the future of finance with Bankai—where your money works for you.</p>
+        <div className='mt-3'>
         <i className="fa-brands fa-linkedin"></i>
         <i className="fa-brands fa-youtube"></i>    
         <i className="fa-brands fa-github"></i>

@@ -3,9 +3,9 @@ import DefaultPage from "./pages/defaultpage/DefaultPage"
 import Login from "./pages/loginpage/Login"
 import HomeUser from "./pages/user/HomeUser"
 import HomeAdmin from "./pages/admin/HomeAdmin"
-import Deposit from "./pages/depositpage/Deposit"
 import OTP from "./pages/otppage/OTP"
 import { Toaster } from "react-hot-toast"
+import Staff from "./pages/staff/Staff"
 
 
 
@@ -20,11 +20,8 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/userdashboard" element={<HomeUser/>}/>
       <Route path="/admindashboard" element={<HomeAdmin/>}/>
-      <Route path="/deposit" element={<Deposit/>}/>
       <Route path="/otp" element={<OTP/>}/>
-     
-      
-    
+      <Route path="/staff" element={<Staff/>}/>
      </Routes>
    
     </>

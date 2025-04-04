@@ -10,7 +10,7 @@ const DefaultCard = () => {
       </div>
       <div>
         <h1>Explore the unexplored with Bankai</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, provident. Voluptate vel, et minima aperiam debitis quod at cumque nostrum quae id ducimus ex, animi doloremque officia odio? Perferendis, consectetur.</p>
+        <p>Unlock seamless banking with secure transactions, easy account management, and exclusive financial services.</p>
        <Link to={'/login'}> <button>Signup Now</button></Link>
       </div>
     </div>

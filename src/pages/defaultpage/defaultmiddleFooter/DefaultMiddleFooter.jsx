@@ -10,7 +10,7 @@ const DefaultMiddleFooter = () => {
       </div>
       <div>
         <h1>Ready to join Bankai?</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed modi unde nihil, beatae fugiat eius, veniam neque velit exercitationem incidunt est minus eveniet ipsam non mollitia odit sunt laboriosam optio?</p>
+        <p>Experience seamless banking with security, convenience, and exclusive benefits. Open your account today and take control of your financial journey with Bankai.</p>
        <Link to={'/login'}><button>Get started</button></Link>
       </div>
     </div>

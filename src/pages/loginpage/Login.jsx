@@ -98,7 +98,7 @@ const Login = () => {
 
   const onTextChange = (e) => {
     if (e.name == "email") {
-      let regexTest = e.value.match(/^[a-z]*@?@gmail.com+$/)
+      let regexTest = e.value.match(/^[a-z]*[0-9]*@?@gmail.com+$/)
       if (!!regexTest) {
         setUserData({ ...userData, email: e.value })
         setValid({ ...valid, email: false })

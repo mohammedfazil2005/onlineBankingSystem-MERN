@@ -20,10 +20,8 @@ const HomeRightLoans = () => {
                     </div>
                     <div>
                         <Form.Select aria-label="Select card">
-                            <option>Select Card</option>
+                            <option disabled selected>Select Card</option>
                             <option value="debit">Debit Card</option>
-                            <option value="credit">Credit Card</option>
-
                         </Form.Select>
                     </div>
                 </div>

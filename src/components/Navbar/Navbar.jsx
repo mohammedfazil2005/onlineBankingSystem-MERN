@@ -31,6 +31,9 @@ const toggleShowA = () => setShowA(!showA);
         <li className="nav-item">
         <Link>About</Link>
         </li>
+        <li className="nav-item">
+        <Link>Deposit</Link>
+        </li>
        
       </ul>
       <form className="" role="search">

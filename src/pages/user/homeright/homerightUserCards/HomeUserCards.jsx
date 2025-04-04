@@ -85,7 +85,7 @@ const HomeUserCards = ({setCategoryName}) => {
         </div>
 
         <div className="card-buttons-div">
-          <button>Delete Card</button>
+          <button>Freeze Card</button>
         </div>
 
 
@@ -114,10 +114,7 @@ const HomeUserCards = ({setCategoryName}) => {
 
         <div className="main-card-right">
           <div className='main-card-right-money-details-div' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
-            <div>
-              <p>Received</p>
-              <h6>₹299</h6>
-            </div>
+           
             <div>
               <h2>Available</h2>
               <h6 style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px' }}>₹299</h6>
@@ -153,7 +150,7 @@ const HomeUserCards = ({setCategoryName}) => {
         </div>
 
         <div className="card-buttons-div">
-          <button>Delete Card</button>
+          <button>Freeze Card</button>
           <button onClick={()=>setCategoryName("repay")}>Repay</button>
         </div>
 

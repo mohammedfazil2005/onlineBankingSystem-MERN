@@ -13,7 +13,7 @@ const DefaultMiddle = () => {
     <div className='defaultmiddle-parent'>
       <div className='defaultmiddle-left'>
         <h1>A Right Choice changes everything</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora enim quam eos cupiditate pariatur voluptatum harum </p>
+        <p>Secure and seamless banking solutions tailored to your needs. Manage deposits, transactions, and more with ease. </p>
         <div className='deposit-btn-div'>
       <Link to={'/deposit'}><button>Deposit</button></Link>
     </div>

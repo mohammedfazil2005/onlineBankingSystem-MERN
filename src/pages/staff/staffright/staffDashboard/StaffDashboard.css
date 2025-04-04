@@ -1,0 +1,15 @@
+.staff-deahsboard-parent{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.staff-dashboard-details{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.main-card-staff{
+    background: url('https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg');
+}

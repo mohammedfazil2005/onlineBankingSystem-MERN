@@ -12,14 +12,10 @@ const HomeRightRepay = () => {
           <h1 style={{ fontSize: "24px" }}>Repay Options</h1>
           <p id='repay-desc'>Manage your repayments easily and securely</p>
 
-          <div className='main-card-right-money-details-div' >
+          <div className='main-card-right-money-details-div' style={{display:'flex',justifyContent:'center'}} >
           <div>
               <h2>Total Due</h2>
               <h6 style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px' }}>₹5299</h6>
-            </div>
-            <div>
-              <p>Minimum</p>
-              <h6>₹899</h6>
             </div>
             
 
