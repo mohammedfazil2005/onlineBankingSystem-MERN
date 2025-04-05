@@ -24,7 +24,7 @@ const StaffDepositMoney = () => {
                         />
                     </FloatingLabel>
                 </>
-                <button>Deposit</button>
+                <button>Next</button>
             </div>
         </div>
     )

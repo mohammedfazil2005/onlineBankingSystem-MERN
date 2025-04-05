@@ -51,14 +51,25 @@
     font-size: 15px;
 }
 
+.home-user-profile-admin-heading main div button{
+    padding: 10px;
+    border: none;
+    background-color: blueviolet;
+    color: white;
+}
 
 .user-card-admin-main{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px;
     margin-top: 50px;
 }
-
+.user-card-details-card-parent{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 .user-card-admin-details{
     display: flex;
     flex-direction: column;
@@ -77,7 +88,7 @@
     gap: 10px;
 }
 .user-card-admin-details div button{
-    padding: 7px;
+    padding: 2px;
     border: 1px solid blueviolet;
     background-color: white;
     border-radius: 7px;

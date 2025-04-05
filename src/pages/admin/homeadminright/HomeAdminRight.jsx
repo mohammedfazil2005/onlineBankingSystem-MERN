@@ -7,6 +7,8 @@ import HomeAdminTransactions from './homeadminallTransactions/HomeAdminTransacti
 import HomeAdminNotifications from './homeadminNotifications/HomeAdminNotifications'
 import HomeAdminCreditCardReq from './homeadmincreditCardRequests/HomeAdminCreditCardReq'
 import HomeAdminCreditCardManage from './homeadmincreditCardManage/HomeAdminCreditCardManage'
+import HomeAdminStaff from './homeadminAddStaff/HomeAdminStaff'
+import HomeAdminStaffManagement from './homeAdminStaffManagement/HomeAdminStaffManagement'
 
 
 const HomeAdminRight = ({categoryName,setCategoryName}) => {
@@ -14,12 +16,14 @@ const HomeAdminRight = ({categoryName,setCategoryName}) => {
     <div>
      {categoryName=="Admin Dashboard"?<HomeAdminDashboard/>:""}
      {categoryName=="User Management"?<HomeAdminUserDetails setCategoryName={setCategoryName}/>:""}
+     {categoryName=="Add staff"?<HomeAdminStaff/>:""}
      {categoryName=="ViewProfile"?<HomeUserProfile/>:""}
      {categoryName=="Loan Approvals"?<HomeAdminLoanRequests/>:""}
      {categoryName=="Transactions"?<HomeAdminTransactions/>:""}
      {categoryName=="Notifications"?<HomeAdminNotifications/>:""}
      {categoryName=="Credit Card Requests"?<HomeAdminCreditCardReq/>:""}
      {categoryName=="Manage Credit Cards"?<HomeAdminCreditCardManage/>:""}
+     {categoryName=="Staff Management"?<HomeAdminStaffManagement/>:""}
     </div>
   )
 }

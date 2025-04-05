@@ -11,7 +11,9 @@ const HomeAdminCategory = ({setCategoryName}) => {
         { name: "Transactions", fontClass: "fas fa-exchange-alt" }, 
         {name:"Manage Credit Cards",fontClass:" fas fa-id-card"},
         { name: "Credit Card Requests", fontClass: "fa-solid fa-credit-card" },
-        { name: "Loan Approvals", fontClass: "fas fa-hand-holding-usd" }, 
+        { name: "Loan Approvals", fontClass: "fas fa-hand-holding-usd" },
+        {name:"Add staff",fontClass:"fa-solid fa-clipboard-user"}, 
+        { name: "Staff Management", fontClass: "fas fa-users-cog" }, 
         { name: "Notifications", fontClass: "fa-solid fa-bell" },
         { name: "Logout", fontClass: "fas fa-sign-out-alt" }  
       ];

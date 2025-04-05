@@ -78,7 +78,7 @@ const StaffDashboard = () => {
             <button><i class="fa-solid fa-sack-dollar"></i></button>
           </div>
           <div>
-            <h5>Total Creditcard users</h5>
+            <h5>Total Withdrawel </h5>
             <p>₹564,7792</p>
 
           </div>

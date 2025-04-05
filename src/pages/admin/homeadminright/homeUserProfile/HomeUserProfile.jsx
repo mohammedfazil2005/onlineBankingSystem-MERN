@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import './HomeUserProfile.css'
 import { Line } from 'react-chartjs-2'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
+import { Button, FloatingLabel, Modal } from 'react-bootstrap'
+
 
 
 const HomeUserProfile = () => {
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const lineData = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -57,8 +64,7 @@ const HomeUserProfile = () => {
                     </main>
                     <main>
                         <div>
-                            <h5>Employement type</h5>
-                            <h4>Full time employee</h4>
+                            <button onClick={handleShow}>Send Notifcation</button>
                         </div>
                     </main>
                 </div>
@@ -70,7 +76,7 @@ const HomeUserProfile = () => {
                         </h6>
                     </div>
 
-                
+
                     <div className="admin-profile-detail">
                         <h6>
                             <i class="fa-solid fa-user-shield"></i>
@@ -78,7 +84,7 @@ const HomeUserProfile = () => {
                         </h6>
                     </div>
 
-                  
+
                     <div className="admin-profile-detail">
                         <h6>
                             <i class="fa-solid fa-envelope"></i>
@@ -86,7 +92,7 @@ const HomeUserProfile = () => {
                         </h6>
                     </div>
 
-                 
+
                     <div className="admin-profile-detail">
                         <h6>
                             <i class="fa-solid fa-phone"></i>
@@ -94,7 +100,7 @@ const HomeUserProfile = () => {
                         </h6>
                     </div>
 
-                    
+
                     <div className="admin-profile-detail">
                         <h6>
                             <i class="fa-solid fa-toggle-on"></i>
@@ -102,7 +108,7 @@ const HomeUserProfile = () => {
                         </h6>
                     </div>
 
-                    
+
                     <div className="admin-profile-detail">
                         <h6>
                             <i class="fa-solid fa-wallet"></i>
@@ -110,7 +116,7 @@ const HomeUserProfile = () => {
                         </h6>
                     </div>
 
-                
+
                     <div className="admin-profile-detail">
                         <h6>
                             <i class="fa-solid fa-clock"></i>
@@ -118,7 +124,7 @@ const HomeUserProfile = () => {
                         </h6>
                     </div>
 
-                    
+
                     <div className="admin-profile-detail">
                         <h6>
                             <i class="fa-solid fa-map-marker-alt"></i>
@@ -126,8 +132,8 @@ const HomeUserProfile = () => {
                         </h6>
                     </div>
 
-                    
-                   
+
+
                 </div>
             </div>
 
@@ -137,90 +143,85 @@ const HomeUserProfile = () => {
 
 
             <div className="home-user-details-parent">
-                <div className="user-dashboard-transactions-heading">
-
-                </div>
-                <div className="user-card-admin-main">
-                    <div className='user-card-admin-details'>
-                        <h1>DEBIT</h1>
-
-                        <p>Available Balance: ₹3,999</p>
-
-                        <p>Bank Name: MyBank</p>
-                        <p>Card Type: Visa</p>
-                        <p>Card Number: **** 1234</p>
-                        <p>Expiry Date: 08/27</p>
-                        <div>
-                            <button>Delete Card</button>  {/* Removes the card permanently */}
-                            <button>Freeze Card</button>  {/* Temporarily disables the card */}
-                            <button>Report Lost/Stolen</button>  {/* Marks the card as lost or stolen */}
-                        </div>
-                    </div>
+                <div className="user-card-details-card-parent">
 
 
-                    <div>
-                        <div className="user-card-div-main">
-                            <div className='main-card'>
-                                <div className='main-card-heading'>
-                                    <h5>Bank Ai</h5>
-                                    <p>Debit</p>
-                                </div>
-                                <div className='main-card-user-details'>
-                                    <h4>ADRIAN HADJIN</h4>
-                                    <p>06/24</p>
-                                </div>
-                                <div className='main-card-card-details'>
-                                    <p><span>1234</span><span>1234</span> <span>1234</span></p>
-                                    <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
-                                </div>
+                    <div className="user-card-admin-main">
+                        <div className='user-card-admin-details'>
+                            <h1>DEBIT</h1>
+
+                            <p>Available Balance: ₹3,999</p>
+                            <p>Expiry Date: 08/27</p>
+                            <div>
+                                <button>Delete Card</button>  {/* Removes the card permanently */}
+                                <button>Freeze Card</button>  {/* Temporarily disables the card */}
+                                <button>Report Lost/Stolen</button>  {/* Marks the card as lost or stolen */}
                             </div>
-
-
-
-
                         </div>
-                    </div>
-                </div>
 
 
-                <div className="user-card-admin-main">
-                    <div className='user-card-admin-details'>
-                        <h1>CREDIT</h1>
-
-                        <p>Available Balance: ₹3,999</p>
-
-                        <p>Bank Name: MyBank</p>
-                        <p>Card Type: Visa</p>
-                        <p>Card Number: **** 1234</p>
-                        <p>Expiry Date: 08/27</p>
                         <div>
-                            <button>Delete Card</button>  {/* Removes the card permanently */}
-                            <button>Freeze Card</button>  {/* Temporarily disables the card */}
-                            <button>Report Lost/Stolen</button>  {/* Marks the card as lost or stolen */}
+                            <div className="user-card-div-main">
+                                <div className='main-card'>
+                                    <div className='main-card-heading'>
+                                        <h5>Bank Ai</h5>
+                                        <p>Debit</p>
+                                    </div>
+                                    <div className='main-card-user-details'>
+                                        <h4>ADRIAN HADJIN</h4>
+                                        <p>06/24</p>
+                                    </div>
+                                    <div className='main-card-card-details'>
+                                        <p><span>****</span><span>****</span> <span>****</span></p>
+                                        <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
                         </div>
                     </div>
 
 
-                    <div>
-                        <div className="user-card-div-main">
-                            <div className='main-card' style={{ background: 'url(https://img.freepik.com/free-vector/red-wavy-background_1189-269.jpg?t=st=1742144590~exp=1742148190~hmac=58499faebca52b4edf5bbae339e2b93062d3cbd7b10432b9bf782e4c4da83de8&w=826)' }}>
-                                <div className='main-card-heading'>
-                                    <h5>Bank Ai</h5>
-                                    <p>Credit</p>
-                                </div>
-                                <div className='main-card-user-details'>
-                                    <h4>ADRIAN HADJIN</h4>
-                                    <p>06/24</p>
-                                </div>
-                                <div className='main-card-card-details'>
-                                    <p><span>1234</span><span>1234</span> <span>1234</span></p>
-                                    <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
-                                </div>
+                    <div className="user-card-admin-main">
+                        <div className='user-card-admin-details'>
+                            <h1>CREDIT</h1>
+
+                            <p>Available Balance: ₹3,999</p>
+
+
+                            <p>Expiry Date: 08/27</p>
+                            <div>
+                                <button>Delete Card</button>  {/* Removes the card permanently */}
+                                <button>Freeze Card</button>  {/* Temporarily disables the card */}
+                                <button>Report Lost/Stolen</button>  {/* Marks the card as lost or stolen */}
                             </div>
+                        </div>
+
+
+                        <div>
+                            <div className="user-card-div-main">
+                                <div className='main-card' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
+                                    <div className='main-card-heading'>
+                                        <h5>Bank Ai</h5>
+                                        <p>Credit</p>
+                                    </div>
+                                    <div className='main-card-user-details'>
+                                        <h4>ADRIAN HADJIN</h4>
+                                        <p>06/24</p>
+                                    </div>
+                                    <div className='main-card-card-details'>
+                                        <p><span>****</span><span>****</span> <span>****</span></p>
+                                        <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
+                                    </div>
+                                </div>
 
 
 
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -256,25 +257,64 @@ const HomeUserProfile = () => {
                             </Form.Select>
                         </div>
                     </div>
-                    <div className="user-transaction-list">
+                    <div className="home-admin-dashboard-transaction-table">
                         <p>#</p>
-                        <p>Transactions</p>
+                        <p>Name</p>
+                        <p>Date</p>
+                        <p>Transaction Type</p>
                         <p>Amount</p>
                         <p>Status</p>
-                        <p>Date</p>
-                        <p>Download</p>
+                        <p>Export</p>
+
                     </div>
-                    <div className="user-transaction-list">
-                        <p>1</p>
-                        <p>Kumar</p>
-                        <p>200</p>
-                        <p>Processing</p>
-                        <p>Wed 11:00pm</p>
-                        <button>Download</button>
+
+                    <div className="home-admin-dashboard-transaction-table" style={{ borderBottom: '1px solid lightgray' }}>
+
+                        <img src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_13146336.png" alt="" />
+                        <p>Mohammed fazil</p>
+                        <p>10/2/2024</p>
+                        <p>Deposit</p>
+                        <p>₹299</p>
+                        <p>Success</p>
+                        <button> Recipet</button>
+
                     </div>
                 </div>
 
             </div>
+            <Modal show={show} onHide={handleClose} size='lg'>
+                <Modal.Header closeButton>
+                    <Modal.Title>Send Notifications</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className='notification-modal-parent'>
+                        <div>
+
+                            <p>Enter the title for the notification you want to send.</p>
+                            <FloatingLabel controlId="title" label="Title" className="mb-3">
+                                <Form.Control type="text" placeholder="Enter title" className="cursor-pointer" required style={{ width: '100%' }} />
+                            </FloatingLabel>
+                        </div>
+                        <div>
+                            <div>
+
+                                <p>Provide a brief message that will be sent as a notification.</p>
+                                <FloatingLabel controlId="message" label="Message" className="mb-3">
+                                    <Form.Control as="textarea" placeholder="Enter message" className="cursor-pointer" required style={{ width: '100%', height: '200px' }} />
+                                </FloatingLabel>
+                            </div>
+                        </div>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Send
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

@@ -28,3 +28,10 @@ export const datas=[
     { state: "Uttarakhand", pincode: "248001" },
     { state: "West Bengal", pincode: "700001" }
 ]
+
+export const staffData = [
+    { label: "Loan Officer", value: "loan-officer" },
+    { label: "Credit Card Manager", value: "credit-manager" },
+    { label: "Account Manager", value: "account-manager" },
+    { label: "Operations Manager", value: "operation-manager" },
+  ];

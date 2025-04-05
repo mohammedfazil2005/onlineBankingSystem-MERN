@@ -31,7 +31,7 @@ const HomeAdminCreditCardManage = () => {
                         <p>06/24</p>
                     </div>
                     <div className='main-card-card-details'>
-                        <p><span>1234</span><span>1234</span> <span>1234</span></p>
+                        <p><span>****</span><span>****</span> <span>****</span></p>
                        <button className='btn text-light'>view</button>
                     </div>
                    
@@ -47,7 +47,7 @@ const HomeAdminCreditCardManage = () => {
                         <p>12/24</p>
                     </div>
                     <div className='main-card-card-details'>
-                        <p><span>1234</span><span>1234</span> <span>1234</span></p>
+                        <p><span>****</span><span>****</span> <span>****</span></p>
                        <button className='btn text-light'>view</button>
                     </div>
                    

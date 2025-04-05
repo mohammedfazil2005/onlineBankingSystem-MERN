@@ -7,14 +7,18 @@
     position: fixed;
     width: 300px;
     overflow: scroll;
-
-    height: 100vh;
-   
+    height: 600px;
+    scrollbar-width: none; /* Firefox */
+-ms-overflow-style: none;  /* Internet Explorer 10+ */ 
 }
 .home-right{
     margin-left: 330px;
     width: 75%;
    
+}
+
+.home-left::-webkit-scrollbar {
+display: none; /* Chrome, Safari, Opera */
 }
 
 @media screen and (max-width:909px) {
