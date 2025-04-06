@@ -1,0 +1,25 @@
+.home-staff-profile{
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.home-staff-profile-left img{
+    width: 100px;
+    height: 100px;
+}
+
+.home-staff-profile-right{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-profile-detail button{
+    padding: 3px;
+    background-color: white;
+    border: 1px solid blueviolet;
+    border-radius: 6px;
+
+}
