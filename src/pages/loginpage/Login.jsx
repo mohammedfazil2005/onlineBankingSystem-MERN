@@ -181,6 +181,9 @@ const Login = () => {
             <FloatingLabel controlId="firstName" label="Enter your email" className="mb-3">
               <Form.Control type="text" placeholder="ex: Rosh" className="cursor-pointer" />
             </FloatingLabel>
+            <FloatingLabel controlId="password" label="Enter your 4 Digit password" className="mb-3">
+                    <Form.Control type="text" name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
+                  </FloatingLabel>
 
           </>
             :
