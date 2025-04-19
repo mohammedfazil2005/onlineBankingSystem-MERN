@@ -30,8 +30,16 @@ export const datas=[
 ]
 
 export const staffData = [
-    { label: "Loan Officer", value: "loan-officer" },
-    { label: "Credit Card Manager", value: "credit-manager" },
-    { label: "Account Manager", value: "account-manager" },
-    { label: "Operations Manager", value: "operation-manager" },
+    { label: "Loan Officer", value: "loanofficer" },
+    { label: "Credit Card Manager", value: "creditcardmanager" },
+    { label: "Account Manager", value: "accountmanager" },
+    { label: "Operations Manager", value: "operationmanager" },
+  ];
+
+ export const loanTypes = [
+    { label: "Personal Loan", value: "personal", interestRate: 12 },
+    { label: "Home Loan", value: "home", interestRate: 8 },
+    { label: "Auto Loan", value: "auto", interestRate: 9 },
+    { label: "Business Loan", value: "business", interestRate: 13 },
+    { label: "Education Loan", value: "education", interestRate: 10 }
   ];

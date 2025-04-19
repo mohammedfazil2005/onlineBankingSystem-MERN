@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './HomeRightLoans.css'
 import { FloatingLabel, Form } from 'react-bootstrap'
+import { loanTypes } from '../../../randomdata/data'
 const HomeRightLoans = () => {
+    const [interestRate,setInterestRate]=useState('')
+    const [EMIamount,setEMIamount]=useState(0)
+    const [loanData,setLoanData]=useState({
+        card:"debit",
+        loanType:"",
+        loanAmount:0,
+        loanDuration:"",
+        interestRate:"",
+        EMIamount:EMIamount,
+    })
+    
+
+    useEffect(()=>{
+        let interest=(loanData.loanAmount*loanData.interestRate*loanData.loanDuration)/100
+        console.log(Number(loanData.loanAmount)+interest)
+    },[loanData])
+
+    // console.log(loanData)
+    
+
     return (
         <div className='home-user-payment-parent'>
             <div className="home-user-payment-heading">
@@ -31,13 +52,19 @@ const HomeRightLoans = () => {
                         <p>Select the type of loan you want to apply for.</p>
                     </div>
                     <div>
-                        <Form.Select aria-label="Default select example">
-                            <option>Select Loan Type</option>
-                            <option value="1">Personal Loan</option>
-                            <option value="2">Home Loan</option>
-                            <option value="3">Auto Loan</option>
-                            <option value="4">Business Loan</option>
-                            <option value="5">Education Loan</option>
+                        <Form.Select aria-label="Default select example" defaultValue={''} onChange={(e)=>{
+                         
+                            
+                            const loantype=loanTypes.find((a)=>a.value==e.target.value)
+                            if(loantype){
+                                setInterestRate(loantype.interestRate)
+                                setLoanData({...loanData,interestRate:loantype.interestRate,loanType:loantype.value})
+                            }
+                        }} >
+                        <option value="" disabled>Select Loan Type</option>
+                            {loanTypes.map((a,key)=>(
+                                <option key={key} value={a.value}>{a.label}</option>
+                            ))}
 
                         </Form.Select>
                     </div>
@@ -49,7 +76,7 @@ const HomeRightLoans = () => {
                     </div>
                     <div>
                         <FloatingLabel controlId="amount" label="Loan Amount" className="mb-3">
-                            <Form.Control type="text" placeholder="ex:jhon@gmail.com" className="cursor-pointer" required style={{ width: '100%' }} />
+                            <Form.Control onChange={(e)=>setLoanData({...loanData,loanAmount:e.target.value})} type="number" placeholder="ex:jhon@gmail.com" className="cursor-pointer" required style={{ width: '100%' }} />
                         </FloatingLabel>
                     </div>
                 </div>
@@ -59,12 +86,12 @@ const HomeRightLoans = () => {
                         <p>Please select a loan duration: 12 months, 24 months,<br /> 5 years, or 10 years.</p>
                     </div>
                     <div>
-                        <Form.Select aria-label="Default select example">
-                            <option>Select Duration</option>
-                            <option value="1">12 months</option>
-                            <option value="2">24 months</option>
-                            <option value="">5 years</option>
-                            <option value="">10 years</option>
+                        <Form.Select defaultValue={''} aria-label="Default select example" onChange={(e)=>setLoanData({...loanData,loanDuration:e.target.value})}>
+                            <option disabled value="">Select Duration</option>
+                            <option value="1">1 year</option>
+                            <option value="2">2 years</option>
+                            <option value="5">5 years</option>
+                            <option value="10">10 years</option>
 
                         </Form.Select>
                     </div>
@@ -75,7 +102,7 @@ const HomeRightLoans = () => {
                         <p>interest rate for this loan is set by the bank.</p>
                     </div>
                     <div>
-                        <p>15%</p>
+                        <p>{interestRate?`${interestRate}%`:'Please select a loantype'}</p>
                     </div>
                 </div>
                 <div className="transfer-details-input-div">

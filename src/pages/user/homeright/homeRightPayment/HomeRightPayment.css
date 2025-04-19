@@ -57,6 +57,10 @@
     width: 100%;
     align-items: center;
 }
+.bank-account-details-inputs p{
+    color: gray;
+    font-size: 15px;
+}
 .bank-account-details-inputs div{
     width: 100%;
 }

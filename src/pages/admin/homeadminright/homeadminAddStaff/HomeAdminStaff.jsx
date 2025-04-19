@@ -84,7 +84,7 @@ const HomeAdminStaff = () => {
                   {profileImageError ? <p style={{ marginTop: '-16px', fontSize: '14px', color: 'red' }}>
                     Only JPEG, PNG, and JPG file  formats <br /> are supported.
                   </p> : <p style={{ marginTop: '-16px', fontSize: '14px', color: 'blueviolet' }}>
-                    Only JPEG, PNG, and JPG file  formats <br /> are supported.</p>}
+                    <p>Choose a file to upload.</p></p>}
                 </div>
 
               </div>
@@ -104,7 +104,7 @@ const HomeAdminStaff = () => {
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={['DatePicker']}>
-                      <DatePicker label="DOB" onChange={onDOB} />
+                      <DatePicker label="DOB" onChange={onDOB}/>
                       
                     </DemoContainer>
                   </LocalizationProvider>

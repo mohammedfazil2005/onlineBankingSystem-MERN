@@ -14,14 +14,14 @@ const HomeRightUserDashboard = () => {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
             {
-                label: "Income",
+                label: "Debit",
                 data: [10, 400, 50, 90],
                 borderColor: "rgba(255, 99, 132, 1)", // Red
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                 tension: 0.4
             },
             {
-                label: "expence",
+                label: "Credit",
                 data: [100, 600, 200, 30],
                 borderColor: "rgba(54, 162, 235, 1)", // Blue
                 backgroundColor: "rgba(54, 162, 235, 0.2)",
@@ -74,7 +74,7 @@ const HomeRightUserDashboard = () => {
 
             <div className="home-user-card-headings">
 
-            <h2>Income & Expense</h2>
+            <h2>Debited & Credit</h2>
             <p>Track your earnings and spending with real-time insights.</p>
 
             </div>
@@ -92,8 +92,8 @@ const HomeRightUserDashboard = () => {
         </div>
         <div className="user-banks-name">
             <button style={{borderBottom:'2px solid blueviolet'}}>All Transactions</button>
-            <button>Income </button>
-            <button>Expense </button>
+            <button>Debited </button>
+            <button>Credited </button>
         </div>
         <div className="user-bank-balance">
             <div className='user-bank-balance-heading'>

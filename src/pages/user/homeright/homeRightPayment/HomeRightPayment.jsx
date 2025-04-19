@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './HomeRightPayment.css'
 import { FloatingLabel, Form } from 'react-bootstrap'
+import OTP from '../../../otppage/OTP'
 
 const HomeRightPayment = () => {
+    const [inOTP,setInOTP]=useState(false)
+    const [isLoading,setIsLoading]=useState(false)
+
+
+
     return (
-        <div className='home-user-payment-parent'>
+        <>
+        {inOTP?<OTP/>:isLoading?<div className='loader-div' style={{marginTop:'-80px'}}>
+        <img src="https://assets-v2.lottiefiles.com/a/b90ff028-1177-11ee-81af-97de0bdd79c1/3mdk9wAzDF.gif" alt="" />
+      </div> : <div className='home-user-payment-parent'>
             <div className="home-user-payment-heading">
                 <h1>Payment Transfer</h1>
                 <p>Please provide any specific details or notes related to the payment transfer</p>
@@ -50,21 +59,25 @@ const HomeRightPayment = () => {
                     <p>Enter the bank account details of the recipent</p>
                 </div>
                 <div className="bank-account-details-inputs">
-                    <div>
-                    <p>Recipient's Email Address</p>
+                <div>
+                    <h6>Recipient's Bank Account Number</h6>
+                    <p>Enter the recipient’s bank account number to transfer funds securely</p>
                     </div>
                     <div>
-                    <FloatingLabel controlId="state" label="Email Address" className="mb-3">
-                        <Form.Control type="text" placeholder="ex:jhon@gmail.com" className="cursor-pointer" required style={{width:'100%'}}/>
+                    <FloatingLabel controlId="accno" label="Account Number" className="mb-3">
+                        <Form.Control type="text" placeholder="ex: 123 123 123" className="cursor-pointer" required />
                     </FloatingLabel>
                     </div>
+
                 </div>
                 <div className="bank-account-details-inputs">
                 <div>
-                    <p>Recipient's Bank Account Number</p>
+                    <h6>Confirm Recipient's Bank Account Number</h6>
+                    <p>Enter the account number again to verify the recipient’s bank details.</p>
+                    
                     </div>
                     <div>
-                    <FloatingLabel controlId="state" label="Account Number" className="mb-3">
+                    <FloatingLabel controlId="accno" label="Confirm Account Number" className="mb-3">
                         <Form.Control type="text" placeholder="ex: 123 123 123" className="cursor-pointer" required />
                     </FloatingLabel>
                     </div>
@@ -72,7 +85,8 @@ const HomeRightPayment = () => {
                 </div>
                 <div className="bank-account-details-inputs">
                     <div>
-                    <p>Amount</p>
+                    <h6>Amount</h6>
+                    <p>Enter the amount to transfer. Minimum transfer amount is ₹100.</p>
                     </div>
                     <div>
                     <FloatingLabel controlId="state" label="Amount" className="mb-3">
@@ -85,7 +99,9 @@ const HomeRightPayment = () => {
                 <button>Transfer Fund</button>
                 </div>
             </div>
-        </div>
+        </div>}
+       
+        </>
     )
 }
 

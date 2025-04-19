@@ -172,9 +172,9 @@ const HomeUserCards = ({setCategoryName}) => {
              
          <p>Apply for a credit card with ease! Fill in your personal details, select the type of credit card that suits your needs, and submit your application. Ensure all information is accurate, and review the terms & conditions before proceeding. Your application will be processed, and you will be notified about the approval status.</p>
           <div className="credit-card-details-modal mt-3" >
-            <h1>Basic Credit Card</h1>
+            <h1>Silver Credit Card</h1>
             <p>
-              The Basic Credit Card offers a credit limit of ₹50,000 with minimal fees.
+              The Silver Credit Card offers a credit limit of ₹50,000 with minimal fees.
               It is ideal for first-time users looking for a simple and affordable credit card.
               Enjoy cashback on selected purchases, secure transactions, and easy repayment options.
               <br />
@@ -186,9 +186,9 @@ const HomeUserCards = ({setCategoryName}) => {
           </div>
 
           <div className="credit-card-details-modal mt-4">
-            <h1>Silver Credit Card</h1>
+            <h1>Gold Credit Card</h1>
             <p>
-              The Silver Credit Card provides a higher credit limit and additional perks compared to the Basic Credit Card.
+              The Gold Credit Card provides a higher credit limit and additional perks compared to the Basic Credit Card.
               It is suitable for individuals looking for better rewards and exclusive benefits.
               Earn more cashback, enjoy travel privileges, and access premium services.
               <br /><br />
@@ -208,8 +208,8 @@ const HomeUserCards = ({setCategoryName}) => {
                     <div>
                         <Form.Select aria-label="Select card">
                             <option>Select Card Type</option>
-                            <option value="debit">Basic Card</option>
-                            <option value="credit">Sliver Card</option>
+                            <option value="sliver">Silver Card</option>
+                            <option value="gold">Gold Card</option>
 
                         </Form.Select>
                     </div>
