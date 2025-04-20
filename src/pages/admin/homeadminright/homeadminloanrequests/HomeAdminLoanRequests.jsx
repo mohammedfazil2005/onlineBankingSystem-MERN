@@ -19,6 +19,7 @@ const HomeAdminLoanRequests = () => {
         <p>Loan Type </p>
         <p> Loan Duration</p>
         <p>Requested Amount</p>
+        <p>Interest Rate</p>
         <p>Profile</p>
         <p>...</p>
       </div>
@@ -30,6 +31,7 @@ const HomeAdminLoanRequests = () => {
         <p>Personal</p>
         <p>12 months</p>
         <p>₹20000</p>
+        <p>10%</p>
         <Link>View Profile</Link>
         <div className='btn-loan-req-div'>
           <button>Approve</button>

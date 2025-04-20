@@ -4,23 +4,32 @@ import { FloatingLabel, Form } from 'react-bootstrap'
 import { loanTypes } from '../../../randomdata/data'
 const HomeRightLoans = () => {
     const [interestRate,setInterestRate]=useState('')
-    const [EMIamount,setEMIamount]=useState(0)
+    // const [EMIamount,setEMIamount]=useState(0)
     const [loanData,setLoanData]=useState({
         card:"debit",
         loanType:"",
         loanAmount:0,
         loanDuration:"",
         interestRate:"",
-        EMIamount:EMIamount,
+        repayingAmount:0,
+        EMIamount:0,
     })
+
+    // console.log(loanData)
     
 
     useEffect(()=>{
-        let interest=(loanData.loanAmount*loanData.interestRate*loanData.loanDuration)/100
-        console.log(Number(loanData.loanAmount)+interest)
-    },[loanData])
+        if(loanData.loanAmount&&loanData.interestRate&&loanData.loanDuration){
+            let interest=(loanData.loanAmount*loanData.interestRate*loanData.loanDuration)/100
+            let totalLoanAMOUNT=Number(loanData.loanAmount)+interest
+            let totalMonth=loanData.loanDuration*12
+            let EMIperMonth=totalLoanAMOUNT/totalMonth
 
-    // console.log(loanData)
+        setLoanData({ ...loanData, EMIamount:Math.ceil(EMIperMonth),repayingAmount:Math.ceil(totalLoanAMOUNT) });
+        }
+    },[loanData.loanDuration,loanData.loanDuration,loanData.loanType])
+
+    console.log(loanData)
     
 
     return (
@@ -111,7 +120,7 @@ const HomeRightLoans = () => {
                         <p>Your next EMI is scheduled as per the bank's loan repayment plan.</p>
                     </div>
                     <div>
-                        <p>3000/month</p>
+                        <p>{loanData.EMIamount}/month</p>
                     </div>
                 </div>
                 <button>Request</button>
