@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import DefaultPage from "./pages/defaultpage/DefaultPage"
 import Login from "./pages/loginpage/Login"
 import HomeUser from "./pages/user/HomeUser"
@@ -9,11 +9,17 @@ import Staff from "./pages/staff/Staff"
 import LoanOfficer from "./pages/loanOfficer/LoanOfficer"
 import CreditCardManager from "./pages/creditcardManager/CreditCardManager"
 import AccountManager from "./pages/accountManager/AccountManager"
+import { useContext } from "react"
+import { AuthContext } from "./contexts/TokenContext"
 
 
 
 function App() {
 
+  const {isToken,setIsToken} = useContext(AuthContext)
+
+  console.log(isToken)
+  
   return (
     <>
     {/* <Navbar/> */}
@@ -21,7 +27,7 @@ function App() {
      <Routes>
       <Route path="/" element={<DefaultPage/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/userdashboard" element={<HomeUser/>}/>
+      <Route path="/userdashboard" element={isToken?<HomeUser/>:<Navigate to={'/login'}/>}/>
       <Route path="/admindashboard" element={<HomeAdmin/>}/>
       <Route path="/operationmanager" element={<Staff/>}/>
       <Route path="/loanofficerdashboard" element={<LoanOfficer/>}/>

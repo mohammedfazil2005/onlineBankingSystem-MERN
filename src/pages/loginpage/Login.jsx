@@ -12,6 +12,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { onRegistration } from '../../services/allAPI'
 
 
 
@@ -33,15 +34,15 @@ const Login = () => {
     profileimg: "",
     firstName: "",
     lastName: "",
-    address: "",
+    role: "accountholder",
     state: "",
     postalCode: "",
     DOB: "",
     phone: "",
     salarySource: "",
-    monthlySalary: "",
     email: "",
-    password: ""
+    password: "",
+
 
 
   })
@@ -64,41 +65,40 @@ const Login = () => {
 
   const handleSuccess = (responce) => {
     const token = responce.credential
-    const userData = jwtDecode(token)
-    console.log(userData)
+    const userDetails = jwtDecode(token)
+
+    if (userDetails) {
+      setUserData({ ...userData, email: userDetails.email, firstName: userDetails.name })
+      setValid(false)
+
+      toast(
+        "We’ll automatically import your name and email address from your Google account.Please fill in the remaining fields below to complete your registration.", {
+        style: {
+          border: '2px solid blueviolet',
+          padding: '16px',
+          color: 'blueviolet',
+        },
+      },
+        {
+          duration: 6000,
+        }
+      );
+    }
+
+
   }
 
   const handlError = () => {
     console.log("Login Failed")
   }
 
-  const onbtnClick = () => {
-    if (login == "Register") {
-      if (userData.firstName || userData.lastName || userData.DOB || userData.address || userData.email || userData.monthlySalary || userData.password || userData.phone || userData.postalCode || userData.profileimg || userData.salarySource || userData.state) {
-
-
-
-      } else {
-        toast.error('All fields are required!', {
-          style: {
-            border: '1px solid red',
-            padding: '16px',
-            color: 'red',
-          },
-          iconTheme: {
-            primary: 'red',
-            secondary: 'white',
-          },
-        });
-      }
-
-    }
-  }
 
 
   const onTextChange = (e) => {
+
     if (e.name == "email") {
-      let regexTest = e.value.match(/^[a-z]*[0-9]*@?@gmail.com+$/)
+      setUserData(d => ({ ...d, email: e.value }));
+      let regexTest = e.value.match(/^[a-zA-Z]*[0-9]*@?@gmail.com+$/)
       if (!!regexTest) {
         setUserData({ ...userData, email: e.value })
         setValid({ ...valid, email: false })
@@ -125,27 +125,138 @@ const Login = () => {
     let userYear = date.year()
     let userDate = date.date()
     let userMonth = date.month()
-    let DOB = `${userDate}-${userMonth}-${userYear}`
+    let DOB = `${userDate}/${userMonth.length>=2?userMonth:`0${userMonth}`}/${userYear}`
     console.log(DOB)
     if (currentYear - userYear >= 21) {
       setUserData({ ...userData, DOB: DOB })
       setValid({ ...valid, DOB: false })
     } else {
       setValid({ ...valid, DOB: true })
-      
+
     }
   }
 
-  console.log(userData)
+
+  const onRegORLogBtnClick = async () => {
+    if (login == "Register") {
+      if (userData.DOB && userData.email && userData.firstName && userData.lastName && userData.password && userData.phone && userData.postalCode && userData.profileimg && userData.salarySource && userData.state && userData.role) {
+
+        if (userData.password == userData.confirmpassword) {
+
+          let payload = new FormData()
+          payload.append('imageurl', userData.profileimg)
+          payload.append('firstname', userData.firstName)
+          payload.append('lastname', userData.lastName)
+          payload.append('role', userData.role)
+          payload.append('DOB', userData.DOB)
+          payload.append('phonenumber', userData.phone)
+          payload.append('salarysource', userData.salarySource)
+          payload.append('email', userData.email)
+          payload.append('password', userData.password)
+          payload.append('state', userData.state)
+          payload.append('pincode', userData.postalCode)
+
+          let header = {
+            'Content-Type': 'multipart/form-data'
+          }
+
+          console.log(payload)
+
+          try {
+            const serverResponce=await onRegistration(payload,header)
+            if(serverResponce.status==201){
+              sessionStorage.setItem('token', serverResponce.data.token)
+              setLoading(true)
+              setTimeout(() => {
+                toast.success(
+                  "Registration successful! Welcome aboard—enjoy seamless banking with us.",
+                  {
+                    style: {
+                      border: '2px solid blueviolet',
+                      padding: '16px',
+                      color: 'blueviolet',
+                    },
+                    iconTheme: {
+                      primary: 'blueviolet',
+                      secondary: 'white',
+                    },
+                  },
+                  {
+                    duration: 6000,
+                  }
+                );
+                navigate('/userdashboard')
+                setLoading(false)
+              }, 5000)
+            }else if(serverResponce.status==409){
+              toast.error(
+                      "User already exists. Please log in or use a different email address.",
+                      {
+                        style: {
+                          border: '2px solid red',
+                          padding: '16px',
+                          color: 'red',
+                        },
+                        iconTheme: {
+                          primary: 'red',
+                          secondary: 'white',
+                        },
+                      },
+                      {
+                        duration: 6000,
+                      }
+                    );
+            }
+          } catch (error) {
+            console.log(error)
+            toast.error("Please try again after a while!")
+          }
+
+        } else {
+          toast.error('Passwords do not match. Please ensure both password fields are identical.', {
+            style: {
+              border: '1px solid red',
+              padding: '16px',
+              color: 'red',
+            },
+            iconTheme: {
+              primary: 'red',
+              secondary: 'white',
+            },
+          });
+        }
+
+      } else {
+        toast.error('All fields are required. Please complete every field before continuing.', {
+          style: {
+            border: '1px solid red',
+            padding: '16px',
+            color: 'red',
+          },
+          iconTheme: {
+            primary: 'red',
+            secondary: 'white',
+          },
+        });
+      }
+    }
+
+
+  }
 
 
 
 
-  // setLoading(true)
-  // setTimeout(() => {
-  //  setLoading(false)
-  //  navigate('/otp')
-  // }, 3000);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -182,8 +293,8 @@ const Login = () => {
               <Form.Control type="text" placeholder="ex: Rosh" className="cursor-pointer" />
             </FloatingLabel>
             <FloatingLabel controlId="password" label="Enter your 4 Digit password" className="mb-3">
-                    <Form.Control type="text" name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
-                  </FloatingLabel>
+              <Form.Control type="text" name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
+            </FloatingLabel>
 
           </>
             :
@@ -214,7 +325,7 @@ const Login = () => {
               <div>
 
                 <FloatingLabel controlId="firstName" label="First Name" className="mb-3">
-                  <Form.Control type="text" placeholder="ex: Rosh" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} required />
+                  <Form.Control type="text" placeholder="ex: Rosh" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} value={userData.firstName} required />
                 </FloatingLabel>
 
                 <FloatingLabel controlId="lastName" label="Last Name" className="mb-3">
@@ -281,26 +392,28 @@ const Login = () => {
 
                 </Form.Select>
 
-                <FloatingLabel controlId="Salary Amount (₹)" label="Monthly Income Amount (₹)" className="mb-3">
-                  <Form.Control type="number" placeholder="Enter your email" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, monthlySalary: e.target.value })} required />
-                </FloatingLabel>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <FloatingLabel controlId="email" label="Email" className="mb-3">
+                    <Form.Control type="email" value={userData.email} name='email' placeholder="Enter your email" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
+                  </FloatingLabel>
+                  {valid.email ? <p style={{ marginTop: '-25px', color: 'red', fontWeight: "300" }}>Please enter a valid email address!</p> : ""}
+                </div>
+
+
               </div>
 
-              <FloatingLabel controlId="email" label="Email" className="mb-3">
-                <Form.Control type="email" name='email' placeholder="Enter your email" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
-              </FloatingLabel>
-              {valid.email ? <p style={{ marginTop: '-25px', color: 'red', fontWeight: "300" }}>Please enter a valid email address!</p> : ""}
+
               <div>
 
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <FloatingLabel controlId="password" label="Enter your 4 Digit password" className="mb-3">
-                    <Form.Control type="text" name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
+                    <Form.Control type="password" name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
                   </FloatingLabel>
                   {valid.password ? <p style={{ marginTop: '-35px', color: 'red', fontWeight: "300" }}>Password must be exactly 4 digits!</p> : ""}
                 </div>
 
                 <FloatingLabel controlId="confirmPassword" label="Confirm Password" className="mb-3">
-                  <Form.Control type="number" placeholder="Enter password again" className="cursor-pointer" />
+                  <Form.Control onChange={(e) => setUserData({ ...userData, confirmpassword: e.target.value })} type="number" placeholder="Enter password again" className="cursor-pointer" />
                 </FloatingLabel>
               </div>
             </>
@@ -308,7 +421,7 @@ const Login = () => {
 
           }
           <h6 onClick={onStateChange}>{login == "Login" ? "Dosen't have an account?" : "Already have an account?"}</h6>
-          <button onClick={onbtnClick}>{login == "Login" ? "Login" : "Signup"}</button>
+          <button onClick={onRegORLogBtnClick}>{login == "Login" ? "Login" : "Signup"}</button>
           <GoogleLogin onSuccess={handleSuccess} onError={handlError} />
 
 
