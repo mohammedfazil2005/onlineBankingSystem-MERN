@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
+import { AuthContext } from '../../contexts/TokenContext';
+import toast from 'react-hot-toast';
 
 
  
@@ -12,7 +14,16 @@ import Toast from 'react-bootstrap/Toast';
 const Navbar = () => {
 
   const [showA, setShowA] = useState(true);
+
+  const {role,setRole}=useContext(AuthContext)
+  
 const toggleShowA = () => setShowA(!showA);
+
+const onLogout=()=>{
+  toast.error("Logged out!")
+  sessionStorage.clear()
+  setRole("null")
+}
   
   return (
     <>
@@ -31,15 +42,16 @@ const toggleShowA = () => setShowA(!showA);
         <li className="nav-item">
         <Link>About</Link>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
         <Link>Deposit</Link>
-        </li>
+        </li> */}
        
       </ul>
       <form className="" role="search">
         <button type='button' onClick={toggleShowA}><i className="fa-solid fa-bell"></i></button>
-        <Link to={'/login'}><button style={{border:'1px solid white'}}>Logout</button></Link>
-      </form>
+       
+        {role?<button onClick={()=>onLogout()} style={{border:'1px solid white'}} >Logout</button>: <Link><button style={{border:'1px solid white'}}>Logout</button></Link>}
+              </form>
     </div>
   </div>
 </nav>

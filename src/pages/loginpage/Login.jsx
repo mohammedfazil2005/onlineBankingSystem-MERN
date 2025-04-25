@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Login.css'
 import { FloatingLabel, Form } from 'react-bootstrap'
 import { data, Link, useNavigate } from 'react-router-dom'
@@ -12,16 +12,22 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { onRegistration } from '../../services/allAPI'
+import { onLoginWithEmail, onLoginWithEmailAndPassword, onLoginWithGoogle, onRegistration } from '../../services/allAPI'
+import { AuthContext } from '../../contexts/TokenContext'
 
 
 
 const Login = () => {
 
+  const {setRole,setEmail}=useContext(AuthContext) 
+
   const [login, setLogin] = useState("Login")
   const [previewImage, setPreviewImage] = useState('')
   const [profileImageError, setProfileImageError] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [isOTP,setIsOTP]=useState(false)
+
+  const [isLoginWithGoogle,setIsLoginWithGoogle]=useState(false)
 
   const [valid, setValid] = useState({
     email: false,
@@ -55,34 +61,79 @@ const Login = () => {
 
   const onStateChange = () => {
     if (login == "Login") {
+      setIsOTP(false)
       setLogin('Register')
+      
     } else {
+      setIsOTP(false)
       setLogin("Login")
+     
     }
   }
 
 
 
-  const handleSuccess = (responce) => {
+  const handleSuccess =async (responce) => {
+    setIsLoginWithGoogle(true)
     const token = responce.credential
     const userDetails = jwtDecode(token)
-
     if (userDetails) {
-      setUserData({ ...userData, email: userDetails.email, firstName: userDetails.name })
-      setValid(false)
-
-      toast(
-        "We’ll automatically import your name and email address from your Google account.Please fill in the remaining fields below to complete your registration.", {
-        style: {
-          border: '2px solid blueviolet',
-          padding: '16px',
-          color: 'blueviolet',
-        },
-      },
-        {
-          duration: 6000,
-        }
-      );
+      let payload={
+        email:userDetails.email
+      }
+      console.log(payload)
+      try {
+        const serverResponce=await onLoginWithGoogle(payload)
+        console.log(serverResponce)
+      setLoading(true)
+      if(serverResponce.status==200){
+        sessionStorage.setItem("token",serverResponce.data.token)
+        sessionStorage.setItem("role",serverResponce.data.role)
+        setRole(sessionStorage.getItem("role"))
+        setTimeout(()=>{
+          toast.success(
+            "Login successful! Enjoy seamless access to your account.",
+            {
+              style: {
+                border: '2px solid blueviolet',
+                padding: '16px',
+                color: 'blueviolet',
+              },
+              iconTheme: {
+                primary: 'blueviolet',
+                secondary: 'white',
+              },
+              duration: 6000,
+            }
+          );
+          setRole(serverResponce.data.role)
+          navigate('/dashboard')
+          setLoading(false)
+        },3000)
+      }else{
+        setLoading(false)
+        toast.error(
+          "Account not found! Please check your credentials or register a new account.",
+          {
+            style: {
+              border: '2px solid blueviolet',
+              padding: '16px',
+              color: 'blueviolet',
+            },
+            iconTheme: {
+              primary: 'blueviolet',
+              secondary: 'white',
+            },
+            duration: 6000,
+          }
+        );
+      }
+      } catch (error) {
+        console.log(error)
+      }
+   
+    }else{
+      toast.error("Please try again!")
     }
 
 
@@ -97,14 +148,16 @@ const Login = () => {
   const onTextChange = (e) => {
 
     if (e.name == "email") {
-      setUserData(d => ({ ...d, email: e.value }));
+      // setUserData(d => ({ ...d, email: e.value }));
       let regexTest = e.value.match(/^[a-zA-Z]*[0-9]*@?@gmail.com+$/)
       if (!!regexTest) {
         setUserData({ ...userData, email: e.value })
         setValid({ ...valid, email: false })
       } else {
+        toast.error("Please enter valid email!")
         setValid({ ...valid, email: true })
       }
+    
     }
 
     if (e.name == "password") {
@@ -136,7 +189,7 @@ const Login = () => {
     }
   }
 
-
+  console.log(isLoginWithGoogle)
   const onRegORLogBtnClick = async () => {
     if (login == "Register") {
       if (userData.DOB && userData.email && userData.firstName && userData.lastName && userData.password && userData.phone && userData.postalCode && userData.profileimg && userData.salarySource && userData.state && userData.role) {
@@ -166,6 +219,8 @@ const Login = () => {
             const serverResponce=await onRegistration(payload,header)
             if(serverResponce.status==201){
               sessionStorage.setItem('token', serverResponce.data.token)
+              sessionStorage.setItem('role', serverResponce.data.role)
+              sessionStorage.setItem('name', serverResponce.data.name)
               setLoading(true)
               setTimeout(() => {
                 toast.success(
@@ -185,7 +240,8 @@ const Login = () => {
                     duration: 6000,
                   }
                 );
-                navigate('/userdashboard')
+                setRole(serverResponce.data.role)
+                navigate('/dashboard')
                 setLoading(false)
               }, 5000)
             }else if(serverResponce.status==409){
@@ -239,6 +295,124 @@ const Login = () => {
           },
         });
       }
+    }else{
+      if(isOTP){
+        
+        if(userData.email){
+
+          let payload={
+            email:userData.email
+          }
+
+          try {
+            setLoading(true)
+            const serverResponce=await onLoginWithEmail(payload)
+            console.log(serverResponce)
+          
+            if(serverResponce.status==201){
+             
+              setTimeout(()=>{
+                toast.success(
+                  "OTP sent successfully! Please check your email or phone to proceed.",
+                  {
+                    style: {
+                      border: '2px solid blueviolet',
+                      padding: '16px',
+                      color: 'blueviolet',
+                    },
+                    iconTheme: {
+                      primary: 'blueviolet',
+                      secondary: 'white',
+                    },
+                    duration: 6000,
+                  }
+                );
+                setEmail(userData.email)
+                navigate('/otp')
+                setLoading(false)
+              },4000)
+            }else{
+              if(serverResponce.status==401){
+                setTimeout(()=>{
+                  setLoading(false)
+                  toast.error("Oops! We couldn't Find your account. Double-check your email.")
+                  navigate('/login')
+                },2000)
+               
+              }else if(serverResponce.status==404){
+                toast.error("Please try again after sometime!")
+                setLoading(false)
+                navigate('/login')
+              }
+            }
+
+
+          } catch (error) {
+            console.log(error)
+            toast.error("Please try again after a while!")
+          }
+
+        }else{
+          toast.error("Please enter email!")
+        }
+       
+      }else{
+        const payload={
+          email:userData.email,
+          password:userData.password,
+        }
+        console.log(payload)
+        try {
+         const serverResponce=await onLoginWithEmailAndPassword(payload)
+         console.log(serverResponce)
+         if(serverResponce.status==200){
+          sessionStorage.setItem("token",serverResponce.data.token)
+          sessionStorage.setItem("role",serverResponce.data.role)
+          setLoading(true)
+          setTimeout(()=>{
+            toast.success(
+              "Login successful! Enjoy seamless access to your account.",
+              {
+                style: {
+                  border: '2px solid blueviolet',
+                  padding: '16px',
+                  color: 'blueviolet',
+                },
+                iconTheme: {
+                  primary: 'blueviolet',
+                  secondary: 'white',
+                },
+                duration: 6000,
+              }
+            );
+            setRole(serverResponce.data.role)
+            navigate('/dashboard')
+            setLoading(false)
+            
+          },4000)
+         
+          
+         }else{
+          toast.error(
+            "Invalid credentials! Please check your email and password.",
+            {
+              style: {
+                border: '1px solid red',
+                padding: '16px',
+                color: 'red',
+              },
+              iconTheme: {
+                primary: 'red',
+                secondary: 'white',
+              },
+            }
+          );
+         }
+        } catch (error) {
+          console.log(error)
+          toast.error("Please try again after a while!")
+        }
+      }
     }
 
 
@@ -274,6 +448,8 @@ const Login = () => {
     }
   }, [userData.profileimg])
 
+  console.log(userData)
+
 
 
 
@@ -288,12 +464,16 @@ const Login = () => {
           <Link to={'/'}> <img src="https://askproject.net/bankai/wp-content/uploads/sites/32/2021/10/logo_Asset-4_4-2048x688.png" alt="" /></Link>
           <h1>{login == "Login" ? "Login" : "Signup"}</h1>
           <p>{login == 'Login' ? "Welcome back! Please enter your details" : "Please enter your details"}</p>
-          {login == "Login" ? <>
+          {
+          isOTP? <FloatingLabel controlId="firstName" label="Enter your email" className="mb-3">
+          <Form.Control name='email'  onChange={(e) => onTextChange(e.target)} type="text" placeholder="ex: Rosh" className="cursor-pointer" />
+        </FloatingLabel>:
+          login == "Login" ? <>
             <FloatingLabel controlId="firstName" label="Enter your email" className="mb-3">
-              <Form.Control type="text" placeholder="ex: Rosh" className="cursor-pointer" />
+              <Form.Control onChange={(e) => onTextChange(e.target)} name='email' type="text" placeholder="ex: Rosh" className="cursor-pointer" />
             </FloatingLabel>
             <FloatingLabel controlId="password" label="Enter your 4 Digit password" className="mb-3">
-              <Form.Control type="text" name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
+              <Form.Control type="password" name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
             </FloatingLabel>
 
           </>
@@ -394,7 +574,7 @@ const Login = () => {
 
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <FloatingLabel controlId="email" label="Email" className="mb-3">
-                    <Form.Control type="email" value={userData.email} name='email' placeholder="Enter your email" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
+                    <Form.Control type="email"  name='email' placeholder="Enter your email" className="cursor-pointer" onChange={(e) => setUserData({...userData,email:e.target.value})} required />
                   </FloatingLabel>
                   {valid.email ? <p style={{ marginTop: '-25px', color: 'red', fontWeight: "300" }}>Please enter a valid email address!</p> : ""}
                 </div>
@@ -413,16 +593,22 @@ const Login = () => {
                 </div>
 
                 <FloatingLabel controlId="confirmPassword" label="Confirm Password" className="mb-3">
-                  <Form.Control onChange={(e) => setUserData({ ...userData, confirmpassword: e.target.value })} type="number" placeholder="Enter password again" className="cursor-pointer" />
+                  <Form.Control onChange={(e) => setUserData({ ...userData, confirmpassword: e.target.value })} maxLength={4} type="password" placeholder="Enter password again" className="cursor-pointer" />
                 </FloatingLabel>
               </div>
             </>
+            
 
 
           }
+          {login=="Login"&&!isOTP?<p onClick={()=>setIsOTP(true)} style={{padding:'2px',backgroundColor:"white",cursor:'pointer',color:"blueviolet",fontSize:'14px',}}> Forgot password? Login with OTP</p>:""}
           <h6 onClick={onStateChange}>{login == "Login" ? "Dosen't have an account?" : "Already have an account?"}</h6>
-          <button onClick={onRegORLogBtnClick}>{login == "Login" ? "Login" : "Signup"}</button>
-          <GoogleLogin onSuccess={handleSuccess} onError={handlError} />
+
+
+          <button onClick={onRegORLogBtnClick}>{login == "Login" ?isOTP? "Send OTP" :"Login" : "Signup"}</button>
+          {login=="Login"&&!isOTP?<GoogleLogin onSuccess={handleSuccess} onError={handlError} />:""}
+
+
 
 
         </div>

@@ -16,7 +16,7 @@ import { AuthContext } from "./contexts/TokenContext"
 
 function App() {
 
-  const {isToken,setIsToken} = useContext(AuthContext)
+  const {isToken,setIsToken,role,} = useContext(AuthContext)
 
   console.log(isToken)
   
@@ -27,7 +27,8 @@ function App() {
      <Routes>
       <Route path="/" element={<DefaultPage/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/userdashboard" element={isToken?<HomeUser/>:<Navigate to={'/login'}/>}/>
+      <Route path="/dashboard" element={isToken?role?role=="accountholder"?<HomeUser/>:role=="generalmanager"?<HomeAdmin/>:role=="loanofficer"?<LoanOfficer/>:role=="creditcardmanager"?<CreditCardManager/>:role=="accountmanager"?<AccountManager/>:role=="operationmanager"?<Staff/>:<Navigate to={'/login'}/>:<Navigate to={'/login'}/>:<Navigate to={'/login'}/>}/>
+
       <Route path="/admindashboard" element={<HomeAdmin/>}/>
       <Route path="/operationmanager" element={<Staff/>}/>
       <Route path="/loanofficerdashboard" element={<LoanOfficer/>}/>
