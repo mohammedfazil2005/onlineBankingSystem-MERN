@@ -19,3 +19,11 @@ export const onLoginWithEmail=async(data)=>{
 export const onLoginOTP=async(data)=>{
   return await commonAPI("post",'/verify',data)
 }
+
+export const onFetchAllTransactions=async(header)=>{
+  return await commonAPI("get",'/get/transactions',{},header)
+}
+
+export const onFetchAllNotifications=async(header)=>{
+  return await commonAPI("get",'/get/notifications',{},header)
+}

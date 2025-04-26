@@ -28,12 +28,6 @@ function App() {
       <Route path="/" element={<DefaultPage/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/dashboard" element={isToken?role?role=="accountholder"?<HomeUser/>:role=="generalmanager"?<HomeAdmin/>:role=="loanofficer"?<LoanOfficer/>:role=="creditcardmanager"?<CreditCardManager/>:role=="accountmanager"?<AccountManager/>:role=="operationmanager"?<Staff/>:<Navigate to={'/login'}/>:<Navigate to={'/login'}/>:<Navigate to={'/login'}/>}/>
-
-      <Route path="/admindashboard" element={<HomeAdmin/>}/>
-      <Route path="/operationmanager" element={<Staff/>}/>
-      <Route path="/loanofficerdashboard" element={<LoanOfficer/>}/>
-      <Route path="/creditcardmanagerdashboard" element={<CreditCardManager/>}/>
-      <Route path="/accountmanagerdashboard" element={<AccountManager/>}/>
       <Route path="/otp" element={<OTP/>}/>
       
      </Routes>
