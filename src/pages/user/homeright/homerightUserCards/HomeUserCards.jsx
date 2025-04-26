@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './HomeUserCards.css'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { onFetchAllCards } from '../../../../services/allAPI';
 
 
 
@@ -11,9 +14,47 @@ import { Form } from 'react-bootstrap';
 const HomeUserCards = ({setCategoryName}) => {
 
   const [show, setShow] = useState(false);
+  const [debitCard,setDebitCard]=useState({})
+  const [creditCards,setCreditCards]=useState([])
+
+  const navigate=useNavigate()
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const fetchCards=async()=>{
+    const token=sessionStorage.getItem("token")
+    if(token){
+      const header={
+        'Authorization':`Bearer ${token}`
+      }
+      try {
+        const serverResponce=await onFetchAllCards(header)
+        if(serverResponce.status==200){
+          setDebitCard(serverResponce.data.debitCard)
+          setCreditCards(serverResponce.data.creditCards)
+          console.log(serverResponce.data)
+        }else{
+          toast.error("Please Login Again")
+          navigate('/login')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+
+    }else{
+      toast.error("Please Login Again!")
+      navigate("/login")
+    }
+  }
+
+  useEffect(()=>{
+    fetchCards()
+  },[])
+
+
+
+
 
   return (
     <div className='home-user-cards-parent'>
@@ -28,18 +69,19 @@ const HomeUserCards = ({setCategoryName}) => {
 
       </div>
       <h2 style={{ letterSpacing: '1px', fontSize: '17px' }}>Debit Card</h2>
-      <div className="user-card-div-main">
+      {debitCard&&(
+        <div className="user-card-div-main">
         <div className='main-card'>
           <div className='main-card-heading'>
             <h5>Bank Ai</h5>
             <p>Debit</p>
           </div>
           <div className='main-card-user-details'>
-            <h4>ADRIAN HADJIN</h4>
-            <p>06/24</p>
+            <h4>{debitCard?.cardholderName}</h4>
+            <p>{debitCard?.cardExpiryDate}</p>
           </div>
           <div className='main-card-card-details'>
-            <p><span>1234</span><span>1234</span> <span>1234</span></p>
+            <p><span>{debitCard?.accountNumber?.slice(0,4)}</span><span>{debitCard?.accountNumber?.slice(4,8)}</span> <span>{debitCard?.accountNumber?.slice(8,12)}</span></p>
             <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
           </div>
         </div>
@@ -48,35 +90,35 @@ const HomeUserCards = ({setCategoryName}) => {
           <div className='main-card-right-money-details-div'>
             <div>
               <p>Received</p>
-              <h6>₹299</h6>
+              <h6>₹{debitCard?.received}</h6>
             </div>
             <div>
               <h2>Available</h2>
-              <h6 style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px' }}>₹299</h6>
+              <h6 style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px' }}>₹{debitCard?.cardBalance}</h6>
             </div>
             <div>
               <p>Sent</p>
-              <h6>₹299</h6>
+              <h6>₹{debitCard?.sent}</h6>
             </div>
           </div>
 
           <div className="main-card-right-account-holder-details">
             <div>
-              <h6>Cardholder Name</h6>
-              <p><i class="fa-solid fa-user" style={{ fontSize: '14px' }}></i> James DENIS</p>
+              <h6> Name</h6>
+              <p><i class="fa-solid fa-user" style={{ fontSize: '14px' }}></i> {debitCard?.cardholderName}</p>
             </div>
             <div>
               <h6>Card Number</h6>
-              <p><img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" /><span>5300</span><span>5848</span><span>9581</span></p>
+              <p><img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" /><span>{debitCard?.accountNumber?.slice(0,4)}</span><span>{debitCard?.accountNumber?.slice(4,8)}</span><span>{debitCard?.accountNumber?.slice(8,12)}</span></p>
             </div>
             <section>
               <main>
                 <h6>Expires</h6>
-                <p>01/23</p>
+                <p>{debitCard?.cardExpiryDate}</p>
               </main>
               <main>
                 <h6>CVV</h6>
-                <p>***</p>
+                <p>{debitCard?.cvv}</p>
               </main>
             </section>
           </div>
@@ -93,72 +135,79 @@ const HomeUserCards = ({setCategoryName}) => {
 
 
       </div>
+      )}
 
-      <h2 style={{ letterSpacing: '1px', fontSize: '17px' }}>Credit Card</h2>
+     
 
-      <div className="user-card-div-main">
-        <div className='main-card' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
-          <div className='main-card-heading'>
-            <h5>Bank Ai</h5>
-            <p>Debit</p>
-          </div>
-          <div className='main-card-user-details'>
-            <h4>ADRIAN HADJIN</h4>
-            <p>06/24</p>
-          </div>
-          <div className='main-card-card-details'>
-            <p><span>1234</span><span>1234</span> <span>1234</span></p>
-            <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
-          </div>
-        </div>
+     {creditCards?.length>0?creditCards?.map((a)=>(
+      <> <h2 style={{ letterSpacing: '1px', fontSize: '17px' }}>Credit Card</h2>
+       <div className="user-card-div-main">
+       <div className='main-card' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
+         <div className='main-card-heading'>
+           <h5>Bank Ai</h5>
+           <p>Debit</p>
+         </div>
+         <div className='main-card-user-details'>
+           <h4>ADRIAN HADJIN</h4>
+           <p>06/24</p>
+         </div>
+         <div className='main-card-card-details'>
+           <p><span>1234</span><span>1234</span> <span>1234</span></p>
+           <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
+         </div>
+       </div>
 
-        <div className="main-card-right">
-          <div className='main-card-right-money-details-div' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
-           
-            <div>
-              <h2>Available</h2>
-              <h6 style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px' }}>₹299</h6>
-            </div>
-            <div>
-              <p>Sent</p>
-              <h6>₹299</h6>
-            </div>
-          </div>
+       <div className="main-card-right">
+         <div className='main-card-right-money-details-div' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
+          
+           <div>
+             <h2>Available</h2>
+             <h6 style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px' }}>₹299</h6>
+           </div>
+           <div>
+             <p>Sent</p>
+             <h6>₹299</h6>
+           </div>
+         </div>
 
-          <div className="main-card-right-account-holder-details" style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
-            <div>
-              <h6>Cardholder Name</h6>
-              <p><i class="fa-solid fa-user" style={{ fontSize: '14px' }}></i> James DENIS</p>
-            </div>
-            <div>
-              <h6>Card Number</h6>
-              <p><img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" /><span>5300</span><span>5848</span><span>9581</span></p>
-            </div>
-            <section>
-              <main>
-                <h6>Expires</h6>
-                <p>01/23</p>
-              </main>
-              <main>
-                <h6>CVV</h6>
-                <p>***</p>
-              </main>
-            </section>
-          </div>
-
-
-        </div>
-
-        <div className="card-buttons-div">
-          <button>Freeze Card</button>
-          <button onClick={()=>setCategoryName("repay")}>Repay</button>
-        </div>
+         <div className="main-card-right-account-holder-details" style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
+           <div>
+             <h6>Cardholder Name</h6>
+             <p><i class="fa-solid fa-user" style={{ fontSize: '14px' }}></i> James DENIS</p>
+           </div>
+           <div>
+             <h6>Card Number</h6>
+             <p><img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" /><span>5300</span><span>5848</span><span>9581</span></p>
+           </div>
+           <section>
+             <main>
+               <h6>Expires</h6>
+               <p>01/23</p>
+             </main>
+             <main>
+               <h6>CVV</h6>
+               <p>***</p>
+             </main>
+           </section>
+         </div>
 
 
+       </div>
+
+       <div className="card-buttons-div">
+         <button>Freeze Card</button>
+         <button onClick={()=>setCategoryName("repay")}>Repay</button>
+       </div>
 
 
 
-      </div>
+
+
+     </div>
+     </>
+     )):""}
+
+
       <Modal size='lg'
         show={show}
         onHide={handleClose}

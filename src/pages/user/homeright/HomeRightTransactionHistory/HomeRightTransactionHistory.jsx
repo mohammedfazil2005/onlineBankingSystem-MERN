@@ -47,37 +47,41 @@ const HomeRightTransactionHistory = () => {
                     <h1>Transaction history</h1>
                     <p>Gain insights and Track Your Transactions Over Time</p>
                 </div>
-                <div>
+                {transactions?.length>0?<div>
                 <Form.Select aria-label="Default select example" value={''}>
                            <option value="" disabled>Select card</option>
                             <option value="1">DEBIT</option>
                             <option value="2">CREDIT</option>
 
                         </Form.Select>
-                </div>
+                </div>:""}
             </div>
            
-         <div className="user-page-transaction-table head-user-trans">
          
+         
+           {transactions?.length>0?<div className="user-page-transaction-table head-user-trans"> 
             <p>Name</p>
             <p>Date</p>
             <p>CARD</p>
             <p>Transaction Type</p>
-          
             <p>Amount</p>
             <p>Export</p>
-         </div>
-         {transactions.length>0?transactions?.map((a,index)=>(
+         </div>:<div className='text-center'>
+            <p> Oops! Looks like you haven't made any transactions yet.</p>
+            <button className='mt-3' style={{backgroundColor:'blueviolet',padding:'8px',border:'1px solid white',color:'white'}}>  Start Your First Transaction</button>
+            </div>}
+         {transactions?.length>0?transactions?.map((a,index)=>(
              <div key={index} className="user-page-transaction-table" style={{marginTop:'-20px'}}>
                  <p>{a?.to?a.to:a.from}</p>
                  <p>{a?.date}</p>
                  <p>{a?.card}</p>
-                 <p>Credited</p>
+                 <p>{a?.transactionType}</p>
                  
                  <p>₹{a?.amount}</p>
                  <button>Export</button>
                  </div>
-            )):""}
+            )):""
+            }
         
            
         

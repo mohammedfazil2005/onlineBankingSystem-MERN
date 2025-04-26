@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './HomeRightLoans.css'
 import { FloatingLabel, Form } from 'react-bootstrap'
 import { loanTypes } from '../../../randomdata/data'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { onLoanApplication } from '../../../../services/allAPI'
 const HomeRightLoans = () => {
     const [interestRate,setInterestRate]=useState('')
-    // const [EMIamount,setEMIamount]=useState(0)
     const [loanData,setLoanData]=useState({
         card:"debit",
         loanType:"",
@@ -15,7 +17,114 @@ const HomeRightLoans = () => {
         EMIamount:0,
     })
 
-    // console.log(loanData)
+    const navigate=useNavigate()
+
+    const onLoanRequest=async()=>{
+        const token=sessionStorage.getItem("token")
+        if(token){
+            if(loanData.loanType&&loanData.loanAmount&&loanData.loanDuration&&loanData.interestRate){
+                if(loanData.loanAmount>=50000&&loanData.loanAmount<=500000){
+
+                    const header={
+                        'Authorization':`Bearer ${token}`
+                    }
+                    
+
+                    try {
+                        const serverResponce=await onLoanApplication(loanData,header)
+                        if(serverResponce.status==200){
+                            toast.success(
+                                "Loan request successfully submitted! You can view the details in 'My Loans'.",
+                                {
+                                  style: {
+                                    border: '2px solid blueviolet',
+                                    padding: '16px',
+                                    color: 'blueviolet',
+                                  },
+                                  iconTheme: {
+                                    primary: 'blueviolet',
+                                    secondary: 'white',
+                                  },
+                                  duration: 6000,
+                                }
+                              );
+                              ClearFunction()
+                        }else if(serverResponce.status==400){
+                            toast.error(
+                                "You have already two active loans. You can't apply for more until they close.",
+                                {
+                                  style: {
+                                    border: '1px solid red',
+                                    padding: '16px',
+                                    color: 'red',
+                                  },
+                                  iconTheme: {
+                                    primary: 'red',
+                                    secondary: 'white',
+                                  },
+                                }
+                              );
+                        }else if(serverResponce.status==409){
+                            toast.error(
+                                "You have already requested two loans. You cannot request more at this time",
+                                {
+                                  style: {
+                                    border: '1px solid red',
+                                    padding: '16px',
+                                    color: 'red',
+                                  },
+                                  iconTheme: {
+                                    primary: 'red',
+                                    secondary: 'white',
+                                  },
+                                }
+                              );
+                        }else{
+                            toast.error("Internal Error")
+                        }
+                    } catch (error) {
+                        console.log(error)
+                        toast.error("Please try again after a while!")
+                    }
+                    
+
+                }else{
+                    toast.error(
+                        "Please enter a loan amount between ₹50,000 and ₹5,00,000.",
+                        {
+                          style: {
+                            border: '1px solid red',
+                            padding: '16px',
+                            color: 'red',
+                          },
+                          iconTheme: {
+                            primary: 'red',
+                            secondary: 'white',
+                          },
+                        }
+                      );
+                }
+            }else{
+                toast.error("Please Select the fields!")
+            }
+        }else{
+            toast.error("Please Login Again!")
+            navigate('/login')
+        }
+    }
+
+
+    const ClearFunction=()=>{
+        setLoanData({...loanData,
+            loanAmount:"",
+            loanType:"",
+            interestRate:"",
+            loanDuration:"",
+            EMIamount:0
+        })
+    }
+
+    
     
 
     useEffect(()=>{
@@ -25,9 +134,9 @@ const HomeRightLoans = () => {
             let totalMonth=loanData.loanDuration*12
             let EMIperMonth=totalLoanAMOUNT/totalMonth
 
-        setLoanData({ ...loanData, EMIamount:Math.ceil(EMIperMonth),repayingAmount:Math.ceil(totalLoanAMOUNT) });
+        setLoanData({ ...loanData, EMIamount:Math.ceil(EMIperMonth)});
         }
-    },[loanData.loanDuration,loanData.loanDuration,loanData.loanType])
+    },[loanData.loanAmount,loanData.interestRate,loanData.loanDuration])
 
     console.log(loanData)
     
@@ -50,7 +159,7 @@ const HomeRightLoans = () => {
                     </div>
                     <div>
                         <Form.Select aria-label="Select card">
-                            <option disabled selected>Select Card</option>
+                           
                             <option value="debit">Debit Card</option>
                         </Form.Select>
                     </div>
@@ -123,7 +232,7 @@ const HomeRightLoans = () => {
                         <p>{loanData.EMIamount}/month</p>
                     </div>
                 </div>
-                <button>Request</button>
+                <button onClick={onLoanRequest}>Request</button>
             </div>
 
         </div>

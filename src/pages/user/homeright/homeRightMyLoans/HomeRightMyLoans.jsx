@@ -1,6 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './HomeRightMyLoans.css'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { onFetchLoans } from '../../../../services/allAPI'
 const HomeRightMyLoans = ({setCategoryName}) => {
+
+    const [activeloans,setActiveLoans]=useState([])
+    const [requestedLoans,setRequestedLoans]=useState([])
+
+    const navigate=useNavigate()
+
+    const fetchLoans=async()=>{
+        const token=sessionStorage.getItem("token")
+        if(token){
+            const header={
+                'Authorization':`Bearer ${token}`
+            }
+            try {
+                const serverResponce=await onFetchLoans(header)
+                if(serverResponce.status==200){
+                    setActiveLoans(serverResponce.data.loans)
+                    setRequestedLoans(serverResponce.data.requestedLoans)
+                }else{
+                    toast.error("Something went wrong!")
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
+        }else{
+            toast.error("Please Login Again!")
+            navigate("/login")
+        }
+    }
+
+    useEffect(()=>{
+        fetchLoans()
+    },[])
+
+    console.log(requestedLoans)
+    console.log(activeloans)
+
+
+
   return (
     <div className='home-right-my-loans-parent'>
         <div className="home-right-my-loans-heading">
@@ -35,12 +77,14 @@ const HomeRightMyLoans = ({setCategoryName}) => {
         </div>
 
         <div className="my-loans-cards-parent">
-            <div className="my-loans-card-main" style={{border:'1px solid #660e19',width:'400px'}}>
+            {requestedLoans?.length>0?requestedLoans?.map((a)=>(
+                <div className="my-loans-card-main" style={{border:'1px solid #660e19',width:'400px'}}>
                 <div>
-                <h4>Loan type :<span style={{color:'gray'}}>Personal</span></h4>
-                <h4>Loan Amount :<span style={{color:'gray'}}>₹3000</span></h4>
-                <h4>Loan Duration :<span style={{color:'gray'}}>12months</span></h4>
-                <h4>Interest Rate (%):<span style={{color:'gray'}}>15%</span></h4>
+                <h4>Loan type :<span style={{color:'gray'}}>{a?.loanType}</span></h4>
+                <h4>Loan Amount :<span style={{color:'gray'}}>₹{a?.amount}</span></h4>
+                <h4>Loan Duration :<span style={{color:'gray'}}>{a?.loanDuration} Years</span></h4>
+                <h4>Interest Rate (%):<span style={{color:'gray'}}>{a?.interestRate}%</span></h4>
+                <h4>Status:<span style={{color:'gray'}}>{a?.status}</span></h4>
                  <main>
                     <button>Cancel Loan Request</button>
                  
@@ -50,6 +94,12 @@ const HomeRightMyLoans = ({setCategoryName}) => {
                    ...
                 </div>
             </div>
+            )):""}
+            
+        </div>
+
+        <div className='mb-2'>
+
         </div>
 
 
