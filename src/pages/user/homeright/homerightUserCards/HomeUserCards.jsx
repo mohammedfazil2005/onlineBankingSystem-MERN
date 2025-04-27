@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { onFetchAllCards } from '../../../../services/allAPI';
+import { onApplyForCreditCard, onFetchAllCards } from '../../../../services/allAPI';
 
 
 
@@ -16,6 +16,8 @@ const HomeUserCards = ({setCategoryName}) => {
   const [show, setShow] = useState(false);
   const [debitCard,setDebitCard]=useState({})
   const [creditCards,setCreditCards]=useState([])
+
+  const [cardtype,setCardtype]=useState("")
 
   const navigate=useNavigate()
 
@@ -48,10 +50,61 @@ const HomeUserCards = ({setCategoryName}) => {
     }
   }
 
+  const applyCreditCard=async()=>{
+    const token=sessionStorage.getItem("token")
+    if(token){
+     if(cardtype){
+      const header={
+        'Authorization':`Bearer ${token}`
+      }
+      const payload={
+        cardType:cardtype
+      }
+      try {
+        const serverResponce=await onApplyForCreditCard(payload,header)
+        console.log(serverResponce)
+        if(serverResponce.status==200){
+          toast.success(
+            "Credit card application successfully submitted!",
+            {
+              style: {
+                border: '2px solid blueviolet',
+                padding: '16px',
+                color: 'blueviolet',
+              },
+              iconTheme: {
+                primary: 'blueviolet',
+                secondary: 'white',
+              },
+              duration: 6000,
+            }
+          );
+          handleClose()
+        }else if(serverResponce.status==409){
+          toast.error("You have already requested this credit card!")
+          handleClose()
+        }else if(serverResponce.status==400){
+          toast.error("You already have a credit card of this type.")
+          handleClose() 
+        }
+      } catch (error) {
+        console.log(error)
+      }
+     }else{
+      toast.error("Please select a cardtype!")
+     }
+
+    }else{
+      toast.error("Please Login Again!")
+      navigate("/login")
+    }
+  }
+
   useEffect(()=>{
     fetchCards()
   },[])
 
+  
 
 
 
@@ -255,9 +308,9 @@ const HomeUserCards = ({setCategoryName}) => {
                         <p>Choose the card you want to apply</p>
                     </div>
                     <div>
-                        <Form.Select aria-label="Select card">
-                            <option>Select Card Type</option>
-                            <option value="sliver">Silver Card</option>
+                        <Form.Select onChange={(e)=>setCardtype(e.target.value)} aria-label="Select card" defaultValue={""}>
+                            <option value={''} disabled>Select Card Type</option>
+                            <option value="silver">Silver Card</option>
                             <option value="gold">Gold Card</option>
 
                         </Form.Select>
@@ -269,7 +322,7 @@ const HomeUserCards = ({setCategoryName}) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Apply</Button>
+          <Button variant="primary" onClick={applyCreditCard}>Apply</Button>
         </Modal.Footer>
       </Modal>
     </div>

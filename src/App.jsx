@@ -16,7 +16,7 @@ import { AuthContext } from "./contexts/TokenContext"
 
 function App() {
 
-  const {isToken,setIsToken,role,} = useContext(AuthContext)
+  const {isToken,setIsToken,role} = useContext(AuthContext)
 
   console.log(isToken)
   

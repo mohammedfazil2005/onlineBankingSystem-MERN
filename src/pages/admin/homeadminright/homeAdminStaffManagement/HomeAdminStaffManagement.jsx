@@ -1,8 +1,10 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { staffData } from '../../../randomdata/data'
 import { Button, FloatingLabel, Modal } from 'react-bootstrap'
+import toast from 'react-hot-toast'
+import { onFetchAllStaffs } from '../../../../services/allAPI'
 
 
 
@@ -12,6 +14,37 @@ const HomeAdminStaffManagement = ({setCategoryName}) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [staffs,setStaffs]=useState([])
+
+  const fetchStaffs=async()=>{
+    const token=sessionStorage.getItem("token")
+    if(token){
+
+        const header={
+            'Authorization':`Bearer ${token}`
+        }
+
+        try {
+            const serverResponce=await onFetchAllStaffs(header)
+            if(serverResponce.status==200){
+                setStaffs(serverResponce.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    }else{
+        toast.error("please login again!")
+    }
+  }
+
+  useEffect(()=>{
+    fetchStaffs()
+  },[])
+
+  console.log(staffs)
+
    
   return (
     <div className='home-admin-userdetails-parent'>
@@ -35,18 +68,23 @@ const HomeAdminStaffManagement = ({setCategoryName}) => {
 
             </div>
             <div className="home-admin-user-details-table-parent">
-               <div className="user-details-table-card-main">
-                <div>
-                    <img src="https://cdn.create.vista.com/api/media/small/20030237/stock-photo-cheerful-young-man-over-white" alt="" />
-                    <h2>Ray Clarke</h2>
-                    <h6>Credit card manager</h6>
+              {staffs?.length>0?staffs?.map((a,key)=>(
+                <>
+                 <div className="user-details-table-card-main">
+                 <div>
+                     <img src={`http://localhost:3000/uploads/${a.imageurl}`} alt="" />
+                     <h2>{a?.firstname} {a?.lastname}</h2>
+                     <h6>{a?.role}</h6>
+                 </div>
+                 <main>
+                 <p>Active</p>
+                 <button className='w-100' onClick={handleShow}>Send a notification</button>
+                 </main>
                 </div>
-                <main>
-                <p>Active</p>
-                <button className='w-100' onClick={handleShow}>Send a notification</button>
-                </main>
-               </div>
-               <hr />
+                <hr />
+                </>
+              )):""}
+               
                
             </div>
 

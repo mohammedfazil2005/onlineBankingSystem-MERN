@@ -7,18 +7,24 @@
 .home-admin-dashboard-transaction-table{
 
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     align-items: center;
     place-items: center;
     gap: 2px;
  
 
 }
-
+.home-admin-dashboard-transaction-table div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .home-admin-dashboard-transaction-table  img{
     width: 50px;
     height: 40px;
+    border-radius: 50%;
+    margin-top: -50px;
 }
 .home-admin-dashboard-transaction-table button{
     width: 80px;

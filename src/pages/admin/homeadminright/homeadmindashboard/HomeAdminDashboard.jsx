@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './HomeAdminDashboard.css'
 import { Line, Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { onFetchDashboardDetails } from '../../../../services/allAPI'
 
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
 const HomeAdminDashboard = () => {
+
+  const [data,setData]=useState({})
+
+  const navigate=useNavigate()
 
   //Line Chart
   const Linedata = {
@@ -74,6 +81,33 @@ const HomeAdminDashboard = () => {
     ]
   }
 
+  const fetchDashboardDetails=async()=>{
+    const token=sessionStorage.getItem("token")
+    if(token){
+      const header={
+        'Authorization':`Bearer ${token}`
+      }
+      try {
+        const serverResponce=await onFetchDashboardDetails(header)
+        if(serverResponce.status==200){
+          setData(serverResponce.data)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+
+    }else{
+      navigate('/login')
+      toast.error("Please login again!")
+    }
+  }
+
+  useEffect(()=>{
+    fetchDashboardDetails()
+  },[])
+
+  console.log(data)
+
 
 
 
@@ -95,7 +129,7 @@ const HomeAdminDashboard = () => {
           </div>
           <div>
             <h5>Total Balance</h5>
-            <p>₹564,7792</p>
+            <p>₹{data?.totalbalance}</p>
 
           </div>
         </div>
@@ -106,7 +140,7 @@ const HomeAdminDashboard = () => {
           </div>
           <div>
             <h5>Total Users</h5>
-            <p>1000</p>
+            <p>{data?.totalusers}</p>
 
           </div>
         </div>
@@ -117,7 +151,7 @@ const HomeAdminDashboard = () => {
           </div>
           <div>
             <h5>Total Loans Approved</h5>
-            <p>₹47,792</p>
+            <p>₹{data?.totalloanamountapproved }</p>
 
           </div>
         </div>
@@ -127,8 +161,8 @@ const HomeAdminDashboard = () => {
             <button><i class="fa-solid fa-money-bill-transfer"></i></button>
           </div>
           <div>
-            <h5>Total Deposit Amount</h5>
-            <p>₹64,7792</p>
+            <h5>Total Withdrawel Amount</h5>
+            <p>₹{data?.totalwithdrawelamount}</p>
 
           </div>
         </div>

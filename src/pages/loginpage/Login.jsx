@@ -154,7 +154,6 @@ const Login = () => {
         setUserData({ ...userData, email: e.value })
         setValid({ ...valid, email: false })
       } else {
-        toast.error("Please enter valid email!")
         setValid({ ...valid, email: true })
       }
     
@@ -417,14 +416,6 @@ const Login = () => {
 
 
   }
-
-
-
-
-
-
-
-
 
 
 

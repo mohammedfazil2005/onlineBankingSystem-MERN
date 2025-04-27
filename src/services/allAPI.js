@@ -47,3 +47,50 @@ export const onLoanApplication=async(data,header)=>{
 export const onFetchLoans=async(header)=>{
   return await commonAPI("get",'/fetchloans',{},header)
 }
+
+export const onFetchProfile=async(header)=>{
+  return await commonAPI("get",'/get/profile',{},header)
+}
+
+export const onUpdateProfile=async(data,header)=>{
+  return await commonAPI("patch",'/update/profile',data,header)
+}
+
+export const onFetchAccountHolders=async(header)=>{
+  return await commonAPI("get",'/getaccountholders',{},header)
+}
+
+export const onFetchAllBankTransactions=async(header)=>{
+  return await commonAPI("get",'/getalltransaction',{},header)
+}
+
+export const onFetchApprovedCreditcards=async(header)=>{
+  return await commonAPI("get",'/getcreditcards/approved',{},header)
+}
+export const onFetchAllBankNotifications=async(header)=>{
+  return await commonAPI("get",'/getallnotifications',{},header)
+}
+
+export const onFetchCreditCardRequests=async(header)=>{
+  return await commonAPI("get",'/getcreditcard/requests',{},header)
+}
+
+export const onFetchLoanRequests=async(header)=>{
+  return await commonAPI("get",'/getloan/requests',{},header)
+}
+
+export const onStaffRegisteration=async(data,header)=>{
+  return await commonAPI("post",'/addstaff',data,header)
+}
+
+export const onFetchAllStaffs=async(header)=>{
+  return await commonAPI("get",'/getStaffs',{},header)
+}
+
+export const onFetchDashboardDetails=async(header)=>{
+  return await commonAPI("get",'/getdashboard/details',{},header)
+}
+
+export const onApplyForCreditCard=async(data,header)=>{
+  return await commonAPI("post",'/creditcardApplication',data,header)
+}

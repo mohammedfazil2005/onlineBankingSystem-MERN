@@ -5,6 +5,9 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './HomeAdminStaff.css'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import { onStaffRegisteration } from '../../../../services/allAPI'
 
 
 
@@ -12,21 +15,18 @@ const HomeAdminStaff = () => {
       const [previewImage, setPreviewImage] = useState('')
       const [profileImageError, setProfileImageError] = useState(false)
 
+      const navigate=useNavigate()
+
        const [userData, setUserData] = useState({
           profileimg: "",
           firstName: "",
           lastName: "",
           address: "",
-          state: "",
-          postalCode: "",
           DOB: "",
           phone: "",
-          salarySource: "",
-          monthlySalary: "",
           email: "",
-          password: ""
-      
-      
+          password: "",
+          role:""
         })
 
          const [loading, setLoading] = useState(false)
@@ -54,6 +54,51 @@ const HomeAdminStaff = () => {
             }
           }
 
+          const AddStaff=async()=>{
+            const token=sessionStorage.getItem("token")
+            if(token){
+              if(userData.firstName&&userData.lastName&&userData.email&&userData.password&&userData.profileimg&&userData.phone&&userData.DOB&&userData.role){
+                
+                const header={
+                  'Authorization':`Bearer ${token}`
+                }
+
+                const payload= new FormData()
+
+                payload.append("firstname",userData.firstName)
+                payload.append("lastname",userData.lastName)
+                payload.append("DOB",userData.DOB)
+                payload.append("role",userData.role)
+                payload.append("phonenumber",userData.phone)
+                payload.append("email",userData.email)
+                payload.append("password",userData.password)
+                payload.append("imageurl",userData.profileimg)
+
+                try {
+                  const serverResponce=await onStaffRegisteration(payload,header)
+                  if(serverResponce.status==200){
+                    toast.success("Staff Added Successfully!")
+                  }else if(serverResponce.status==409){
+                    toast.error("Email already exists!")
+                  }else{
+                    toast.error("Failed to Add Staff!")
+                  }
+                } catch (error) {
+                  toast.error("Failed to Add Staff!")
+                }
+
+              }else{
+                toast.error("All fields are required!")
+              }
+
+            }else{
+              toast.error("Please Login Again!")
+              navigate('/login')
+            }
+          }
+
+          console.log(userData)
+
       useEffect(() => {
           if (userData.profileimg) {
             if (userData.profileimg.type == "image/png" || userData.profileimg.type == "image/jpeg" || userData.profileimg.type == "image/jpg") {
@@ -67,6 +112,32 @@ const HomeAdminStaff = () => {
       
           }
         }, [userData.profileimg])
+
+        const onTextChange = (e) => {
+
+          if (e.name == "email") {
+            // setUserData(d => ({ ...d, email: e.value }));
+            let regexTest = e.value.match(/^[a-zA-Z]*[0-9]*@?@gmail.com+$/)
+            if (!!regexTest) {
+              setUserData({ ...userData, email: e.value })
+              setValid({ ...valid, email: false })
+            } else {
+              setValid({ ...valid, email: true })
+            }
+          
+          }
+      
+          if (e.name == "password") {
+            let regexTest = e.value.match(/^[0-9]*$/)
+            if (!!regexTest) {
+              setUserData({ ...userData, password: e.value })
+              setValid({ ...valid, password: false })
+            } else {
+              setValid({ ...valid, password: true })
+            }
+          }
+      
+        }
       
   return (
     <div className='login-parent login-parent-staff'>
@@ -125,9 +196,9 @@ const HomeAdminStaff = () => {
                   aria-label="Default select example"
                   style={{ height: '60px' }}
                   onChange={(e) => {
-                    const selectedData = datas.find((a) => a['value'] == e.target.value)
+                    const selectedData = staffData.find((a) => a['value'] == e.target.value)
                     if (selectedData) {
-                      setUserData({ ...userData, state: selectedData.state, postalCode: selectedData.pincode })
+                      setUserData({ ...userData,role:selectedData.value })
                     }
                   }}
 
@@ -159,7 +230,7 @@ const HomeAdminStaff = () => {
              
               
              
-           <button>Add</button>
+           <button onClick={AddStaff}>Add</button>
       </div>
     </div>
   )

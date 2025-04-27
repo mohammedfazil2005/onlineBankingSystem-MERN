@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './HomeAdminNotifications.css'
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
+import { onFetchAllBankNotifications, onFetchAllNotifications } from '../../../../services/allAPI';
+import { useNavigate } from 'react-router-dom';
 
 
 const HomeAdminNotifications = () => {
@@ -8,6 +10,41 @@ const HomeAdminNotifications = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const navigate=useNavigate()
+
+    const [notifications,setNotification]=useState([])
+
+    const fetchNotifications=async()=>{
+          const token=sessionStorage.getItem("token")
+                if(token){
+                    try {
+                        const header={
+                            'Authorization': `Bearer ${token}`
+                        }
+                        const serverResponce=await onFetchAllBankNotifications(header)
+                        console.log(serverResponce)
+                        if(serverResponce.status==200){
+                            setNotification(serverResponce.data)
+                        }
+        
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }else{
+                    navigate('/login')
+                }
+    }
+
+    useEffect(()=>{
+        fetchNotifications()
+    },[])
+
+    console.log(notifications)
+
+
+
+
     return (
         <div className='home-admin-notifications-parent'>
             <div className="heading-dashboard-not">
@@ -18,16 +55,21 @@ const HomeAdminNotifications = () => {
                 <button onClick={handleShow}>Send Notifcation</button>
             </div>
             <div className='notfication-table-parent'>
-                <div className='notification-table-main'>
+                {notifications?.length>0?notifications?.map((a,key)=>(
+                    <>
+                      <div key={key} className='notification-table-main'>
                     <div>
                         <i className='fa-solid fa-bell'></i>
-                        <p>Your Fixed Deposit of ₹1,00,000 will..</p>
+                        <p>{a?.message.slice(0,50)}...</p>
                     </div>
                     <div>
                         <button>View</button>
                     </div>
                 </div>
                 <hr />
+                    </>
+                )):""}
+              
             </div>
             <Modal show={show} onHide={handleClose} size='lg'>
                 <Modal.Header closeButton>

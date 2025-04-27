@@ -81,7 +81,7 @@ const HomeRightMyLoans = ({setCategoryName}) => {
                 <div className="my-loans-card-main" style={{border:'1px solid #660e19',width:'400px'}}>
                 <div>
                 <h4>Loan type :<span style={{color:'gray'}}>{a?.loanType}</span></h4>
-                <h4>Loan Amount :<span style={{color:'gray'}}>₹{a?.amount}</span></h4>
+                <h4>Loan Amount :<span style={{color:'gray'}}>₹{a?.requestedAmount}</span></h4>
                 <h4>Loan Duration :<span style={{color:'gray'}}>{a?.loanDuration} Years</span></h4>
                 <h4>Interest Rate (%):<span style={{color:'gray'}}>{a?.interestRate}%</span></h4>
                 <h4>Status:<span style={{color:'gray'}}>{a?.status}</span></h4>
