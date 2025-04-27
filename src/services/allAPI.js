@@ -94,3 +94,10 @@ export const onFetchDashboardDetails=async(header)=>{
 export const onApplyForCreditCard=async(data,header)=>{
   return await commonAPI("post",'/creditcardApplication',data,header)
 }
+export const onWithdraw=async(acco,data,header)=>{
+  return await commonAPI("post",`/withdraw/${acco}`,data,header)
+}
+export const onWithdrawOTP=async(otp,header)=>{
+  return await commonAPI("post",`/withdrawOTP/${otp}`,{},header)
+}
+

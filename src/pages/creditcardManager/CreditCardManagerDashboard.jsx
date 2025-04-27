@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Line, Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { useNavigate } from 'react-router-dom'
+import { onFetchDashboardDetails } from '../../services/allAPI'
 
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
 const CreditCardManagerDashboard = () => {
+
+  const [data,setData]=useState({})
+
+  const navigate=useNavigate()
+
+
   const Linedata = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
@@ -37,10 +45,44 @@ const CreditCardManagerDashboard = () => {
     ]
   }
 
+  
+
   const Lineoptions = {
     responsive: true,  // Enables responsiveness
     maintainAspectRatio: false, // Allows custom width & height
   };
+
+   const fetchDashboardDetails=async()=>{
+      const token=sessionStorage.getItem("token")
+      if(token){
+        const header={
+          'Authorization':`Bearer ${token}`
+        }
+        try {
+          const serverResponce=await onFetchDashboardDetails(header)
+          if(serverResponce.status==200){
+            setData(serverResponce.data)
+          }
+        } catch (error) {
+          console.log(error)
+        }
+  
+      }else{
+        navigate('/login')
+        toast.error("Please login again!")
+      }
+    }
+  
+    console.log(data)
+  
+    useEffect(()=>{
+        fetchDashboardDetails()
+      },[])
+
+      
+
+
+
   return (
     <div>
        <div className="heading-dashboard">
@@ -54,7 +96,7 @@ const CreditCardManagerDashboard = () => {
           </div>
           <div>
             <h5>Total Balance</h5>
-            <p>₹564,7792</p>
+            <p>₹{data?.totalbalance}</p>
 
           </div>
         </div>
@@ -64,7 +106,7 @@ const CreditCardManagerDashboard = () => {
           </div>
           <div>
             <h5> Creditcard Approved</h5>
-            <p>200</p>
+            <p>{data?.totalcreditcardApproved}</p>
 
           </div>
         </div>
@@ -74,7 +116,7 @@ const CreditCardManagerDashboard = () => {
           </div>
           <div>
             <h5> Creditcard Request Pending </h5>
-            <p>7</p>
+            <p>{data?.totalcreditcardrequestpending}</p>
 
           </div>
         </div>

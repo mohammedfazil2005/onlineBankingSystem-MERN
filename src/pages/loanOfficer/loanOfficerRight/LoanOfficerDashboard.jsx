@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Line, Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { onFetchDashboardDetails } from '../../../services/allAPI'
+import { useNavigate } from 'react-router-dom'
 
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
 const LoanOfficerDashboard = () => {
+  const [data,setData]=useState({})
+
+  const navigate=useNavigate()
+  
   const Linedata = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
@@ -51,6 +57,36 @@ const LoanOfficerDashboard = () => {
     responsive: true,  // Enables responsiveness
     maintainAspectRatio: false, // Allows custom width & height
   };
+
+  const fetchDashboardDetails=async()=>{
+    const token=sessionStorage.getItem("token")
+    if(token){
+      const header={
+        'Authorization':`Bearer ${token}`
+      }
+      try {
+        const serverResponce=await onFetchDashboardDetails(header)
+        if(serverResponce.status==200){
+          setData(serverResponce.data)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+
+    }else{
+      navigate('/login')
+      toast.error("Please login again!")
+    }
+  }
+
+  console.log(data)
+
+  useEffect(()=>{
+      fetchDashboardDetails()
+    },[])
+
+
+
   return (
     <div className='loanofficer-dashboard-parent'>
         <div className="heading-dashboard">
@@ -64,7 +100,7 @@ const LoanOfficerDashboard = () => {
           </div>
           <div>
             <h5>Total Balance</h5>
-            <p>₹564,7792</p>
+            <p>₹{data?.totalbalance}</p>
 
           </div>
         </div>
@@ -74,7 +110,7 @@ const LoanOfficerDashboard = () => {
           </div>
           <div>
             <h5>Total Loans Approved</h5>
-            <p>10</p>
+            <p>{data?.totalloansapproved}</p>
 
           </div>
         </div>
@@ -85,7 +121,7 @@ const LoanOfficerDashboard = () => {
           </div>
           <div>
             <h5> Loan Request Pending </h5>
-            <p>7</p>
+            <p>{data?.totalloansrequestpending}</p>
 
           </div>
         </div>

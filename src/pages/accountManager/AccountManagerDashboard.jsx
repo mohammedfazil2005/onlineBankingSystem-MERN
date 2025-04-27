@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Line, Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { useNavigate } from 'react-router-dom'
+import { onFetchDashboardDetails } from '../../services/allAPI'
 
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
 const AccountManagerDashboard = () => {
+   const [data,setData]=useState({})
+  
+    const navigate=useNavigate()
   const Linedata = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
@@ -31,6 +36,38 @@ const AccountManagerDashboard = () => {
     responsive: true,  // Enables responsiveness
     maintainAspectRatio: false, // Allows custom width & height
   };
+
+   const fetchDashboardDetails=async()=>{
+        const token=sessionStorage.getItem("token")
+        if(token){
+          const header={
+            'Authorization':`Bearer ${token}`
+          }
+          try {
+            const serverResponce=await onFetchDashboardDetails(header)
+            if(serverResponce.status==200){
+              setData(serverResponce.data)
+            }
+          } catch (error) {
+            console.log(error)
+          }
+    
+        }else{
+          navigate('/login')
+          toast.error("Please login again!")
+        }
+      }
+    
+      console.log(data)
+    
+      useEffect(()=>{
+          fetchDashboardDetails()
+        },[])
+
+        
+
+
+
   return (
     <div>
       <div className="heading-dashboard">
@@ -44,7 +81,7 @@ const AccountManagerDashboard = () => {
           </div>
           <div>
             <h5>Total Withdrawel </h5>
-            <p>₹64,7792</p>
+            <p>₹{data?.totalwithdrawelamount}</p>
 
           </div>
         </div>
@@ -55,7 +92,7 @@ const AccountManagerDashboard = () => {
           </div>
           <div>
             <h5> Account Holders </h5>
-            <p>7</p>
+            <p>{data?.totalusers}</p>
 
           </div>
         </div>

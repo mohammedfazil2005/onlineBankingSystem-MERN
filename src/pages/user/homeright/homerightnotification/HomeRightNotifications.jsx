@@ -19,15 +19,12 @@ const HomeRightNotifications = () => {
         if(serverResponce.status==200){
           setNotification(serverResponce.data)
         }else{
-          toast.error("Please Login Again")
-      navigate("/login")
+        
         }
       } catch (error) {
         console.log(error)
       }
     }else{
-      toast.error("Please Login Again")
-      navigate("/login")
     }
   }
 
@@ -49,7 +46,7 @@ const HomeRightNotifications = () => {
            <div key={a.id} className='notification-table-main'>
            <div>
            <i className='fa-solid fa-bell'></i>
-           <p>{a?.message.slice(0,68)}...</p>
+           <p>{a?.message}...</p>
            </div>
        <div>
            <button>View</button>

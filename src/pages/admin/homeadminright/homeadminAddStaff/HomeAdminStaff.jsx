@@ -58,34 +58,60 @@ const HomeAdminStaff = () => {
             const token=sessionStorage.getItem("token")
             if(token){
               if(userData.firstName&&userData.lastName&&userData.email&&userData.password&&userData.profileimg&&userData.phone&&userData.DOB&&userData.role){
-                
-                const header={
-                  'Authorization':`Bearer ${token}`
-                }
 
-                const payload= new FormData()
-
-                payload.append("firstname",userData.firstName)
-                payload.append("lastname",userData.lastName)
-                payload.append("DOB",userData.DOB)
-                payload.append("role",userData.role)
-                payload.append("phonenumber",userData.phone)
-                payload.append("email",userData.email)
-                payload.append("password",userData.password)
-                payload.append("imageurl",userData.profileimg)
-
-                try {
-                  const serverResponce=await onStaffRegisteration(payload,header)
-                  if(serverResponce.status==200){
-                    toast.success("Staff Added Successfully!")
-                  }else if(serverResponce.status==409){
-                    toast.error("Email already exists!")
-                  }else{
+                if(userData.phone.length>10){
+                  toast.error("Please enter valid phone number!")
+                }else{
+                  const header={
+                    'Authorization':`Bearer ${token}`
+                  }
+  
+                  const payload= new FormData()
+  
+                  payload.append("firstname",userData.firstName)
+                  payload.append("lastname",userData.lastName)
+                  payload.append("DOB",userData.DOB)
+                  payload.append("role",userData.role)
+                  payload.append("phonenumber",userData.phone)
+                  payload.append("email",userData.email)
+                  payload.append("password",userData.password)
+                  payload.append("imageurl",userData.profileimg)
+  
+                  try {
+                    const serverResponce=await onStaffRegisteration(payload,header)
+                    if(serverResponce.status==201){
+                      toast.success("Staff Added Successfully!")
+                      setUserData({
+                        firstName: "",
+                        lastName: "",
+                        DOB: "",
+                        role: "",
+                        phone: "",
+                        email: "",
+                        password: "",
+                        profileimg: ""
+                    });
+                    }else if(serverResponce.status==409){
+                      toast.error("Email already exists!")
+                      setUserData({
+                        firstName: "",
+                        lastName: "",
+                        DOB: "",
+                        role: "",
+                        phone: "",
+                        email: "",
+                        password: "",
+                        profileimg: ""
+                    });
+                    }else{
+                      toast.error("Failed to Add Staff!")
+                    }
+                  } catch (error) {
                     toast.error("Failed to Add Staff!")
                   }
-                } catch (error) {
-                  toast.error("Failed to Add Staff!")
                 }
+                
+              
 
               }else{
                 toast.error("All fields are required!")
@@ -148,7 +174,7 @@ const HomeAdminStaff = () => {
                   <label>
 
                     <p className='btn' style={{ backgroundColor: 'rgba(137, 43, 226, 0.414)', color: 'white' }}>choose a file</p>
-                    <Form.Control type="file" className="cursor-pointer w-50" onChange={(e) => setUserData({ ...userData, profileimg: e.target.files[0] })} required style={{ display: 'none' }} />
+                    <Form.Control value={userData.profileimg} type="file" className="cursor-pointer w-50" onChange={(e) => setUserData({ ...userData, profileimg: e.target.files[0] })} required style={{ display: 'none' }} />
 
                   </label>
 
@@ -162,11 +188,11 @@ const HomeAdminStaff = () => {
               <div>
 
                 <FloatingLabel controlId="firstName" label="First Name" className="mb-3">
-                  <Form.Control type="text" placeholder="ex: Rosh" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} required />
+                  <Form.Control value={userData.lastName} type="text" placeholder="ex: Rosh" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} required />
                 </FloatingLabel>
 
                 <FloatingLabel controlId="lastName" label="Last Name" className="mb-3">
-                  <Form.Control type="text" placeholder="ex: Mathew" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, lastName: e.target.value })} required />
+                  <Form.Control value={userData.lastName} type="text" placeholder="ex: Mathew" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, lastName: e.target.value })} required />
                 </FloatingLabel>
               </div>
 
@@ -187,7 +213,7 @@ const HomeAdminStaff = () => {
                 </div>
 
                 <FloatingLabel controlId="phoneNumber" label="Phone Number" className="mb-3">
-                  <Form.Control type="number" maxLength={10} placeholder="Enter your 10-digit number" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, phone: e.target.value })} required />
+                  <Form.Control value={userData.phone} type="number" maxLength={10} placeholder="Enter your 10-digit number" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, phone: e.target.value })} required />
                 </FloatingLabel>
               </div>
               <div>
@@ -215,11 +241,11 @@ const HomeAdminStaff = () => {
 
               <div>
               <FloatingLabel controlId="email" label="Email" className="mb-3">
-                <Form.Control type="email" name='email' placeholder="Enter your email" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
+                <Form.Control type="email" value={userData.email} name='email' placeholder="Enter your email" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
               </FloatingLabel>
 
               <FloatingLabel controlId="password" label="Enter 4 Digit password" className="mb-3">
-                    <Form.Control type="text" name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
+                    <Form.Control type="text" value={userData.password} name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
                   </FloatingLabel>
               </div>
 
