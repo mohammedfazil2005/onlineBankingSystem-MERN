@@ -12,30 +12,8 @@ const AccountManagerDashboard = () => {
    const [data,setData]=useState({})
   
     const navigate=useNavigate()
-  const Linedata = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Total withdrawels",
-        data: [10, 15, 9, 20, 25, 22, 30], // More data points for a full year
-        borderColor: "rgba(255, 99, 132, 1)", // Red
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        pointBackgroundColor: "rgba(255, 99, 132, 1)", // Red for points
-        pointBorderColor: "#fff",
-        pointRadius: 6,
-        pointHoverRadius: 8,
-        tension: 0.4, // Smooth curve
-        fill: true,
-      },
-     
-     
-    ]
-  }
+ 
 
-  const Lineoptions = {
-    responsive: true,  // Enables responsiveness
-    maintainAspectRatio: false, // Allows custom width & height
-  };
 
    const fetchDashboardDetails=async()=>{
         const token=sessionStorage.getItem("token")
@@ -58,7 +36,37 @@ const AccountManagerDashboard = () => {
         }
       }
     
-      console.log(data)
+      const Linedata = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [
+          {
+            label: "Total withdrawels",
+            data: [], // More data points for a full year
+            borderColor: "rgba(255, 99, 132, 1)", // Red
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            pointBackgroundColor: "rgba(255, 99, 132, 1)", // Red for points
+            pointBorderColor: "#fff",
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            tension: 0.4, // Smooth curve
+            fill: true,
+          },
+         
+         
+        ]
+      }
+
+      data?.withdrawelmonthlychart?.forEach((item)=>{
+        const month=Linedata.labels.indexOf(item.month)
+        Linedata.datasets[0].data[month]=item.count
+      })
+    
+      const Lineoptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        
+          
+      };
     
       useEffect(()=>{
           fetchDashboardDetails()

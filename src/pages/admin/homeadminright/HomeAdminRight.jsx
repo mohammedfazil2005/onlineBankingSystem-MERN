@@ -19,7 +19,7 @@ const HomeAdminRight = ({categoryName,setCategoryName}) => {
      {categoryName=="User Management"?<HomeAdminUserDetails setCategoryName={setCategoryName}/>:""}
      {categoryName=="Add staff"?<HomeAdminStaff/>:""}
      {categoryName=="ViewProfile"?<HomeUserProfile/>:""}
-     {categoryName=="Loan Approvals"?<HomeAdminLoanRequests/>:""}
+     {categoryName=="Loan Requests"?<HomeAdminLoanRequests/>:""}
      {categoryName=="Transactions"?<HomeAdminTransactions/>:""}
      {categoryName=="Notifications"?<HomeAdminNotifications/>:""}
      {categoryName=="Credit Card Requests"?<HomeAdminCreditCardReq/>:""}

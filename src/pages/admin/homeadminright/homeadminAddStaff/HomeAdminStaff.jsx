@@ -80,7 +80,21 @@ const HomeAdminStaff = () => {
                   try {
                     const serverResponce=await onStaffRegisteration(payload,header)
                     if(serverResponce.status==201){
-                      toast.success("Staff Added Successfully!")
+                      toast.success(
+                        "New staff member added successfully! Welcome aboard.",
+                        {
+                          style: {
+                            border: '2px solid blueviolet',
+                            padding: '16px',
+                            color: 'blueviolet',
+                          },
+                          iconTheme: {
+                            primary: 'blueviolet',
+                            secondary: 'white',
+                          },
+                          duration: 6000,
+                        }
+                      );
                       setUserData({
                         firstName: "",
                         lastName: "",
@@ -140,9 +154,9 @@ const HomeAdminStaff = () => {
         }, [userData.profileimg])
 
         const onTextChange = (e) => {
-
+          
           if (e.name == "email") {
-            // setUserData(d => ({ ...d, email: e.value }));
+            setUserData(d => ({ ...d, email: e.value }));
             let regexTest = e.value.match(/^[a-zA-Z]*[0-9]*@?@gmail.com+$/)
             if (!!regexTest) {
               setUserData({ ...userData, email: e.value })
@@ -174,7 +188,7 @@ const HomeAdminStaff = () => {
                   <label>
 
                     <p className='btn' style={{ backgroundColor: 'rgba(137, 43, 226, 0.414)', color: 'white' }}>choose a file</p>
-                    <Form.Control value={userData.profileimg} type="file" className="cursor-pointer w-50" onChange={(e) => setUserData({ ...userData, profileimg: e.target.files[0] })} required style={{ display: 'none' }} />
+                    <Form.Control  type="file" className="cursor-pointer w-50" onChange={(e) => setUserData({ ...userData, profileimg: e.target.files[0] })} required style={{ display: 'none' }} />
 
                   </label>
 
@@ -188,7 +202,7 @@ const HomeAdminStaff = () => {
               <div>
 
                 <FloatingLabel controlId="firstName" label="First Name" className="mb-3">
-                  <Form.Control value={userData.lastName} type="text" placeholder="ex: Rosh" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} required />
+                  <Form.Control value={userData.firstName} type="text" placeholder="ex: Rosh" className="cursor-pointer" onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} required />
                 </FloatingLabel>
 
                 <FloatingLabel controlId="lastName" label="Last Name" className="mb-3">

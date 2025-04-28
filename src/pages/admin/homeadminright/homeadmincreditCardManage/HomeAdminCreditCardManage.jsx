@@ -8,7 +8,7 @@ const HomeAdminCreditCardManage = () => {
 
     const navigate=useNavigate()
 
-    const [creditcards,Setcreditcards]=useState([])
+    const [creditcards,setCreditcards]=useState([])
 
     const fetchCreditCards=async()=>{
         const token=sessionStorage.getItem("token")
@@ -19,8 +19,7 @@ const HomeAdminCreditCardManage = () => {
             try {
                 const serverResponce=await onFetchApprovedCreditcards(header)
                 if(serverResponce.status==200){
-                    console.log(serverResponce.data)
-                    Setcreditcards(serverResponce.data.allrequests)
+                    setCreditcards(serverResponce.data)
                 }
             } catch (error) {
                 console.log(error)
@@ -30,6 +29,10 @@ const HomeAdminCreditCardManage = () => {
             alert("Please login again!")
         }
     }
+
+    
+    
+    console.log(creditcards)
 
     useEffect(()=>{
         fetchCreditCards()
@@ -56,11 +59,11 @@ const HomeAdminCreditCardManage = () => {
                     <div key={key} className='main-card' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
                     <div className='main-card-heading'>
                         <h5>Bank Ai</h5>
-                        <p>Debit</p>
+                        <p>{a?.cardType}</p>
                     </div>
                     <div className='main-card-user-details'>
-                        <h4>ADRIAN HADJIN</h4>
-                        <p>06/24</p>
+                        <h4>{a?.cardholderName}</h4>
+                        <p>{a?.cardExpiryDate}</p>
                     </div>
                     <div className='main-card-card-details'>
                         <p><span>****</span><span>****</span> <span>****</span></p>

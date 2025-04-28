@@ -101,3 +101,40 @@ export const onWithdrawOTP=async(otp,header)=>{
   return await commonAPI("post",`/withdrawOTP/${otp}`,{},header)
 }
 
+
+export const onSendNotificationToAllUsers=async(data,header)=>{
+  return await commonAPI("post",'/sendnotifications',data,header)
+}
+
+export const onSendNotificationToUser=async(userId,data,header)=>{
+  return await commonAPI("patch",`/sendnotification/user/${userId}`,data,header)
+}
+
+export const onFetchUserDeatils=async(userID,header)=>{
+  return await commonAPI('get',`/fetchuserdetails/${userID}`,{},header)
+}
+
+
+export const onApproveCreditCard=async(data,header)=>{
+  return await commonAPI('patch',`/approvecreditcard/request`,data,header)
+
+}
+
+export const onApproveLoan=async(data,header)=>{
+  return await commonAPI('patch','/approveloan',data,header)
+}
+export const onCancelLoanRequest=async(loanid,header)=>{
+  return await commonAPI('delete',`/cancel/loanrequest/${loanid}`,{},header)
+}
+
+export const onRejectCreditcardRequest=async(creditcardID,header)=>{
+  return await commonAPI('patch',`/rejectcreditcard/requests/${creditcardID}`,{},header)
+}
+
+export const onRejectLoanRequest=async(data,header)=>{
+  return await commonAPI('delete',`/rejectloan/requests`,data,header)
+}
+
+export const onFetchLoanAmount=async(id,header)=>{
+  return await commonAPI('get',`/get/loanamount/${id}`,{},header)
+}

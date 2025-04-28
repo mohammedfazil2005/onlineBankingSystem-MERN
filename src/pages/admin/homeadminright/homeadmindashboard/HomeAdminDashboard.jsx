@@ -20,46 +20,43 @@ const HomeAdminDashboard = () => {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
       {
-        label: "Personal Loan",
-        data: [10, 15, 9],
+        label: "Loan Requests",
+        data: [],
         borderColor: "rgba(255, 99, 132, 1)", // Red
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         tension: 0.4
       },
-      {
-        label: "Home Loan",
-        data: [5, 8, 12],
-        borderColor: "rgba(54, 162, 235, 1)", // Blue
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
-        tension: 0.4
-      },
-      {
-        label: "Auto Loan",
-        data: [3, 5, 7],
-        borderColor: "rgba(255, 206, 86, 1)", // Yellow
-        backgroundColor: "rgba(255, 206, 86, 0.2)",
-        tension: 0.4
-      },
-      {
-        label: "Business Loan",
-        data: [8, 12, 15],
-        borderColor: "rgba(75, 192, 192, 1)", // Teal
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        tension: 0.4
-      },
-      {
-        label: "Education Loan",
-        data: [4, 6, 9],
-        borderColor: "rgba(153, 102, 255, 1)", // Purple
-        backgroundColor: "rgba(153, 102, 255, 0.2)",
-        tension: 0.4
-      }
+     
     ]
   }
 
+ 
+
+  data?.loanmonthlyrequestchart?.forEach((item)=>{
+    const Month=Linedata.labels.indexOf(item.month)
+    Linedata.datasets[0].data[Month]=item.count
+  })
+
+
+
   const Lineoptions = {
-    responsive: true,  // Enables responsiveness
-    maintainAspectRatio: false, // Allows custom width & height
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      }
+    },
+    scales: {
+      y: {
+        ticks: {
+          callback: function(value) {
+            return Number.isInteger(value) ? value : null; // Only show integer numbers
+          },
+          stepSize: 1, // Optional: force step of 1 if you want closer ticks
+        }
+      }
+    }
   };
 
 
@@ -70,7 +67,7 @@ const HomeAdminDashboard = () => {
     datasets: [
       {
         label: "Loan status",
-        data: ['10', '5', '3'],
+        data: [],
         backgroundColor: [
         "#81C784", // Light Green (Lighter version of #4CAF50)
     "#FFB74D", // Light Orange (Lighter version of #FF9800)
@@ -80,6 +77,18 @@ const HomeAdminDashboard = () => {
       }
     ]
   }
+
+  if (data?.loanstatusmonthlychart?.length > 0) {
+  const loanStatus = data.loanstatusmonthlychart[0];  // Picking latest month (April)
+
+  PieData.datasets[0].data = [
+    loanStatus.approved || 0, 
+    loanStatus.pending || 0, 
+    loanStatus.rejected || 0
+  ];
+}
+
+
 
   const fetchDashboardDetails=async()=>{
     const token=sessionStorage.getItem("token")
@@ -177,9 +186,9 @@ const HomeAdminDashboard = () => {
         <div style={{ height: '330px',borderRadius:'10px' }}>
           <Pie data={PieData} />
         </div>
-        <div className='w-100' style={{borderRadius:'10px'}}>
+        {/* <div className='w-100' style={{borderRadius:'10px'}}>
           <Line data={Linedata} options={Lineoptions} />
-        </div>
+        </div> */}
       </div>
 
       <div className='home-dashboard-transactions-heading mt-4'>

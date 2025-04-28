@@ -18,8 +18,8 @@ const CreditCardManagerDashboard = () => {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
       {
-        label: "Basic Card",
-        data: [10, 15, 9, 20, 25, 22, 30], // More data points for a full year
+        label: "Silver Card",
+        data: [], // More data points for a full year
         borderColor: "rgba(255, 99, 132, 1)", // Red
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         pointBackgroundColor: "rgba(255, 99, 132, 1)", // Red for points
@@ -30,8 +30,8 @@ const CreditCardManagerDashboard = () => {
         fill: true,
       },
       {
-        label: "Silver Card",
-        data: [5, 8, 12, 18, 22, 19, 25],
+        label: "Gold Card",
+        data: [],
         borderColor: "rgba(54, 162, 235, 1)", // Blue
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         pointBackgroundColor: "rgba(54, 162, 235, 1)", // Blue for points
@@ -45,11 +45,30 @@ const CreditCardManagerDashboard = () => {
     ]
   }
 
+  data?.creditcardMonthlyrequestschart?.forEach((e) => {
+    const monthIndex = Linedata.labels.indexOf(e.month);
+  
+    if (monthIndex !== -1) {
+      Linedata.datasets[0].data[monthIndex] = e.silver ?? 0; // Silver Card
+      Linedata.datasets[1].data[monthIndex] = e.gold ?? 0;   // Gold Card
+    }
+  });
+
   
 
   const Lineoptions = {
-    responsive: true,  // Enables responsiveness
-    maintainAspectRatio: false, // Allows custom width & height
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        ticks: {
+          callback: function(value) {
+            return Number.isInteger(value) ? value : null;
+          },
+          stepSize: 1, // optional: force steps of 1
+        },
+      },
+    },
   };
 
    const fetchDashboardDetails=async()=>{
@@ -127,7 +146,7 @@ const CreditCardManagerDashboard = () => {
         <p className='mt-2'> Visual representation of Silver and Gold credit card request trends.</p>
       </div>
 
-       <div className='w-100' style={{borderRadius:'10px',minHeight:'340px'}}>
+       <div className='w-100' style={{borderRadius:'10px',minHeight:'340px',maxHeight:"500px"}}>
                 <Line data={Linedata} options={Lineoptions} />
               </div>
     </div>

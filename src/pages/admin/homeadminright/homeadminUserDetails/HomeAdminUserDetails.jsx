@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './HomeAdminUserDetails.css'
 import { TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { onFetchAccountHolders } from '../../../../services/allAPI'
+import { AuthContext } from '../../../../contexts/TokenContext'
 
 const HomeAdminUserDetails = ({setCategoryName}) => {
-    const onHandleShow=()=>{
-        setCategoryName("ViewProfile")
-    }
+  
 
     const [users,setUsers]=useState([])
 
     const navigate=useNavigate()
+    const {setUserID}=useContext(AuthContext)
+
+    const onHandleShow=(id)=>{
+        setUserID(id)
+        setCategoryName("ViewProfile")
+    }
 
     const fetchAccountHolders=async()=>{
         const token=sessionStorage.getItem("token")
@@ -64,7 +69,7 @@ const HomeAdminUserDetails = ({setCategoryName}) => {
                 </div>
                 <main>
                 <p>Active</p>
-                <button onClick={()=>onHandleShow()}>Show</button>
+                <button onClick={()=>onHandleShow(a?._id)}>Show</button>
                 </main>
                </div>
                <hr /></>

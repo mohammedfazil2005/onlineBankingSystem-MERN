@@ -33,8 +33,9 @@ const HomeUserCards = ({setCategoryName}) => {
       try {
         const serverResponce=await onFetchAllCards(header)
         if(serverResponce.status==200){
+          console.log(serverResponce.data)
           setDebitCard(serverResponce.data.debitCard)
-          setCreditCards(serverResponce.data.creditCards)
+          setCreditCards(serverResponce.data.creditcards)
           console.log(serverResponce.data)
         }else{
           toast.error("Please Login Again")
@@ -99,6 +100,8 @@ const HomeUserCards = ({setCategoryName}) => {
       navigate("/login")
     }
   }
+
+  console.log(creditCards)
 
   useEffect(()=>{
     fetchCards()
@@ -201,11 +204,11 @@ const HomeUserCards = ({setCategoryName}) => {
            <p>Debit</p>
          </div>
          <div className='main-card-user-details'>
-           <h4>ADRIAN HADJIN</h4>
-           <p>06/24</p>
+           <h4>{a?.cardholderName}</h4>
+           <p>{a?.cardExpiryDate}</p>
          </div>
          <div className='main-card-card-details'>
-           <p><span>1234</span><span>1234</span> <span>1234</span></p>
+         <p><span>{a?.accountNumber?.slice(0,4)}</span><span>{a?.accountNumber?.slice(4,8)}</span> <span>{a?.accountNumber?.slice(8,12)}</span></p>
            <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
          </div>
        </div>
@@ -215,27 +218,24 @@ const HomeUserCards = ({setCategoryName}) => {
           
            <div>
              <h2>Available</h2>
-             <h6 style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px' }}>₹299</h6>
+             <h6 style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px' }}>₹{a?.cardBalance}</h6>
            </div>
-           <div>
-             <p>Sent</p>
-             <h6>₹299</h6>
-           </div>
+          
          </div>
 
          <div className="main-card-right-account-holder-details" style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
            <div>
              <h6>Cardholder Name</h6>
-             <p><i class="fa-solid fa-user" style={{ fontSize: '14px' }}></i> James DENIS</p>
+             <p><i class="fa-solid fa-user" style={{ fontSize: '14px' }}></i>{debitCard?.cardholderName}</p>
            </div>
            <div>
              <h6>Card Number</h6>
-             <p><img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" /><span>5300</span><span>5848</span><span>9581</span></p>
+             <p><img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" /><span>{a?.accountNumber?.slice(0,4)}</span><span>{a?.accountNumber?.slice(4,8)}</span><span>{a?.accountNumber?.slice(8,12)}</span></p>
            </div>
            <section>
              <main>
                <h6>Expires</h6>
-               <p>01/23</p>
+               <p>{a?.cardExpiryDate}</p>
              </main>
              <main>
                <h6>CVV</h6>

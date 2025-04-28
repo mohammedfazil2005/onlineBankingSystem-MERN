@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Line, Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import './staffDashboard.css'
+import { useNavigate } from 'react-router-dom'
+import { onFetchDashboardDetails } from '../../../../services/allAPI'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
 const StaffDashboard = () => {
 
+  const [data,setData]=useState({})
+
+  const navigate=useNavigate()
 
     const Linedata = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -44,6 +49,35 @@ const StaffDashboard = () => {
         maintainAspectRatio: false, // Allows custom width & height
       };
 
+      const fetchDashboardDetails=async()=>{
+            const token=sessionStorage.getItem("token")
+            if(token){
+              const header={
+                'Authorization':`Bearer ${token}`
+              }
+              try {
+                const serverResponce=await onFetchDashboardDetails(header)
+                if(serverResponce.status==200){
+                  setData(serverResponce.data)
+                }
+              } catch (error) {
+                console.log(error)
+              }
+        
+            }else{
+              navigate('/login')
+              toast.error("Please login again!")
+            }
+          }
+        
+          console.log(data)
+        
+          useEffect(()=>{
+              fetchDashboardDetails()
+            },[])
+
+            
+
 
   return (
     <div className='staff-deahsboard-parent'>
@@ -59,17 +93,17 @@ const StaffDashboard = () => {
           </div>
           <div>
             <h5>Total Balance</h5>
-            <p>₹564,7792</p>
+            <p>₹{data?.totalbalance}</p>
 
           </div>
         </div>
         <div className="home-dashboard-bank-main-card main-card-staff">
-          <div>
-            <button><i class="fa-solid fa-sack-dollar"></i></button>
+        <div>
+            <button><i class="fas fa-hand-holding-usd"></i></button>
           </div>
           <div>
             <h5>Total Loan Approved</h5>
-            <p>₹564,7792</p>
+            <p>₹{data?.totalloanamountapproved}</p>
 
           </div>
         </div>
@@ -79,7 +113,7 @@ const StaffDashboard = () => {
           </div>
           <div>
             <h5>Total Withdrawel </h5>
-            <p>₹564,7792</p>
+            <p>₹{data?.totalwithdrawelamount}</p>
 
           </div>
         </div>

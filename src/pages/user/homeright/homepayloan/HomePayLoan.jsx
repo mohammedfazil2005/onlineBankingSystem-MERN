@@ -1,7 +1,50 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FloatingLabel, Form } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { onFetchLoanAmount } from '../../../../services/allAPI'
+import { AuthContext } from '../../../../contexts/TokenContext'
+import toast from 'react-hot-toast'
 const HomePayLoan = () => {
+
+  const [remainingloanamount,setRemainingLoanAmount]=useState(0)
+  const navigate=useNavigate()
+  const {loanid}=useContext(AuthContext)
+
+   const fetchloanAmount = async () => {
+          const token = sessionStorage.getItem("token")
+     
+          if (token) {
+              const header = {
+                  'Authorization': `Bearer ${token}`
+              }
+              try {
+                  const serverResponce = await onFetchLoanAmount(loanid,header)
+                  console.log(serverResponce)
+                  if(serverResponce.status==200){
+                    setRemainingLoanAmount(serverResponce.data.loanamount)
+                  }else{
+                    console.log(serverResponce)
+                  }
+                  
+              } catch (error) {
+                  console.log(error)
+              }
+  
+          } else {
+              toast.error("Please Login Again!")
+              navigate("/login")
+          }
+      }
+
+      useEffect(()=>{
+        fetchloanAmount()
+      },[loanid])
+
+
+
+
+
+
   return (
     <div>
       <div className='login-parent'>
@@ -14,7 +57,7 @@ const HomePayLoan = () => {
           <div className='main-card-right-money-details-div' >
           <div>
               <h2>EMI Payment Amount</h2>
-              <h6 sty style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px',textAlign:'left' }}>₹5299</h6>
+              <h6 sty style={{ color: 'white', fontWeight: "bold", fontSize: '25px', letterSpacing: '2px',textAlign:'left' }}>₹{remainingloanamount}</h6>
             </div>
            
             
@@ -67,7 +110,6 @@ const HomePayLoan = () => {
             </div>
             <div className="debit-card-fill-details">
               <p>Use Your Debit Card Details</p>
-              <p>Use Your Credit Card Details</p>
             </div>
 
           </>
