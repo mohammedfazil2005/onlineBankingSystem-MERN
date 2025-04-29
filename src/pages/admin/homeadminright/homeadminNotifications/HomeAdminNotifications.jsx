@@ -7,10 +7,9 @@ import toast from 'react-hot-toast';
 
 
 const HomeAdminNotifications = () => {
-    const [show, setShow] = useState(false);
+   
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    
 
     const navigate=useNavigate()
 
@@ -20,6 +19,21 @@ const HomeAdminNotifications = () => {
         title:"",
         message:""
     })
+    const [show, setShow] = useState(false);
+    const [notShow, setNotShow] = useState(false);
+    const [viewNot,setViewNot]=useState({})
+
+    const [currentPage,setCurrentPage]=useState(1)
+
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const handleCloseNot = () => setNotShow(false);
+    const handleShowNot = (a) => {
+        setViewNot(a)
+        setNotShow(true)
+    };
 
     const fetchNotifications=async()=>{
           const token=sessionStorage.getItem("token")
@@ -85,11 +99,36 @@ const HomeAdminNotifications = () => {
                 }
     }
 
+    let notificationPerPage=6
+    let totalPages=Math.ceil(notifications?.length/notificationPerPage)
+
+   let lastIndex=currentPage*notificationPerPage
+   let firstIndex=lastIndex-notificationPerPage
+
+ 
+
+   let slicedArray=notifications?.slice(firstIndex,lastIndex)
+
+ 
+
+   const onForward=()=>{
+    if(currentPage<totalPages){
+        setCurrentPage(currentPage+1)
+    }
+   }
+
+   const onBackward=()=>{
+    if(currentPage>1){
+        setCurrentPage(currentPage-1)
+    }
+   }
+
+
+
     useEffect(()=>{
         fetchNotifications()
-    },[notifications])
+    },[not])
 
-    console.log(notifications)
 
 
 
@@ -104,7 +143,7 @@ const HomeAdminNotifications = () => {
                 <button onClick={handleShow}>Send Notifcation</button>
             </div>
             <div className='notfication-table-parent'>
-                {notifications?.length>0?notifications?.map((a,key)=>(
+                {slicedArray?.length>0?slicedArray?.map((a,key)=>(
                     <>
                       <div key={key} className='notification-table-main'>
                     <div>
@@ -113,13 +152,18 @@ const HomeAdminNotifications = () => {
                       
                     </div>
                     <div>
-                        <button>View</button>
+                        <button onClick={()=>handleShowNot(a)}>View</button>
                     </div>
                 </div>
                 <hr />
                     </>
                 )):""}
               
+            </div>
+            <div className='d-flex align-items-center justify-content-center'>
+                <button className='btn' onClick={onBackward}><i class="fa-solid fa-arrow-left"></i></button>
+                <p>{currentPage} of {totalPages}</p>
+                <button className='btn' onClick={onForward}><i class="fa-solid fa-arrow-right"></i></button>
             </div>
             <Modal show={show} onHide={handleClose} size='lg'>
                 <Modal.Header closeButton>
@@ -152,6 +196,27 @@ const HomeAdminNotifications = () => {
                     <Button variant="primary" onClick={sendNotifications}>
                         Send
                     </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={notShow} onHide={handleCloseNot} size='md'>
+                <Modal.Header closeButton>
+                    <Modal.Title>View Notifications</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>
+                        {/* <img style={{width:'50px',background:'black'}} src="https://askproject.net/bankai/wp-content/uploads/sites/32/2021/10/logo_Asset-1_2.png" alt="" /> */}
+                        <h6>ID: <span style={{fontWeight:'400',fontSize:'15px'}}>{viewNot?.id}</span> </h6>
+                        <h6 className='mt-3'>MESSAGE: <span style={{fontWeight:'400',fontSize:'15px'}}>{viewNot?.message}</span> </h6>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseNot}>
+                        Close
+                    </Button>
+                    {/* <Button variant="primary">
+                        Send
+                    </Button> */}
                 </Modal.Footer>
             </Modal>
         </div>

@@ -3,6 +3,7 @@ import './HomeAdminTransactions.css'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { onFetchAllBankTransactions, onFetchAllTransactions } from '../../../../services/allAPI'
+import { generateStyledTransactionPDF } from '../../../../services/TransactionPDF'
 const HomeAdminTransactions = () => {
 
     const [transaction,setTransaction]=useState([])
@@ -45,15 +46,12 @@ const HomeAdminTransactions = () => {
         <h1>All Transactions</h1>
         <p>Overview of all transactions made within the banking system.</p>
       </div>
-      <div className="home-admin-user-details-search">
-                <input type="text" placeholder='Search Transaction' />
-                <button>Search</button>
-            </div>
+    
             <div className="home-admin-dashboard-transaction-table mt-4">
         <p>#</p>
         <p>Date</p>
-        <p>From</p>
-        <p>To</p>
+        <p>transactionID</p>
+       
         <p>Amount</p>
         <p>status</p>
         <p>Export</p>
@@ -67,14 +65,14 @@ const HomeAdminTransactions = () => {
           <p>{key+1}</p>
     
          <p>{a?.date}</p>
-          <p>{a?.from}</p>
-          <p>{a?.to}</p>
-         <p>{a?.amount}</p>
+          <p>{a?.transactionID||'17459156866921'}</p>
+    
+         <p>₹{a?.amount}</p>
          <p>{a?.status}</p>
-         <button> Recipet</button>
+         <button onClick={()=>generateStyledTransactionPDF(a)}> Recipet</button>
  
        </div>
-     )):""}
+     )):<p>No transaction found!</p>}
 
      
            

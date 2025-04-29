@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { onCancelLoanRequest, onFetchLoans } from '../../../../services/allAPI'
 import { Button, Modal } from 'react-bootstrap'
 import { AuthContext } from '../../../../contexts/TokenContext'
+import { generateLoanReceiptPDF } from '../../../../services/LoanRecipet'
 const HomeRightMyLoans = ({ setCategoryName }) => {
 
     const [activeloans, setActiveLoans] = useState([])
@@ -124,7 +125,7 @@ const HomeRightMyLoans = ({ setCategoryName }) => {
                             </main>
                         </div>
                         <div>
-                            <button id='download-loan-recipet'>Download Loan Receipt</button>
+                            <button id='download-loan-recipet' onClick={()=>generateLoanReceiptPDF(a)}>Download Loan Receipt</button>
                         </div>
                     </div>
 
@@ -156,7 +157,8 @@ const HomeRightMyLoans = ({ setCategoryName }) => {
                             ...
                         </div>
                     </div>
-                )) : ""}
+                )) : <div className=' w-100'><p className='text-center'>Looks like you don’t Requested any loan!</p></div>}
+         
 
             </div>
 

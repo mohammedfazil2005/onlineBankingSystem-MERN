@@ -17,49 +17,58 @@ const HomeAdminDashboard = () => {
 
   //Line Chart
   const Linedata = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"], // Months
     datasets: [
       {
-        label: "Loan Requests",
-        data: [],
-        borderColor: "rgba(255, 99, 132, 1)", // Red
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        tension: 0.4
+        label: "Total Loan Requests",
+        data: Array(12).fill(0), // Initialize with 0 for each month
+        borderColor: "rgba(54, 162, 235, 1)", // Blue
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        pointBackgroundColor: "rgba(54, 162, 235, 1)",
+        pointBorderColor: "#fff",
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        tension: 0.4, // Smooth curve
+        fill: true,
       },
-     
-    ]
-  }
-
- 
-
-  data?.loanmonthlyrequestchart?.forEach((item)=>{
-    const Month=Linedata.labels.indexOf(item.month)
-    Linedata.datasets[0].data[Month]=item.count
-  })
-
-
+    ],
+  };
+  
+  
+  data?.loanRequestMonthly?.forEach((item) => {
+    const monthIndex = Linedata.labels.indexOf(item.month);
+    if (monthIndex !== -1) {
+      Linedata.datasets[0].data[monthIndex] = item.count; 
+    }
+  });
+  
 
   const Lineoptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
+      tooltip: {
+        enabled: false, 
+      },
       legend: {
-        display: true,
-        position: 'top',
-      }
+        display: true
+      },
+    },
+    elements: {
+      point: {
+        radius: 0,
+        hoverRadius: 0, 
+      },
     },
     scales: {
       y: {
-        ticks: {
-          callback: function(value) {
-            return Number.isInteger(value) ? value : null; // Only show integer numbers
-          },
-          stepSize: 1, // Optional: force step of 1 if you want closer ticks
-        }
-      }
-    }
+        beginAtZero: true, 
+      },
+    },
   };
-
-
+  
+  
+  
   //Bar chart
 
   const PieData = {
@@ -186,9 +195,9 @@ const HomeAdminDashboard = () => {
         <div style={{ height: '330px',borderRadius:'10px' }}>
           <Pie data={PieData} />
         </div>
-        {/* <div className='w-100' style={{borderRadius:'10px'}}>
+        <div className='w-100' style={{borderRadius:'10px',height:'300px',width:'100%'}}>
           <Line data={Linedata} options={Lineoptions} />
-        </div> */}
+        </div>
       </div>
 
       <div className='home-dashboard-transactions-heading mt-4'>
@@ -198,9 +207,9 @@ const HomeAdminDashboard = () => {
 
       <div className="home-admin-dashboard-transaction-table mt-4">
         <p>#</p>
-        <p>Name</p>
+        <p>Transaction ID</p>
         <p>Date</p>
-        <p>Transaction Type</p>
+       
         <p>Amount</p>
         <p>Status</p>
         <p>Export</p>
@@ -208,17 +217,18 @@ const HomeAdminDashboard = () => {
       </div>
 
 
-      <div className="home-admin-dashboard-transaction-table" style={{ borderBottom: '1px solid lightgray' }}>
-
-        <img src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_13146336.png" alt="" />
-        <p>Mohammed fazil</p>
-        <p>10/2/2024</p>
-        <p>Deposit</p>
-        <p>₹299</p>
+    {data?.lastTransactions?.length>0?data?.lastTransactions?.map((a,key)=>(
+        <div key={key} className="home-admin-dashboard-transaction-table mb-2" style={{ borderBottom: '1px solid lightgray' }}>
+        <p>{key+1}</p>
+        <p>{a?.transactionID||982191}</p>
+        <p>{a?.date}</p>
+     
+        <p>₹{a?.amount}</p>
         <p>Success</p>
         <button> Recipet</button>
 
       </div>
+    )):""}
 
 
 

@@ -5,6 +5,8 @@ import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { onFetchAllTransactions } from '../../../../services/allAPI';
+import { generateStyledTransactionPDF } from '../../../../services/TransactionPDF';
+
 const HomeRightTransactionHistory = () => {
     const [transactions,setTransactions]=useState([])
     const navigate=useNavigate()
@@ -78,7 +80,7 @@ const HomeRightTransactionHistory = () => {
                  <p>{a?.transactionType}</p>
                  
                  <p>₹{a?.amount}</p>
-                 <button>Export</button>
+                 <button onClick={()=>generateStyledTransactionPDF(a)}>Export</button>
                  </div>
             )):""
             }

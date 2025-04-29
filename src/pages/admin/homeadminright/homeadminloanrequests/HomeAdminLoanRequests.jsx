@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './HomeAdminLoanRequests.css'
 import { Link, useNavigate } from 'react-router-dom'
 import '../homeadmincreditCardRequests/HomeAdminCreditCardReq.css'
@@ -6,12 +6,15 @@ import '../homeadmincreditCardRequests/HomeAdminCreditCardReq'
 import { onApproveLoan, onFetchLoanRequests, onRejectLoanRequest } from '../../../../services/allAPI'
 import { Button, Modal } from 'react-bootstrap'
 import toast from 'react-hot-toast'
+import { AuthContext } from '../../../../contexts/TokenContext'
 
-const HomeAdminLoanRequests = () => {
+const HomeAdminLoanRequests = ({setCategoryName}) => {
 
 
 
   const navigate = useNavigate()
+
+   const {setUserID}=useContext(AuthContext)
 
 
   const [loanRequests, setLoanRequests] = useState([])
@@ -23,7 +26,7 @@ const HomeAdminLoanRequests = () => {
   const [not, setNot] = useState("")
   const [loanData, setLoanData] = useState({})
 
-  const handleClose = () => setReject(false);
+  const handleClose = () => setShow(false);
   const handleShow = (e) => {
     setUserdetails(e)
     setShow(true)
@@ -157,6 +160,11 @@ const HomeAdminLoanRequests = () => {
     }
   }
 
+  const onViewProfile=(user)=>{
+    setUserID(user.userID)
+    setCategoryName('ViewProfile')
+  }
+
 
 
   useEffect(() => {
@@ -196,7 +204,7 @@ const HomeAdminLoanRequests = () => {
             <p>{a?.loanDuration} years</p>
             <p>₹{a?.requestedAmount}</p>
             <p>{a.interestRate}%</p>
-            <Link>View Profile</Link>
+            <p style={{cursor:'pointer'}} onClick={()=>onViewProfile(a)}>View Profile</p>
             <div className='btn-loan-req-div'>
               <button onClick={() => handleShow(a)}>Approve</button>
               <button onClick={() => handleRejectShow(a)}>Reject</button>
@@ -260,7 +268,7 @@ const HomeAdminLoanRequests = () => {
 
       <Modal
         show={reject}
-        onHide={handleClose}
+        onHide={handleRejectClose}
         backdrop="static"
         keyboard={false}
 

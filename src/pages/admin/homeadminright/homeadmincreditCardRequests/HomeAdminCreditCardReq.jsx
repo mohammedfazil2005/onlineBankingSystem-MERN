@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './HomeAdminCreditCardReq.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 import toast from 'react-hot-toast'
 import { onApproveCreditCard, onFetchCreditCardRequests, onRejectCreditcardRequest } from '../../../../services/allAPI'
 import Modal from 'react-bootstrap/Modal';
+import { AuthContext } from '../../../../contexts/TokenContext'
 
 
 
-const HomeAdminCreditCardReq = () => {
+const HomeAdminCreditCardReq = ({setCategoryName}) => {
 
     const [show, setShow] = useState(false);
     const [reject, setReject] = useState(false);
 
     const [userdetails, setUserdetails] = useState({})
     const [cardData,setCardData]=useState({})
+
+      const {setUserID}=useContext(AuthContext)
 
     const handleClose = () => setShow(false);
     const handleShow = (e) => {
@@ -146,6 +149,11 @@ const HomeAdminCreditCardReq = () => {
         }
     }
 
+    const onViewProfile=(user)=>{
+        setUserID(user)
+        setCategoryName('ViewProfile')
+      }
+
 
 
 
@@ -188,7 +196,7 @@ const HomeAdminCreditCardReq = () => {
                         </div>
                         <p>{a?.email}</p>
                         <h6>{a?.cardType}</h6>
-                        <Link>View Profile</Link>
+                        <p onClick={()=>onViewProfile(a.userID)}>View Profile</p>
                         <div>
                             <button onClick={() => handleShow(a)}>Approve</button>
                             <button onClick={() => handleRejectShow(a)}>Reject</button>

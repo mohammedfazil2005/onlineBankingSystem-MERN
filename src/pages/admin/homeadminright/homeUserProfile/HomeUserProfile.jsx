@@ -7,31 +7,39 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 import { Button, FloatingLabel, Modal } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { onFetchUserDeatils, onSendNotificationToUser } from '../../../../services/allAPI'
+import { onActivateCard, onDeleteUserAccount, onFetchUserDeatils, onFreezeCard, onSendNotificationToUser } from '../../../../services/allAPI'
 import { AuthContext } from '../../../../contexts/TokenContext'
+import { generateStyledTransactionPDF } from '../../../../services/TransactionPDF'
 
 
 
-const HomeUserProfile = () => {
+const HomeUserProfile = ({setCategoryName}) => {
 
     const navigate = useNavigate()
     const { userID } = useContext(AuthContext)
 
     const [show, setShow] = useState(false);
-    const [userdata, setUserdata] = useState({})
+    const [deleteShow, setDeletshow] = useState(false);
 
+    const [userdata, setUserdata] = useState({})
     const [not, setNot] = useState('')
     const [notficationDetails, setNotificationDetails] = useState({
         title: "",
         message: ""
     })
-    
+
 
 
 
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleDeleteClose = () => setDeletshow(false);
+    const handleDeleteShow = () => {
+        setDeletshow(true)
+        console.log(userdata.id)
+    };
 
     const lineData = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -88,24 +96,24 @@ const HomeUserProfile = () => {
                     const header = {
                         'Authorization': `Bearer ${token}`
                     }
-                    const serverResponce = await onSendNotificationToUser(id,notficationDetails, header)
+                    const serverResponce = await onSendNotificationToUser(id, notficationDetails, header)
                     if (serverResponce.status == 200) {
                         toast.success(
                             "Notification sent successfully! Stay updated with the latest alerts.",
                             {
-                              style: {
-                                border: '2px solid blueviolet',
-                                padding: '16px',
-                                color: 'blueviolet',
-                              },
-                              iconTheme: {
-                                primary: 'blueviolet',
-                                secondary: 'white',
-                              },
-                              duration: 6000,
+                                style: {
+                                    border: '2px solid blueviolet',
+                                    padding: '16px',
+                                    color: 'blueviolet',
+                                },
+                                iconTheme: {
+                                    primary: 'blueviolet',
+                                    secondary: 'white',
+                                },
+                                duration: 6000,
                             }
-                          );
-                          
+                        );
+
                         handleClose()
                         setNot("done")
                     }
@@ -123,15 +131,149 @@ const HomeUserProfile = () => {
         }
     }
 
+    const deleteUserAccount = async () => {
+        const token = sessionStorage.getItem("token")
+        if (token) {
+            
+                try {
+                    const header = {
+                        'Authorization': `Bearer ${token}`
+                    }
+                    const serverResponce = await onDeleteUserAccount(userdata.id, header)
+                    if (serverResponce.status == 200) {
+                        toast.success(
+                            "Account deleted successfully! All associated data has been permanently removed.",
+                            {
+                              style: {
+                                border: '2px solid blueviolet',
+                                padding: '16px',
+                                color: 'blueviolet',
+                              },
+                              iconTheme: {
+                                primary: 'blueviolet',
+                                secondary: 'white',
+                              },
+                              duration: 6000,
+                            }
+                          );
+                        setCategoryName("User Management")
+                        handleDeleteClose()
+                    }else{
+                        toast.error("Please try again!")
+                    }
 
-    console.log(userdata)
+                } catch (error) {
+                    console.log(error)
+                }
+            
+        } else {
+            toast.error("Please login again!")
+            navigate('/login')
+        }
+    }
+
+    const freezeCard=async(id,accountno)=>{
+        
+        const token = sessionStorage.getItem("token")
+        if (token) {
+            
+                try {
+                    const header = {
+                        'Authorization': `Bearer ${token}`
+                    }
+                    const payload={
+                        userID:id,
+                        accountNumber:accountno
+                    }
+                    const serverResponce = await onFreezeCard(payload,header)
+                    if (serverResponce.status == 200) {
+                        toast.success(
+                            "Account frozen!",
+                            {
+                              style: {
+                                border: '2px solid blueviolet',
+                                padding: '16px',
+                                color: 'blueviolet',
+                              },
+                              iconTheme: {
+                                primary: 'blueviolet',
+                                secondary: 'white',
+                              },
+                              duration: 6000,
+                            }
+                          );
+                       setNot("done")
+                    }else{
+                        toast.error("Please try again!")
+                    }
+
+                } catch (error) {
+                    console.log(error)
+                }
+            
+        } else {
+            toast.error("Please login again!")
+            navigate('/login')
+        }
+    }
+
+    const activateCard=async(id,accountno)=>{
+        
+        const token = sessionStorage.getItem("token")
+        if (token) {
+            
+                try {
+                    const header = {
+                        'Authorization': `Bearer ${token}`
+                    }
+                    const payload={
+                        userID:id,
+                        accountNumber:accountno
+                    }
+                    const serverResponce = await onActivateCard(payload,header)
+                    setNot("done")
+                    if (serverResponce.status == 200) {
+                        toast.success(
+                            "Account Activated!",
+                            {
+                              style: {
+                                border: '2px solid blueviolet',
+                                padding: '16px',
+                                color: 'blueviolet',
+                              },
+                              iconTheme: {
+                                primary: 'blueviolet',
+                                secondary: 'white',
+                              },
+                              duration: 6000,
+                            }
+                          );
+                       
+                    }else{
+                        toast.error("Please try again!")
+                    }
+
+                } catch (error) {
+                    console.log(error)
+                }
+            
+        } else {
+            toast.error("Please login again!")
+            navigate('/login')
+        }
+    }
+
+
+
 
     useEffect(() => {
         fetchUserDetails()
 
-    }, [userID])
+    }, [userID,not])
 
-    console.log(notficationDetails)
+    console.log(userdata)
+
+
 
 
 
@@ -157,6 +299,7 @@ const HomeUserProfile = () => {
                     <main>
                         <div>
                             <button onClick={handleShow}>Send Notifcation</button>
+                            <button onClick={handleDeleteShow}>Delete Account</button>
                         </div>
                     </main>
                 </div>
@@ -245,9 +388,9 @@ const HomeUserProfile = () => {
                             <p>Available Balance: ₹{userdata?.debitCard?.cardBalance}</p>
                             <p>Expiry Date: {userdata?.debitCard?.cardExpiryDate}</p>
                             <div>
-                                <button>Delete Card</button>  {/* Removes the card permanently */}
-                                <button>Freeze Card</button>  {/* Temporarily disables the card */}
-                                <button>Report Lost/Stolen</button>  {/* Marks the card as lost or stolen */}
+                                {userdata?.debitCard?.status=="active"? <button onClick={()=>freezeCard(userdata?.id,userdata?.debitCard?.accountNumber)}>Freeze Card</button>:<button onClick={()=>activateCard(userdata?.id,userdata?.debitCard?.accountNumber)}>Activate Card</button>}
+                               
+
                             </div>
                         </div>
                         <div>
@@ -276,19 +419,19 @@ const HomeUserProfile = () => {
                     </div>
 
                     <>
-                        {userdata?.creditcards?.length > 0 ? userdata?.creditcards?.map((a) => (
-                            <div className="user-card-admin-main">
+                        {userdata?.creditcards?.length > 0 ? userdata?.creditcards?.map((a,key) => (
+                            <div key={key} className="user-card-admin-main">
                                 <div className='user-card-admin-details'>
                                     <h1>CREDIT</h1>
 
-                                    <p>Available Balance: ₹3,999</p>
+                                    <p>Available Balance: ₹{a?.cardBalance}</p>
 
 
-                                    <p>Expiry Date: 08/27</p>
+                                    <p>Expiry Date: {a?.cardExpiryDate}</p>
                                     <div>
                                         <button>Delete Card</button>  {/* Removes the card permanently */}
                                         <button>Freeze Card</button>  {/* Temporarily disables the card */}
-                                        <button>Report Lost/Stolen</button>  {/* Marks the card as lost or stolen */}
+
                                     </div>
                                 </div>
 
@@ -340,21 +483,12 @@ const HomeUserProfile = () => {
                     </div>
                     <div className="user-banks-name">
                         <button style={{ borderBottom: '2px solid blueviolet' }}>All Transactions</button>
-                        <button>Income </button>
-                        <button>Expense </button>
+                       
                     </div>
-                    <div className="user-bank-balance">
-
-                        <div>
-                            <Form.Select aria-label="Select card">
-                                <option value="debit">Debit Card</option>
-
-                            </Form.Select>
-                        </div>
-                    </div>
+                    
                     <div className="home-admin-dashboard-transaction-table">
                         <p>#</p>
-                        <p>Name</p>
+                      
                         <p>Date</p>
                         <p>Transaction Type</p>
                         <p>Amount</p>
@@ -366,13 +500,13 @@ const HomeUserProfile = () => {
                     {userdata?.transactions?.length > 0 ? userdata?.transactions?.map((a, key) => (
                         <div key={key} className="home-admin-dashboard-transaction-table" style={{ borderBottom: '1px solid lightgray' }}>
 
-                            <img className='mt-2' src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_13146336.png" alt="" />
-                            <p>{a?.from}</p>
+                         <p>{a?.transactionID||"1745928720203"}</p>
+                           
                             <p>{a?.date}</p>
                             <p>{a?.transactionType}</p>
                             <p>₹{a?.amount}</p>
                             <p>Success</p>
-                            <button> Recipet</button>
+                            <button onClick={()=>generateStyledTransactionPDF(a)}> Recipet</button>
 
                         </div>
                     )) : ""}
@@ -389,7 +523,7 @@ const HomeUserProfile = () => {
 
                             <p>Enter the title for the notification you want to send.</p>
                             <FloatingLabel controlId="title" label="Title" className="mb-3">
-                                <Form.Control onChange={((e)=>setNotificationDetails({...notficationDetails,title:e.target.value}))} type="text" placeholder="Enter title" className="cursor-pointer" required style={{ width: '100%' }} />
+                                <Form.Control onChange={((e) => setNotificationDetails({ ...notficationDetails, title: e.target.value }))} type="text" placeholder="Enter title" className="cursor-pointer" required style={{ width: '100%' }} />
                             </FloatingLabel>
                         </div>
                         <div>
@@ -397,7 +531,7 @@ const HomeUserProfile = () => {
 
                                 <p>Provide a brief message that will be sent as a notification.</p>
                                 <FloatingLabel controlId="message" label="Message" className="mb-3">
-                                    <Form.Control onChange={((e)=>setNotificationDetails({...notficationDetails,message:e.target.value}))} as="textarea" placeholder="Enter message" className="cursor-pointer" required style={{ width: '100%', height: '200px' }} />
+                                    <Form.Control onChange={((e) => setNotificationDetails({ ...notficationDetails, message: e.target.value }))} as="textarea" placeholder="Enter message" className="cursor-pointer" required style={{ width: '100%', height: '200px' }} />
                                 </FloatingLabel>
                             </div>
                         </div>
@@ -407,8 +541,36 @@ const HomeUserProfile = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={()=>sendNotifications(userdata?.id)}>
+                    <Button variant="primary" onClick={() => sendNotifications(userdata?.id)}>
                         Send
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={deleteShow} onHide={handleDeleteClose} size='md'>
+                <Modal.Header style={{ background: 'gray', border: '1px solid blueviolet' }} closeButton>
+                    <Modal.Title className='text-light'>Delete Account</Modal.Title>
+                </Modal.Header>
+               
+                <Modal.Body className='text-white' style={{ background: 'gray', border: '1px solid blueviolet' }}>
+                    <Modal.Body style={{ background: 'gray' }}>
+                        <p>Are you sure you want to delete this user account?</p>
+
+                       
+                           
+                        
+
+                     
+
+                        <p style={{fontSize:'12px'}}>Once deleted, all associated account information and transaction history will be permanently removed. This action cannot be undone.</p>
+                    </Modal.Body>
+                </Modal.Body>
+                <Modal.Footer style={{ background: 'gray', border: '1px solid blueviolet' }}>
+                    <Button variant="secondary" onClick={handleDeleteClose}>
+                        Close
+                    </Button>
+                    <Button style={{ background: 'blueviolet', border: '1px solid blueviolet' }} onClick={deleteUserAccount}>
+                        Delete Account
                     </Button>
                 </Modal.Footer>
             </Modal>

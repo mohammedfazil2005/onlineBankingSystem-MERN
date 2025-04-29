@@ -187,7 +187,7 @@ const HomeRightProfile = () => {
         <div>
           <section>
           <main>
-          <button>Change Password</button>
+        
           </main>
           <main>
           <button onClick={updateBtnClick}>Update</button>

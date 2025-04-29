@@ -13,50 +13,57 @@ const LoanOfficerDashboard = () => {
   const navigate=useNavigate()
   
   const Linedata = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"], // Months
     datasets: [
       {
-        label: "Personal Loan",
-        data: [10, 15, 9],
-        borderColor: "rgba(255, 99, 132, 1)", // Red
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        tension: 0.4
-      },
-      {
-        label: "Home Loan",
-        data: [5, 8, 12],
+        label: "Total Loan Requests",
+        data: Array(12).fill(0), // Initialize with 0 for each month
         borderColor: "rgba(54, 162, 235, 1)", // Blue
         backgroundColor: "rgba(54, 162, 235, 0.2)",
-        tension: 0.4
+        pointBackgroundColor: "rgba(54, 162, 235, 1)",
+        pointBorderColor: "#fff",
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        tension: 0.4, // Smooth curve
+        fill: true,
       },
-      {
-        label: "Auto Loan",
-        data: [3, 5, 7],
-        borderColor: "rgba(255, 206, 86, 1)", // Yellow
-        backgroundColor: "rgba(255, 206, 86, 0.2)",
-        tension: 0.4
-      },
-      {
-        label: "Business Loan",
-        data: [8, 12, 15],
-        borderColor: "rgba(75, 192, 192, 1)", // Teal
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        tension: 0.4
-      },
-      {
-        label: "Education Loan",
-        data: [4, 6, 9],
-        borderColor: "rgba(153, 102, 255, 1)", // Purple
-        backgroundColor: "rgba(153, 102, 255, 0.2)",
-        tension: 0.4
-      }
-    ]
-  }
-
-  const Lineoptions = {
-    responsive: true,  // Enables responsiveness
-    maintainAspectRatio: false, // Allows custom width & height
+    ],
   };
+  
+  // Populate data with loan requests
+  data?.loanRequestMonthly?.forEach((item) => {
+    const monthIndex = Linedata.labels.indexOf(item.month);
+    if (monthIndex !== -1) {
+      Linedata.datasets[0].data[monthIndex] = item.count; // Fill in the data for each month
+    }
+  });
+  
+  // Chart options for better control
+  const Lineoptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        enabled: false, // Disable tooltips on hover (as per your requirements)
+      },
+      legend: {
+        display: true, // Show legend (you can adjust this based on your needs)
+      },
+    },
+    elements: {
+      point: {
+        radius: 0, // Hide data points (dots)
+        hoverRadius: 0, // Disable hover effect on points
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true, // Ensure the y-axis starts at 0
+      },
+    },
+  };
+  
+  
 
   const fetchDashboardDetails=async()=>{
     const token=sessionStorage.getItem("token")
@@ -131,7 +138,7 @@ const LoanOfficerDashboard = () => {
         <h3>Loan Distribution Trends Over Time</h3>
         <p>Monthly analysis of different loan types issued by the bank.</p>
       </div>
-       <div className='w-100' style={{borderRadius:'10px',height:"350px"}}>
+       <div className='w-100' style={{borderRadius:'10px',minHeight:"350px"}}>
                 <Line data={Linedata} options={Lineoptions} />
               </div>
     </div>

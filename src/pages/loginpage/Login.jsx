@@ -362,7 +362,8 @@ const Login = () => {
           email:userData.email,
           password:userData.password,
         }
-        console.log(payload)
+       
+        setLoading(true)
         try {
          const serverResponce=await onLoginWithEmailAndPassword(payload)
          console.log(serverResponce)
@@ -394,8 +395,11 @@ const Login = () => {
          
           
          }else{
+         setTimeout(()=>{
+          setLoading(false)
           toast.error(
             "Invalid credentials! Please check your email and password.",
+            
             {
               style: {
                 border: '1px solid red',
@@ -408,6 +412,7 @@ const Login = () => {
               },
             }
           );
+         },4000)
          }
         } catch (error) {
           console.log(error)

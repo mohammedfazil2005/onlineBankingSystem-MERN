@@ -183,7 +183,7 @@ const HomeUserCards = ({setCategoryName}) => {
         </div>
 
         <div className="card-buttons-div">
-          <button>Freeze Card</button>
+          
         </div>
 
 
@@ -248,7 +248,6 @@ const HomeUserCards = ({setCategoryName}) => {
        </div>
 
        <div className="card-buttons-div">
-         <button>Freeze Card</button>
          <button onClick={()=>setCategoryName("repay")}>Repay</button>
        </div>
 

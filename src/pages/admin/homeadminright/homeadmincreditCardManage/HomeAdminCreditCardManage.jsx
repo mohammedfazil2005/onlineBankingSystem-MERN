@@ -59,7 +59,7 @@ const HomeAdminCreditCardManage = () => {
                     <div key={key} className='main-card' style={{ background: 'url(https://img.freepik.com/free-vector/premium-round-golden-frame-red-background-design_1017-54880.jpg)' }}>
                     <div className='main-card-heading'>
                         <h5>Bank Ai</h5>
-                        <p>{a?.cardType}</p>
+                        <p>{a?.cardTier}</p>
                     </div>
                     <div className='main-card-user-details'>
                         <h4>{a?.cardholderName}</h4>

@@ -10,22 +10,24 @@ import HomeAdminCreditCardManage from './homeadmincreditCardManage/HomeAdminCred
 import HomeAdminStaff from './homeadminAddStaff/HomeAdminStaff'
 import HomeAdminStaffManagement from './homeAdminStaffManagement/HomeAdminStaffManagement'
 import HomeStaffProfile from './homestaffProfile/HomeStaffProfile'
+import HomeAdminApprovedLoan from './homeadminApprovedLoan/HomeAdminApprovedLoan'
 
 
 const HomeAdminRight = ({categoryName,setCategoryName}) => {
   return (
     <div>
      {categoryName=="Admin Dashboard"?<HomeAdminDashboard/>:""}
-     {categoryName=="User Management"?<HomeAdminUserDetails setCategoryName={setCategoryName}/>:""}
+     {categoryName=="Account holders"?<HomeAdminUserDetails setCategoryName={setCategoryName}/>:""}
      {categoryName=="Add staff"?<HomeAdminStaff/>:""}
-     {categoryName=="ViewProfile"?<HomeUserProfile/>:""}
-     {categoryName=="Loan Requests"?<HomeAdminLoanRequests/>:""}
+     {categoryName=="ViewProfile"?<HomeUserProfile setCategoryName={setCategoryName}/>:""}
+     {categoryName=="Loan Requests"?<HomeAdminLoanRequests setCategoryName={setCategoryName}/>:""}
      {categoryName=="Transactions"?<HomeAdminTransactions/>:""}
      {categoryName=="Notifications"?<HomeAdminNotifications/>:""}
-     {categoryName=="Credit Card Requests"?<HomeAdminCreditCardReq/>:""}
+     {categoryName=="Credit Card Requests"?<HomeAdminCreditCardReq setCategoryName={setCategoryName}/>:""}
      {categoryName=="Manage Credit Cards"?<HomeAdminCreditCardManage/>:""}
      {categoryName=="Staff Management"?<HomeAdminStaffManagement setCategoryName={setCategoryName}/>:""}
      {categoryName=="viewstaffprofile"?<HomeStaffProfile/>:""}
+     {categoryName=="Manage Loans"?<HomeAdminApprovedLoan/>:""}
     </div>
   )
 }

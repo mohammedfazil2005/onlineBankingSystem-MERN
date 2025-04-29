@@ -138,3 +138,27 @@ export const onRejectLoanRequest=async(data,header)=>{
 export const onFetchLoanAmount=async(id,header)=>{
   return await commonAPI('get',`/get/loanamount/${id}`,{},header)
 }
+export const onFetchUserDashboardDetails=async(header)=>{
+  return await commonAPI('get',`/dashboard/user`,{},header)
+}
+
+export const onDeleteUserAccount=async(id,header)=>{
+  return await commonAPI('delete',`/deleteaccount/${id}`,{},header)
+}
+export const onFreezeCard=async(body,header)=>{
+  return await commonAPI('patch',`/onfreezecard`,body,header)
+}
+export const onActivateCard=async(body,header)=>{
+  return await commonAPI('patch',`/onactivatecard`,body,header)
+}
+export const onPayFullLoanAmount=async(body,header)=>{
+  return await commonAPI('patch',`/payfullamount/loan`,body,header)
+}
+export const onPayFullLoanAmountOTP=async(otp,header)=>{
+  return await commonAPI('patch',`/payfullamount/otp/${otp}`,{},header)
+}
+
+export const onFetchApprovedLoan=async(header)=>{
+  return await commonAPI('get',`/onfetchapproved/loans`,{},header)
+}
+

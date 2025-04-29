@@ -7,6 +7,7 @@ import { onFetchAllNotifications } from '../../../../services/allAPI'
 const HomeRightNotifications = () => {
   const [notification,setNotification]=useState([])
   const navigate=useNavigate()
+  const [currentPage,setCurrentPage]=useState(1)
 
   const fetchNotifications=async()=>{
     const token=sessionStorage.getItem("token")
@@ -27,12 +28,33 @@ const HomeRightNotifications = () => {
     }else{
     }
   }
+  
+  let notificationPerPage=8
+  let totalpages=Math.ceil(notification?.length/notificationPerPage)
+
+  let lastIndex=currentPage* notificationPerPage
+  let firstIndexIndex=lastIndex-notificationPerPage
+
+  let slicedData=notification?.slice(firstIndexIndex,lastIndex)
+
+  const onBackward=()=>{
+    if(currentPage>1){
+      setCurrentPage(currentPage-1)
+    }
+  }
+
+  const onForward=()=>{
+    if(currentPage<totalpages){
+      setCurrentPage(currentPage+1)
+    }
+  }
+
 
   useEffect(()=>{
     fetchNotifications()
   },[])
 
-  console.log(notification)
+
 
 
   return (
@@ -42,7 +64,7 @@ const HomeRightNotifications = () => {
         <p>Stay updated with your account activities</p>
       </div>
       <div className='notfication-table-parent'>
-        {notification.length>0?notification?.map((a)=>(
+        {slicedData.length>0?slicedData?.map((a)=>(
            <div key={a.id} className='notification-table-main'>
            <div>
            <i className='fa-solid fa-bell'></i>
@@ -53,8 +75,17 @@ const HomeRightNotifications = () => {
        </div>
        </div>
         )):''}
+
+
        
         <hr />
+
+        <div className='d-flex align-items-center justify-content-center'>
+                <button className='btn' onClick={onBackward}><i class="fa-solid fa-arrow-left"></i></button>
+                <p>{currentPage} of {totalpages}</p>
+                <button className='btn' onClick={onForward}><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
       </div>
     </div>
   )

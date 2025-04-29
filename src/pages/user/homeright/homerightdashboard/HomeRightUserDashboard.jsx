@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './HomeRightUserDashboard.css'
 import { Form } from 'react-bootstrap';
 import { Line, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import { onFetchUserDashboardDetails } from '../../../../services/allAPI';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
 
 
 const HomeRightUserDashboard = () => {
+
+    const [data,setData]=useState({})
 
     const lineData = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -36,11 +39,40 @@ const HomeRightUserDashboard = () => {
         maintainAspectRatio: false, // Allows custom width & height
     };
 
+    const fetchDashboardDetails=async()=>{
+          const token=sessionStorage.getItem("token")
+          if(token){
+            const header={
+              'Authorization':`Bearer ${token}`
+            }
+            try {
+              const serverResponce=await onFetchUserDashboardDetails(header)
+              if(serverResponce.status==200){
+                setData(serverResponce.data)
+              }
+            } catch (error) {
+              console.log(error)
+            }
+      
+          }else{
+            navigate('/login')
+            toast.error("Please login again!")
+          }
+        }
+
+        useEffect(()=>{
+            fetchDashboardDetails()
+        },[])
+
+        console.log(data)
+
+
+
 
     return (
         <div className='user-dashboard-parent'>
             <div className="userdashboard-heading">
-                <h1>Welcome,<span>Adrian</span></h1>
+                <h1>Welcome,<span>{data?.name}</span></h1>
                 <p>Access & manage your account and transactions efficiently</p>
             </div>
             <div className="user-balance-dashboard">
@@ -48,24 +80,24 @@ const HomeRightUserDashboard = () => {
                     <div className="user-balance-dashboard-main-card">
                         <div>
                             <h5>Your Balance</h5>
-                            <p>₹3989</p>
-                        </div>
-                        <div>
-                            <h6>Credit card</h6>
-                            <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
-                        </div>
-
-                    </div>
-                    <div className="user-balance-dashboard-main-card-2">
-                        <div>
-                            <h5>Your Balance</h5>
-                            <p>₹43,989</p>
+                            <p>₹{data?.debitcardBalance}</p>
                         </div>
                         <div>
                             <h6>Debit card</h6>
                             <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
                         </div>
+
                     </div>
+                    {/* <div className="user-balance-dashboard-main-card-2">
+                        <div>
+                            <h5>Your Balance</h5>
+                            <p>₹43,989</p>
+                        </div>
+                        <div>
+                            <h6>Credit card</h6>
+                            <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
+                        </div>
+                    </div> */}
                 </div>
 
 
@@ -120,16 +152,18 @@ const HomeRightUserDashboard = () => {
          <p>Export</p>
       </div>
 
-      <div className="user-page-transaction-table mb-2" style={{marginTop:'3px'}}>
+      {data?.transactions?.length>0?data?.transactions?.map((a,key)=>(
+        <div className="user-page-transaction-table mb-2" style={{marginTop:'3px'}}>
         
-         <p>MohammedFazil</p>
-         <p>20/2/2024</p>
-         <p>Debit</p>
-         <p>Credited</p>
-       
-         <p>₹460</p>
-         <button>Export</button>
-      </div>
+        <p>MohammedFazil</p>
+        <p>{a?.date}</p>
+        <p>{a?.card}</p>
+        <p>{a?.transactionType}</p>
+      
+        <p>₹{a?.amount}</p>
+        <button>Export</button>
+     </div>
+      )):""}
      </div>
         </div>
     )

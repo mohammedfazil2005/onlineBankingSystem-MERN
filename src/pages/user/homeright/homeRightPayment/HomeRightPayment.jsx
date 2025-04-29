@@ -87,11 +87,22 @@ const HomeRightPayment = () => {
                             setIsLoading(false)
                             setInOTP(true)
 
-                        }else{
+                        }else if(serverResponce.status==404){
                          setTimeout(()=>{
                             setIsLoading(false)
                             toast.error("Account not found")
                          },3000)
+
+                        }else if(serverResponce.status==400){
+                            setTimeout(()=>{
+                                setIsLoading(false)
+                                toast.error("Insufficient balance ❌");
+                             },3000)
+                        }else if(serverResponce.status==403){
+                            setTimeout(()=>{
+                                setIsLoading(false)
+                                toast.error("Your account is Freezed. You can't make payments ❌");
+                             },3000)
                         }
                         
                     } catch (error) {

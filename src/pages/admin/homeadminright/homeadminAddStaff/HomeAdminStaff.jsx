@@ -107,6 +107,7 @@ const HomeAdminStaff = () => {
                     });
                     }else if(serverResponce.status==409){
                       toast.error("Email already exists!")
+                      setPreviewImage("")
                       setUserData({
                         firstName: "",
                         lastName: "",
@@ -183,12 +184,12 @@ const HomeAdminStaff = () => {
     <div className='login-parent login-parent-staff'>
       <div className="login-child">
       <div className='login-profile-div mt-4'>
-                <img src={previewImage ? previewImage : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} alt="" />
+                <img key={previewImage}  src={previewImage ? previewImage : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} alt="" />
                 <div className='d-flex flex-column '>
                   <label>
 
                     <p className='btn' style={{ backgroundColor: 'rgba(137, 43, 226, 0.414)', color: 'white' }}>choose a file</p>
-                    <Form.Control  type="file" className="cursor-pointer w-50" onChange={(e) => setUserData({ ...userData, profileimg: e.target.files[0] })} required style={{ display: 'none' }} />
+                    <Form.Control   type="file" className="cursor-pointer w-50" onChange={(e) => setUserData({ ...userData, profileimg: e.target.files[0] })} required style={{ display: 'none' }} />
 
                   </label>
 
@@ -259,7 +260,7 @@ const HomeAdminStaff = () => {
               </FloatingLabel>
 
               <FloatingLabel controlId="password" label="Enter 4 Digit password" className="mb-3">
-                    <Form.Control type="text" value={userData.password} name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
+                    <Form.Control type="password" value={userData.password} name='password' maxLength={4} placeholder="Enter your 4 Digit password" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
                   </FloatingLabel>
               </div>
 

@@ -9,6 +9,8 @@ const HomeAdminUserDetails = ({setCategoryName}) => {
   
 
     const [users,setUsers]=useState([])
+    const [search,setSearch]=useState('')
+    const [data,setData]=useState([])
 
     const navigate=useNavigate()
     const {setUserID}=useContext(AuthContext)
@@ -17,6 +19,8 @@ const HomeAdminUserDetails = ({setCategoryName}) => {
         setUserID(id)
         setCategoryName("ViewProfile")
     }
+
+    
 
     const fetchAccountHolders=async()=>{
         const token=sessionStorage.getItem("token")
@@ -40,11 +44,22 @@ const HomeAdminUserDetails = ({setCategoryName}) => {
         }
     }
 
-    console.log(users)
+    
+
+    useEffect(()=>{
+        if(search==""){
+         setData(users)
+        }else{
+            let isName=users?.filter((a)=>a.firstname.toLowerCase().includes(search.toLowerCase()))
+        setData(isName)
+        }
+    },[search,users])
 
     useEffect(()=>{
         fetchAccountHolders()
-    },[])
+    },[search])
+
+    console.log(users)
 
 
 
@@ -56,11 +71,11 @@ const HomeAdminUserDetails = ({setCategoryName}) => {
                 <p>Manage user details</p>
             </div>
             <div className="home-admin-user-details-search">
-                <input type="text" placeholder='Search user' />
+                <input onChange={(e)=>setSearch(e.target.value)} type="text" placeholder='Search user' />
                 <button>Search</button>
             </div>
             <div className="home-admin-user-details-table-parent">
-            {users?.length>0?users?.map((a)=>(
+            {data?.length>0?data?.map((a)=>(
                 <> <div className="user-details-table-card-main">
                 <div>
                     <img src={`http://localhost:3000/uploads/${a.imageurl}`} alt="" />
@@ -73,7 +88,7 @@ const HomeAdminUserDetails = ({setCategoryName}) => {
                 </main>
                </div>
                <hr /></>
-            )):""}
+            )):<p>No users found!</p>}
             </div>
             
               

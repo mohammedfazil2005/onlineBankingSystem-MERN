@@ -13,11 +13,9 @@ import { useNavigate } from 'react-router-dom'
 const HomeAdminStaffManagement = ({ setCategoryName }) => {
     const [show, setShow] = useState(false);
     const  [staffID,setStaffID]=useState("")
-    const handleClose = () => setShow(false);
-    const handleShow = (id) => {
-        setStaffID(id)
-        setShow(true);
-    }
+   const [search,setSearch]=useState("")
+
+   const [data,setData]=useState("")
 
     const navigate = useNavigate()
 
@@ -26,6 +24,12 @@ const HomeAdminStaffManagement = ({ setCategoryName }) => {
         title: "",
         message: ""
     })
+
+    const handleClose = () => setShow(false);
+    const handleShow = (id) => {
+        setStaffID(id)
+        setShow(true);
+    }
 
     const fetchStaffs = async () => {
         const token = sessionStorage.getItem("token")
@@ -96,6 +100,16 @@ const HomeAdminStaffManagement = ({ setCategoryName }) => {
         }
     }
 
+    useEffect(()=>{
+        if(search==""){
+            setData(staffs)
+        }else{
+            const filtered=staffs?.filter((a)=>a['firstname'].toLowerCase().includes(search.toLowerCase()))
+            setData(filtered)
+        }
+    },[staffs,search])
+    
+
 
 
     useEffect(() => {
@@ -114,7 +128,7 @@ const HomeAdminStaffManagement = ({ setCategoryName }) => {
             </div>
             <div className="home-admin-user-details-search home-admin-search-staff" style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>
-                    <input type="text" placeholder='Search user' />
+                    <input onChange={(e)=>setSearch(e.target.value)} type="text" placeholder='Search user' />
                     <button className='ms-2'>Search</button>
                 </div>
 
@@ -127,9 +141,9 @@ const HomeAdminStaffManagement = ({ setCategoryName }) => {
 
             </div>
             <div className="home-admin-user-details-table-parent">
-                {staffs?.length > 0 ? staffs?.map((a, key) => (
+                {data?.length > 0 ? data?.map((a, key) => (
                     <>
-                        <div className="user-details-table-card-main">
+                        <div key={key} className="user-details-table-card-main">
                             <div>
                                 <img src={`http://localhost:3000/uploads/${a.imageurl}`} alt="" />
                                 <h2>{a?.firstname} {a?.lastname}</h2>
@@ -137,12 +151,14 @@ const HomeAdminStaffManagement = ({ setCategoryName }) => {
                             </div>
                             <main>
                                 <p>Active</p>
-                                <button className='w-100' onClick={()=>handleShow(a._id)}>Send a notification</button>
+                                <button onClick={()=>handleShow(a._id)}>Send a notification</button>
+                              
+                                <button >Remove</button>
                             </main>
                         </div>
                         <hr />
                     </>
-                )) : ""}
+                )) : <p>No staff found!</p>}
 
 
             </div>

@@ -138,7 +138,6 @@ const HomeRightLoans = () => {
         }
     },[loanData.loanAmount,loanData.interestRate,loanData.loanDuration])
 
-    console.log(loanData)
     
 
     return (
@@ -194,7 +193,7 @@ const HomeRightLoans = () => {
                     </div>
                     <div>
                         <FloatingLabel controlId="amount" label="Loan Amount" className="mb-3">
-                            <Form.Control onChange={(e)=>setLoanData({...loanData,loanAmount:e.target.value})} type="number" placeholder="ex:jhon@gmail.com" className="cursor-pointer" required style={{ width: '100%' }} />
+                            <Form.Control value={loanData.loanAmount} onChange={(e)=>setLoanData({...loanData,loanAmount:e.target.value})} type="number" placeholder="ex:jhon@gmail.com" className="cursor-pointer" required style={{ width: '100%' }} />
                         </FloatingLabel>
                     </div>
                 </div>
@@ -204,7 +203,7 @@ const HomeRightLoans = () => {
                         <p>Please select a loan duration: 12 months, 24 months,<br /> 5 years, or 10 years.</p>
                     </div>
                     <div>
-                        <Form.Select defaultValue={''} aria-label="Default select example" onChange={(e)=>setLoanData({...loanData,loanDuration:e.target.value})}>
+                        <Form.Select  defaultValue={loanData.loanDuration} aria-label="Default select example" onChange={(e)=>setLoanData({...loanData,loanDuration:e.target.value})}>
                             <option disabled value="">Select Duration</option>
                             <option value="1">1 year</option>
                             <option value="2">2 years</option>
@@ -220,7 +219,7 @@ const HomeRightLoans = () => {
                         <p>interest rate for this loan is set by the bank.</p>
                     </div>
                     <div>
-                        <p>{interestRate?`${interestRate}%`:'Please select a loantype'}</p>
+                        <p>{loanData.interestRate?`${loanData.interestRate}%`:'Please select a loantype'}</p>
                     </div>
                 </div>
                 <div className="transfer-details-input-div">
