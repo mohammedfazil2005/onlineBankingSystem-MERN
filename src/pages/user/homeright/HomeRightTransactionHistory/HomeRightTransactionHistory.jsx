@@ -9,6 +9,7 @@ import { generateStyledTransactionPDF } from '../../../../services/TransactionPD
 
 const HomeRightTransactionHistory = () => {
     const [transactions,setTransactions]=useState([])
+    const [currentPage,setCurrentPage]=useState(1)
     const navigate=useNavigate()
 
     const fetchTransactions=async()=>{
@@ -34,11 +35,30 @@ const HomeRightTransactionHistory = () => {
        
     }
 
+    const onBackward=()=>{
+        if(currentPage>1){
+          setCurrentPage(currentPage-1)
+        }
+      }
+    
+      const onForward=()=>{
+        if(currentPage<totalpages){
+          setCurrentPage(currentPage+1)
+        }
+      }
+
+      let notificationPerPage=8
+    let totalpages=Math.ceil(transactions?.length/notificationPerPage)
+
+  let lastIndex=currentPage* notificationPerPage
+  let firstIndexIndex=lastIndex-notificationPerPage
+
+  let slicedData=transactions?.slice(firstIndexIndex,lastIndex)
+
     useEffect(()=>{
         fetchTransactions()
     },[])
 
-    console.log(transactions)
 
 
 
@@ -72,7 +92,7 @@ const HomeRightTransactionHistory = () => {
             <p> Oops! Looks like you haven't made any transactions yet.</p>
             <button className='mt-3' style={{backgroundColor:'blueviolet',padding:'8px',border:'1px solid white',color:'white'}}>  Start Your First Transaction</button>
             </div>}
-         {transactions?.length>0?transactions?.map((a,index)=>(
+         {slicedData?.length>0?slicedData?.map((a,index)=>(
              <div key={index} className="user-page-transaction-table" style={{marginTop:'-20px'}}>
                  <p>{a?.to?a.to:a.from}</p>
                  <p>{a?.date}</p>
@@ -84,6 +104,12 @@ const HomeRightTransactionHistory = () => {
                  </div>
             )):""
             }
+
+<div className='d-flex align-items-center justify-content-center'>
+                <button className='btn' onClick={onBackward}><i class="fa-solid fa-arrow-left"></i></button>
+                <p>{currentPage} of {totalpages}</p>
+                <button className='btn' onClick={onForward}><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
         
            
         

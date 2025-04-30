@@ -15,9 +15,17 @@ const HomeAdminCreditCardReq = ({setCategoryName}) => {
     const [reject, setReject] = useState(false);
 
     const [userdetails, setUserdetails] = useState({})
+    const [filteredData,setFilteredData]=useState([])
     const [cardData,setCardData]=useState({})
 
       const {setUserID}=useContext(AuthContext)
+
+      const navigate = useNavigate()
+
+      const [creditCardRequests, setCreditCardRequests] = useState([])
+      const [not, setNot] = useState("")
+
+      const [dropdownValue,setDropdownValue]=useState("")
 
     const handleClose = () => setShow(false);
     const handleShow = (e) => {
@@ -31,10 +39,7 @@ const HomeAdminCreditCardReq = ({setCategoryName}) => {
         setReject(true)
     };
 
-    const navigate = useNavigate()
-
-    const [creditCardRequests, setCreditCardRequests] = useState([])
-    const [not, setNot] = useState("")
+   
 
     const fetchCreditCardRequests = async () => {
         const token = sessionStorage.getItem('token')
@@ -154,6 +159,9 @@ const HomeAdminCreditCardReq = ({setCategoryName}) => {
         setCategoryName('ViewProfile')
       }
 
+     
+     
+
 
 
 
@@ -161,6 +169,22 @@ const HomeAdminCreditCardReq = ({setCategoryName}) => {
     useEffect(() => {
         fetchCreditCardRequests()
     }, [not])
+
+    useEffect(()=>{
+        if(dropdownValue==""){
+            setFilteredData(creditCardRequests)
+           }else{
+            let sortedData=creditCardRequests?.filter((a)=>a['cardType']==dropdownValue)
+            setFilteredData(sortedData)
+           }
+      },[dropdownValue,creditCardRequests])
+
+      
+
+    
+
+
+
 
 
 
@@ -173,9 +197,11 @@ const HomeAdminCreditCardReq = ({setCategoryName}) => {
                 </div>
                 <div className='me-3'>
 
-                    <Form.Select aria-label="Default select example" style={{ width: '120px' }} className='float-end'>
-                        <option value="1">Silver</option>
-                        <option value="2">Gold</option>
+                    <Form.Select value={dropdownValue}  onChange={(e)=>setDropdownValue(e.target.value)} aria-label="Default select example" style={{ width: '170px' }} className='float-end'>
+                        <option value="" disabled>Select Card type</option>
+                        <option value="">All</option>
+                        <option value="silver">Silver</option>
+                        <option value="gold">Gold</option>
 
                     </Form.Select>
                 </div>
@@ -188,7 +214,7 @@ const HomeAdminCreditCardReq = ({setCategoryName}) => {
                 </div> : <div>
                     <p className='text-center'>No credit card requests are available at the moment.!!</p>
                 </div>}
-                {creditCardRequests?.length > 0 ? creditCardRequests?.map((a, key) => (
+                {filteredData?.length > 0 ? filteredData?.map((a, key) => (
                     <div key={key} className="home-admin-credit-req-table heading-req-content">
                         <div>
                             <img src={`http://localhost:3000/uploads/${a.profileimg}`} alt="" />

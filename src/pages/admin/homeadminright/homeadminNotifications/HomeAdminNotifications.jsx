@@ -99,7 +99,7 @@ const HomeAdminNotifications = () => {
                 }
     }
 
-    let notificationPerPage=6
+    let notificationPerPage=7
     let totalPages=Math.ceil(notifications?.length/notificationPerPage)
 
    let lastIndex=currentPage*notificationPerPage
@@ -155,7 +155,7 @@ const HomeAdminNotifications = () => {
                         <button onClick={()=>handleShowNot(a)}>View</button>
                     </div>
                 </div>
-                <hr />
+                <hr style={{marginTop:'-2px'}}/>
                     </>
                 )):""}
               

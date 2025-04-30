@@ -162,3 +162,10 @@ export const onFetchApprovedLoan=async(header)=>{
   return await commonAPI('get',`/onfetchapproved/loans`,{},header)
 }
 
+export const onDeleteNotifications=async(id,header)=>{
+  return await commonAPI('delete',`/deleteNotification/${id}`,{},header)
+}
+
+export const onRemoveStaffs=async(id,header)=>{
+  return await commonAPI('delete',`/onRemove/staffs/${id}`,{},header)
+}

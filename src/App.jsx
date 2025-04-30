@@ -11,6 +11,7 @@ import CreditCardManager from "./pages/creditcardManager/CreditCardManager"
 import AccountManager from "./pages/accountManager/AccountManager"
 import { useContext } from "react"
 import { AuthContext } from "./contexts/TokenContext"
+import PNF from "./pages/pnf/PNF"
 
 
 
@@ -29,7 +30,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/dashboard" element={isToken?role?role=="accountholder"?<HomeUser/>:role=="generalmanager"?<HomeAdmin/>:role=="loanofficer"?<LoanOfficer/>:role=="creditcardmanager"?<CreditCardManager/>:role=="accountmanager"?<AccountManager/>:role=="operationmanager"?<Staff/>:<Navigate to={'/login'}/>:<Navigate to={'/login'}/>:<Navigate to={'/login'}/>}/>
       <Route path="/otp" element={<OTP/>}/>
-      
+      <Route path="/*" element={<PNF/>}/>
      </Routes>
    
     </>

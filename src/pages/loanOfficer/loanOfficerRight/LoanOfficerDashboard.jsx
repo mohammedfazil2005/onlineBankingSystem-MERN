@@ -30,35 +30,34 @@ const LoanOfficerDashboard = () => {
     ],
   };
   
-  // Populate data with loan requests
+ 
   data?.loanRequestMonthly?.forEach((item) => {
     const monthIndex = Linedata.labels.indexOf(item.month);
-    if (monthIndex !== -1) {
-      Linedata.datasets[0].data[monthIndex] = item.count; // Fill in the data for each month
-    }
+      Linedata.datasets[0].data[monthIndex] = item.count;
+    
   });
   
-  // Chart options for better control
+ 
   const Lineoptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       tooltip: {
-        enabled: false, // Disable tooltips on hover (as per your requirements)
+        enabled: false, 
       },
       legend: {
-        display: true, // Show legend (you can adjust this based on your needs)
+        display: true,
       },
     },
     elements: {
       point: {
-        radius: 0, // Hide data points (dots)
-        hoverRadius: 0, // Disable hover effect on points
+        radius: 0,
+        hoverRadius: 0,
       },
     },
     scales: {
       y: {
-        beginAtZero: true, // Ensure the y-axis starts at 0
+        beginAtZero: true, 
       },
     },
   };

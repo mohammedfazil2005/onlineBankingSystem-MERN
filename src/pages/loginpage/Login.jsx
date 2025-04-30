@@ -180,7 +180,7 @@ const Login = () => {
     let userDate = date.date()
     let userMonth = date.month()
     let DOB = `${userDate}/${userMonth.length>=2?userMonth:`0${userMonth}`}/${userYear}`
-    console.log(DOB)
+ 
     if (currentYear - userYear >= 21) {
       setUserData({ ...userData, DOB: DOB })
       setValid({ ...valid, DOB: false })
@@ -190,7 +190,7 @@ const Login = () => {
     }
   }
 
-  console.log(isLoginWithGoogle)
+ 
   const onRegORLogBtnClick = async () => {
     if (login == "Register") {
       if (userData.DOB && userData.email && userData.firstName && userData.lastName && userData.password && userData.phone && userData.postalCode && userData.profileimg && userData.salarySource && userData.state && userData.role) {
@@ -214,7 +214,6 @@ const Login = () => {
             'Content-Type': 'multipart/form-data'
           }
 
-          console.log(payload)
 
           try {
             const serverResponce=await onRegistration(payload,header)
@@ -308,7 +307,7 @@ const Login = () => {
           try {
             setLoading(true)
             const serverResponce=await onLoginWithEmail(payload)
-            console.log(serverResponce)
+            
           
             if(serverResponce.status==201){
              
@@ -366,7 +365,7 @@ const Login = () => {
         setLoading(true)
         try {
          const serverResponce=await onLoginWithEmailAndPassword(payload)
-         console.log(serverResponce)
+
          if(serverResponce.status==200){
           sessionStorage.setItem("token",serverResponce.data.token)
           sessionStorage.setItem("role",serverResponce.data.role)
@@ -445,8 +444,6 @@ const Login = () => {
 
     }
   }, [userData.profileimg])
-
-  console.log(userData)
 
 
 
