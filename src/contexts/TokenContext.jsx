@@ -8,6 +8,7 @@ const AuthenticationContext=({children})=>{
     const [email,setEmail]=useState("")
     const [userID,setUserID]=useState("")
     const [loanid,setLoanid]=useState("")
+    const [payment,setPayment]=useState("")
 
     useEffect(()=>{
         if(sessionStorage.getItem("token")){
@@ -18,7 +19,7 @@ const AuthenticationContext=({children})=>{
     },[isToken,role])
     
     return(
-        <AuthContext.Provider value={{isToken,setIsToken,role,setRole,email,setEmail,userID,setUserID,loanid,setLoanid}}>
+        <AuthContext.Provider value={{isToken,setIsToken,role,setRole,email,setEmail,userID,setUserID,loanid,setLoanid,setPayment,payment}}>
             {children}
         </AuthContext.Provider>
     )

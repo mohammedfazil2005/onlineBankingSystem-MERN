@@ -169,3 +169,6 @@ export const onDeleteNotifications=async(id,header)=>{
 export const onRemoveStaffs=async(id,header)=>{
   return await commonAPI('delete',`/onRemove/staffs/${id}`,{},header)
 }
+export const onFetchDebitCardDetails=async(header)=>{
+  return await commonAPI('get','/fetchdebitcard',{},header)
+}

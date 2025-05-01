@@ -9,9 +9,12 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 
 
-const HomeRightUserDashboard = () => {
+const HomeRightUserDashboard = ({setCategoryName}) => {
 
     const [data, setData] = useState({})
+
+    const [filteredData,setFilteredData]=useState([])
+    const [selectType,setSelectType]=useState("")
 
     const Linedata = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"], // Months
@@ -84,7 +87,18 @@ const HomeRightUserDashboard = () => {
         fetchDashboardDetails()
     }, [])
 
+    useEffect(()=>{
+        if(selectType==""){
+            setFilteredData(data.transactions)
+        }else{
+            let filteredData=data?.transactions?.filter((a)=>a['transactionType'].toLowerCase()==selectType)
+            setFilteredData(filteredData)
+        }
+    },[selectType,data])
+
     console.log(data)
+
+
 
 
 
@@ -108,16 +122,19 @@ const HomeRightUserDashboard = () => {
                         </div>
 
                     </div>
-                    {/* <div className="user-balance-dashboard-main-card-2">
-                        <div>
-                            <h5>Your Balance</h5>
-                            <p>₹43,989</p>
-                        </div>
-                        <div>
-                            <h6>Credit card</h6>
-                            <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
-                        </div>
-                    </div> */}
+                    {data?.creditcards?.length>0?data?.creditcards?.map((a)=>(
+                          <div className="user-balance-dashboard-main-card-2">
+                          <div>
+                              <h5>Your Balance</h5>
+                              <p>₹{a?.cardBalance}</p>
+                          </div>
+                          <div>
+                              <h6>Credit card ({a?.cardTier})</h6>
+                              <img src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png" alt="" />
+                          </div>
+                      </div>
+                    )):""}
+                  
                 </div>
 
 
@@ -141,26 +158,15 @@ const HomeRightUserDashboard = () => {
             <div className="user-dashboard-transactions">
                 <div className="user-dashboard-transactions-heading">
                     <h1>Recent transactions</h1>
-                    <button>View all <i className="fa-solid fa-arrow-right"></i></button>
+                    <button onClick={()=>setCategoryName('Transactions')}>View all <i className="fa-solid fa-arrow-right"></i></button>
                 </div>
                 <div className="user-banks-name">
-                    <button style={{ borderBottom: '2px solid blueviolet' }}>All Transactions</button>
-                    <button>Debited </button>
-                    <button>Credited </button>
+                    <button onClick={()=>setSelectType('')} style={selectType?{borderBottom:"none"}:{borderBottom: '2px solid blueviolet'}}>All Transactions</button>
+                    <button style={selectType=="debited"?{borderBottom: '2px solid blueviolet'}:{borderBottom:"none"} }onClick={()=>setSelectType('debited')}>Debited </button>
+                    <button style={selectType=="credited"?{borderBottom: '2px solid blueviolet'}:{borderBottom:"none"} } onClick={()=>setSelectType('credited')}>Credited </button>
                 </div>
                 <div className="user-bank-balance">
-                    <div className='user-bank-balance-heading'>
-
-
-                    </div>
-                    <div>
-                        <Form.Select aria-label="Select card">
-
-                            <option value="debit">Debit Card</option>
-                            <option value="credit">Credit Card</option>
-
-                        </Form.Select>
-                    </div>
+                    
                 </div>
                 <div className="user-page-transaction-table head-user-trans">
 
@@ -173,7 +179,8 @@ const HomeRightUserDashboard = () => {
                     <p>Export</p>
                 </div>
 
-                {data?.transactions?.length > 0 ? data?.transactions?.map((a, key) => (
+                {filteredData?.length > 0 ? filteredData?.map((a, key) => (
+                    <>
                     <div className="user-page-transaction-table mb-2" style={{ marginTop: '3px' }}>
 
                         <p>MohammedFazil</p>
@@ -184,7 +191,12 @@ const HomeRightUserDashboard = () => {
                         <p>₹{a?.amount}</p>
                         <button>Export</button>
                     </div>
-                )) : ""}
+                    <hr  style={{marginTop:'-7px'}}/>
+                    </>
+                )) : <div className='text-center'>
+                <p> Oops! Looks like you haven't made any transactions yet.</p>
+                <button onClick={()=>setCategoryName('Transactions')} className='mt-3' style={{backgroundColor:'blueviolet',padding:'8px',border:'1px solid white',color:'white'}}>  Start Your First Transaction</button>
+                </div>}
             </div>
         </div>
     )

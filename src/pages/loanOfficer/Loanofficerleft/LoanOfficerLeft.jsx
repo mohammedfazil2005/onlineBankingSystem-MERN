@@ -5,6 +5,7 @@ const LoanOfficerLeft = ({setCategoryName}) => {
      const categoryDetailsLoanOfficer = [
         { name: "Dashboard", fontClass: "fas fa-tachometer-alt" },
         { name: "Loan Requests", fontClass: "fas fa-file-invoice-dollar" },
+        { name: "Approved Loans", fontClass: "fas fa-file-invoice-dollar" },
         { name: "Notifications", fontClass: "fa-solid fa-bell" },
         { name: "Logout", fontClass: "fas fa-sign-in-alt" }
       ];

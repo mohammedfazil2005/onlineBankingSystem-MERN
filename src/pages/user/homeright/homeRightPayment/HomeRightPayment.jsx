@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './HomeRightPayment.css'
 import { FloatingLabel, Form } from 'react-bootstrap'
 import OTP from '../../../otppage/OTP'
 import { onFetchAllCards, onTransaction, onTransactionOTP } from '../../../../services/allAPI'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import { AuthContext } from '../../../../contexts/TokenContext'
 
 const HomeRightPayment = () => {
     const [inOTP,setInOTP]=useState(false)
     const [isLoading,setIsLoading]=useState(false)
-
+    const {setPayment}=useContext(AuthContext)
     const [cards,setCards]=useState([])
 
     const [OTP,setOTP]=useState("")
@@ -141,6 +142,7 @@ const HomeRightPayment = () => {
                         toast.success("Transaction Completed")
                         setIsLoading(false)
                         setInOTP(false)
+                        setPayment("Done")
                     },3000)
                    
                 }else if(serverResponce.status==400){

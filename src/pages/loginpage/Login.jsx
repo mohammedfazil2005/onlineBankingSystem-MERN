@@ -152,6 +152,7 @@ const Login = () => {
     if (e.name == "email") {
       // setUserData(d => ({ ...d, email: e.value }));
       let regexTest = e.value.match(/^[a-zA-Z]*[0-9]*@?@gmail.com+$/)
+      console.log(regexTest)
       if (!!regexTest) {
         setUserData({ ...userData, email: e.value })
         setValid({ ...valid, email: false })
@@ -428,7 +429,7 @@ const Login = () => {
 
 
 
-
+console.log(userData)
 
 
   useEffect(() => {
@@ -569,7 +570,7 @@ const Login = () => {
 
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <FloatingLabel controlId="email" label="Email" className="mb-3">
-                    <Form.Control type="email"  name='email' placeholder="Enter your email" className="cursor-pointer" onChange={(e) => setUserData({...userData,email:e.target.value})} required />
+                    <Form.Control type="email"  name='email' placeholder="Enter your email" className="cursor-pointer" onChange={(e) => onTextChange(e.target)} required />
                   </FloatingLabel>
                   {valid.email ? <p style={{ marginTop: '-25px', color: 'red', fontWeight: "300" }}>Please enter a valid email address!</p> : ""}
                 </div>

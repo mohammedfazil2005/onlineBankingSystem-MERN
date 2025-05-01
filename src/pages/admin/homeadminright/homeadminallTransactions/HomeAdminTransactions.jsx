@@ -8,6 +8,7 @@ const HomeAdminTransactions = () => {
 
     const [transaction,setTransaction]=useState([])
     const navigate=useNavigate()
+    const [currentPage,setCurrentPage]=useState(1)
 
     const fetchTransaction=async()=>{
         const token=sessionStorage.getItem("token")
@@ -31,6 +32,27 @@ const HomeAdminTransactions = () => {
         }
     }
 
+    let transactionPerPage=6
+
+    let totalpages=Math.ceil(transaction?.length/transactionPerPage)
+    let lastIndex=currentPage* transactionPerPage
+    let firstIndex=lastIndex-transactionPerPage
+
+    let slicedData=transaction?.slice(firstIndex,lastIndex)
+
+    const onForward=()=>{
+        if(currentPage<totalpages){
+            setCurrentPage(currentPage+1)
+        }
+       }
+    
+       const onBackward=()=>{
+        if(currentPage>1){
+            setCurrentPage(currentPage-1)
+        }
+       }
+    
+
     useEffect(()=>{
         fetchTransaction()
     },[])
@@ -50,16 +72,16 @@ const HomeAdminTransactions = () => {
             <div className="home-admin-dashboard-transaction-table mt-4">
         <p>#</p>
         <p>Date</p>
-        <p>transactionID</p>
+        <p>TransactionID</p>
        
         <p>Amount</p>
-        <p>status</p>
+        <p>Status</p>
         <p>Export</p>
 
       </div>
 
 
-     {transaction?.length>0?transaction?.map((a,key)=>(
+     {slicedData?.length>0?slicedData?.map((a,key)=>(
          <div className="home-admin-dashboard-transaction-table" style={{ borderBottom: '1px solid lightgray' }}>
 
           <p>{key+1}</p>
@@ -73,6 +95,12 @@ const HomeAdminTransactions = () => {
  
        </div>
      )):<p>No transaction found!</p>}
+
+<div className='d-flex align-items-center justify-content-center'>
+                <button className='btn' onClick={onBackward}><i class="fa-solid fa-arrow-left"></i></button>
+                <p>{currentPage} of {totalpages}</p>
+                <button className='btn' onClick={onForward}><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
 
      
            

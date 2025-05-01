@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './HomeRightTransactionHistory.css'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Form } from 'react-bootstrap';
@@ -6,11 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { onFetchAllTransactions } from '../../../../services/allAPI';
 import { generateStyledTransactionPDF } from '../../../../services/TransactionPDF';
+import { AuthContext } from '../../../../contexts/TokenContext';
 
 const HomeRightTransactionHistory = () => {
     const [transactions,setTransactions]=useState([])
     const [currentPage,setCurrentPage]=useState(1)
     const navigate=useNavigate()
+    const {payment}=useContext(AuthContext)
+
+        const [filteredData,setFilteredData]=useState([])
+        const [selectType,setSelectType]=useState("")
 
     const fetchTransactions=async()=>{
         const token= sessionStorage.getItem("token")
@@ -57,7 +62,18 @@ const HomeRightTransactionHistory = () => {
 
     useEffect(()=>{
         fetchTransactions()
-    },[])
+    },[payment])
+
+    
+        useEffect(()=>{
+            if(selectType==""){
+                setFilteredData(slicedData)
+            }else{
+                let filteredData=transactions?.filter((a)=>a['transactionType'].toLowerCase()==selectType)
+                setFilteredData(filteredData)
+            }
+        },[selectType,transactions])
+    
 
 
 
@@ -70,10 +86,10 @@ const HomeRightTransactionHistory = () => {
                     <p>Gain insights and Track Your Transactions Over Time</p>
                 </div>
                 {transactions?.length>0?<div>
-                <Form.Select aria-label="Default select example" value={''}>
-                           <option value="" disabled>Select card</option>
-                            <option value="1">DEBIT</option>
-                            <option value="2">CREDIT</option>
+                <Form.Select aria-label="Default select example" value={selectType} onChange={(e)=>setSelectType(e.target.value)}>
+                           <option value="">All</option>
+                            <option value="debited">DEBIT</option>
+                            <option value="credited">CREDIT</option>
 
                         </Form.Select>
                 </div>:""}
@@ -81,8 +97,8 @@ const HomeRightTransactionHistory = () => {
            
          
          
-           {transactions?.length>0?<div className="user-page-transaction-table head-user-trans"> 
-            <p>Name</p>
+           {filteredData?.length>0?<div className="user-page-transaction-table head-user-trans"> 
+            <p>to</p>
             <p>Date</p>
             <p>CARD</p>
             <p>Transaction Type</p>
@@ -92,8 +108,9 @@ const HomeRightTransactionHistory = () => {
             <p> Oops! Looks like you haven't made any transactions yet.</p>
             <button className='mt-3' style={{backgroundColor:'blueviolet',padding:'8px',border:'1px solid white',color:'white'}}>  Start Your First Transaction</button>
             </div>}
-         {slicedData?.length>0?slicedData?.map((a,index)=>(
-             <div key={index} className="user-page-transaction-table" style={{marginTop:'-20px'}}>
+         {filteredData?.length>0?filteredData?.map((a,index)=>(
+            <>
+             <div key={index} className="user-page-transaction-table" style={{marginTop:'-10px'}}>
                  <p>{a?.to?a.to:a.from}</p>
                  <p>{a?.date}</p>
                  <p>{a?.card}</p>
@@ -102,6 +119,8 @@ const HomeRightTransactionHistory = () => {
                  <p>₹{a?.amount}</p>
                  <button onClick={()=>generateStyledTransactionPDF(a)}>Export</button>
                  </div>
+                 <hr style={{marginTop:'-10px'}}/>
+                 </>
             )):""
             }
 

@@ -142,7 +142,7 @@ const HomeAdminLoanRequests = ({setCategoryName}) => {
               duration: 6000,
             }
           );
-          handleClose()
+          handleRejectClose()
           setNot("done")
         } else {
           toast.error("Please try again after some time!")

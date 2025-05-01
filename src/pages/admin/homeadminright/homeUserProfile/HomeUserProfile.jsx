@@ -479,7 +479,7 @@ const HomeUserProfile = ({setCategoryName}) => {
                 <div className="user-dashboard-transactions" style={{ marginTop: '60px' }}>
                     <div className="user-dashboard-transactions-heading">
                         <h1>Recent transactions</h1>
-                        <button>View all</button>
+                        
                     </div>
                     <div className="user-banks-name">
                         <button style={{ borderBottom: '2px solid blueviolet' }}>All Transactions</button>

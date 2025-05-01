@@ -74,6 +74,9 @@
     background-color: rgba(137, 43, 226, 0.503);
     color: white;
 }
+.transfer-btn-div button:hover{
+    background-color: blueviolet;
+}
 
 .bank-account-details-heading{
     display: flex;

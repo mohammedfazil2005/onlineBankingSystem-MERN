@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './HomeUserCards.css'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -6,6 +6,7 @@ import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { onApplyForCreditCard, onFetchAllCards } from '../../../../services/allAPI';
+import { AuthContext } from '../../../../contexts/TokenContext';
 
 
 
@@ -16,7 +17,7 @@ const HomeUserCards = ({setCategoryName}) => {
   const [show, setShow] = useState(false);
   const [debitCard,setDebitCard]=useState({})
   const [creditCards,setCreditCards]=useState([])
-
+  const {payment}=useContext(AuthContext)
   const [cardtype,setCardtype]=useState("")
 
   const navigate=useNavigate()
@@ -105,7 +106,7 @@ const HomeUserCards = ({setCategoryName}) => {
 
   useEffect(()=>{
     fetchCards()
-  },[])
+  },[payment])
 
   
 

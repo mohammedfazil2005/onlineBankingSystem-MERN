@@ -152,7 +152,7 @@ const HomeAdminStaffManagement = ({ setCategoryName }) => {
         if (search == "") {
             setData(staffs)
         } else {
-            const filtered = staffs?.filter((a) => a['firstname'].toLowerCase().includes(search.toLowerCase()))
+            const filtered = staffs?.filter((a) => a['firstname'].toLowerCase().includes(search.toLowerCase())||a['role']==search.toLowerCase())
             setData(filtered)
         }
     }, [staffs, search])
@@ -180,8 +180,9 @@ const HomeAdminStaffManagement = ({ setCategoryName }) => {
                     <button className='ms-2'>Search</button>
                 </div>
 
-                <Form.Select aria-label="Default select example" value={''} style={{ width: '180px' }} className='float-end'>
+                <Form.Select onChange={(e)=>setSearch(e.target.value)} aria-label="Default select example"  style={{ width: '180px' }} className='float-end'>
                     <option value="" disabled>Select staff by role</option>
+                    <option value="">All</option>
                     {staffData.map((a) => (
                         <option value={a.value} key={a.label}>{a.label}</option>
                     ))}

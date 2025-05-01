@@ -30,8 +30,9 @@ const StaffDepositMoney = () => {
                         amount:carddetails.amount
                     }
                     try {
-                        setLoading(true)
+                        setLoading(true)    
                         const serverResponce=await onWithdraw(carddetails.accno,payload,header)
+                        console.log(serverResponce)
                         if(serverResponce.status==200){
                             setTimeout(()=>{
                                 toast.success(
@@ -51,7 +52,7 @@ const StaffDepositMoney = () => {
                                   );
                                 setLoading(false)
                                 setOTP(true)
-                            },4000)
+                            },3000)
                         }else if(serverResponce.status==400){
                             setTimeout(()=>{
                                 toast.error("Transaction failed due to insufficient balance. Kindly ensure sufficient funds are available and try again.")

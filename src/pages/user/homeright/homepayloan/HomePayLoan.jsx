@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FloatingLabel, Form } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { onFetchLoanAmount, onPayFullLoanAmount, onPayFullLoanAmountOTP } from '../../../../services/allAPI'
+import { onFetchDebitCardDetails, onFetchLoanAmount, onPayFullLoanAmount, onPayFullLoanAmountOTP } from '../../../../services/allAPI'
 import { AuthContext } from '../../../../contexts/TokenContext'
 import toast from 'react-hot-toast'
 const HomePayLoan = ({setCategoryName}) => {
@@ -191,6 +191,31 @@ const HomePayLoan = ({setCategoryName}) => {
     }
   }
 
+  const fetchDebitCard=async()=>{
+    const token = sessionStorage.getItem("token")
+    if (token) {
+      const header = {
+        'Authorization': `Bearer ${token}`
+      }
+      try {
+        const serverResponce = await onFetchDebitCardDetails(header)
+        console.log(serverResponce)
+        if (serverResponce.status == 200) {
+         setPayData({...payData,accountNumber:serverResponce.data.accno,cvv:serverResponce.data.cvv})
+        } else {
+          console.log(serverResponce)
+        }
+
+      } catch (error) {
+        console.log(error)
+      }
+
+    } else {
+      toast.error("Please Login Again!")
+      navigate("/login")
+    }
+  }
+
 
 
   useEffect(() => {
@@ -198,7 +223,7 @@ const HomePayLoan = ({setCategoryName}) => {
   }, [loanid])
 
   console.log(payData)
-  console.log(remainingloanamount)
+
 
 
 
@@ -244,6 +269,7 @@ const HomePayLoan = ({setCategoryName}) => {
                       type="number"
                       placeholder="Enter your account number"
                       className="cursor-pointer"
+                      value={payData.accountNumber}
                       maxLength={12}
                       onChange={(e) => setPayData({ ...payData, accountNumber: e.target.value })}
                       required
@@ -252,6 +278,7 @@ const HomePayLoan = ({setCategoryName}) => {
 
                   <FloatingLabel controlId="cvv" label="CVV" className="mb-3">
                     <Form.Control
+                    value={payData.cvv}
                       type="number"
                       maxLength={3}
                       placeholder="Enter CVV"
@@ -279,9 +306,9 @@ const HomePayLoan = ({setCategoryName}) => {
                 </div>
 
               </div>
-              {/* <div className="debit-card-fill-details">
-                <p>Use Your Debit Card Details</p>
-              </div> */}
+              <div className="debit-card-fill-details">
+                <p onClick={fetchDebitCard}>Use Your Debit Card Details</p>
+              </div>
 
             </>
             <button onClick={payLoanAmount}>Pay EMI</button>

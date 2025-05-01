@@ -94,7 +94,8 @@
 .user-dashboard-transactions{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .user-dashboard-transactions-heading{

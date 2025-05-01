@@ -1,7 +1,7 @@
 .user-transaction-history-parent{
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 15px;
 }
 .user-transaction-history-heading{
     display: flex;
@@ -19,9 +19,11 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     place-items: center ;
     align-items: center;
+    margin-top: 10px;
 }
 .head-user-trans {
     border-bottom: 1px solid lightgray;
+    margin-bottom: 10px;
 }
 .head-user-trans p{
     text-transform: uppercase;
