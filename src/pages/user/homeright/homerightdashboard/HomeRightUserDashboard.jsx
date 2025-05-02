@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap';
 import { Line, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { onFetchUserDashboardDetails } from '../../../../services/allAPI';
+import { generateStyledTransactionPDF } from '../../../../services/TransactionPDF';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
 
@@ -189,7 +190,7 @@ const HomeRightUserDashboard = ({setCategoryName}) => {
                         <p>{a?.transactionType}</p>
 
                         <p>₹{a?.amount}</p>
-                        <button>Export</button>
+                        <button onClick={()=>generateStyledTransactionPDF(a)}>Export</button>
                     </div>
                     <hr  style={{marginTop:'-7px'}}/>
                     </>

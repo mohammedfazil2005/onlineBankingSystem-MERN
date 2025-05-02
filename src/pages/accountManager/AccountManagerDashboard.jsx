@@ -41,14 +41,14 @@ const AccountManagerDashboard = () => {
         datasets: [
           {
             label: "Total withdrawels",
-            data: [], // More data points for a full year
-            borderColor: "rgba(255, 99, 132, 1)", // Red
+            data: [], 
+            borderColor: "rgba(255, 99, 132, 1)", 
             backgroundColor: "rgba(255, 99, 132, 0.2)",
-            pointBackgroundColor: "rgba(255, 99, 132, 1)", // Red for points
+            pointBackgroundColor: "rgba(255, 99, 132, 1)", 
             pointBorderColor: "#fff",
             pointRadius: 6,
             pointHoverRadius: 8,
-            tension: 0.4, // Smooth curve
+            tension: 0.4, 
             fill: true,
           },
          

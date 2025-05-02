@@ -5,6 +5,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { onFetchDashboardDetails } from '../../../../services/allAPI'
+import { generateStyledTransactionPDF } from '../../../../services/TransactionPDF'
 
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement)
@@ -15,20 +16,20 @@ const HomeAdminDashboard = () => {
 
   const navigate=useNavigate()
 
-  //Line Chart
+ 
   const Linedata = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"], // Months
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"], 
     datasets: [
       {
         label: "Total Loan Requests",
-        data: Array(12).fill(0), // Initialize with 0 for each month
-        borderColor: "rgba(54, 162, 235, 1)", // Blue
+        data: Array(12).fill(0), 
+        borderColor: "rgba(54, 162, 235, 1)", 
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         pointBackgroundColor: "rgba(54, 162, 235, 1)",
         pointBorderColor: "#fff",
         pointRadius: 6,
         pointHoverRadius: 8,
-        tension: 0.4, // Smooth curve
+        tension: 0.4, 
         fill: true,
       },
     ],
@@ -69,8 +70,7 @@ const HomeAdminDashboard = () => {
   
   
   
-  //Bar chart
-
+ 
   const PieData = {
     labels: ['approved', "pending", "rejected"],
     datasets: [
@@ -78,8 +78,8 @@ const HomeAdminDashboard = () => {
         label: "Loan status",
         data: [],
         backgroundColor: [
-        "#81C784", // Light Green (Lighter version of #4CAF50)
-    "#FFB74D", // Light Orange (Lighter version of #FF9800)
+        "#81C784", 
+    "#FFB74D", 
     "#E57373"  
         ],
         hoverOffset: 4,
@@ -88,7 +88,7 @@ const HomeAdminDashboard = () => {
   }
 
   if (data?.loanstatusmonthlychart?.length > 0) {
-  const loanStatus = data.loanstatusmonthlychart[0];  // Picking latest month (April)
+  const loanStatus = data.loanstatusmonthlychart[0];  
 
   PieData.datasets[0].data = [
     loanStatus.approved || 0, 
@@ -225,7 +225,7 @@ const HomeAdminDashboard = () => {
      
         <p>₹{a?.amount}</p>
         <p>Success</p>
-        <button> Recipet</button>
+        <button onClick={()=>generateStyledTransactionPDF(a)}> Recipet</button>
 
       </div>
     )):""}

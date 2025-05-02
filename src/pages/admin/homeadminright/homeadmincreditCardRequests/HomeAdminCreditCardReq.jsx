@@ -94,7 +94,7 @@ const HomeAdminCreditCardReq = ({setCategoryName}) => {
                         }
                     );
                     handleClose()
-                    setNot("done")
+                    setNot(serverResponce)
                 } else if (serverResponce.status == 409) {
                     toast.error("User already have this card!")
                 } else if (serverResponce.status == 400) {

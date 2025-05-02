@@ -156,7 +156,7 @@ const HomeUserProfile = ({setCategoryName}) => {
                               duration: 6000,
                             }
                           );
-                        setCategoryName("User Management")
+                        setCategoryName("Account holders")
                         handleDeleteClose()
                     }else{
                         toast.error("Please try again!")

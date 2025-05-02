@@ -19,26 +19,26 @@ const CreditCardManagerDashboard = () => {
     datasets: [
       {
         label: "Silver Card",
-        data: [], // More data points for a full year
-        borderColor: "rgba(255, 99, 132, 1)", // Red
+        data: [], 
+        borderColor: "rgba(255, 99, 132, 1)", 
         backgroundColor: "rgba(255, 99, 132, 0.2)",
-        pointBackgroundColor: "rgba(255, 99, 132, 1)", // Red for points
+        pointBackgroundColor: "rgba(255, 99, 132, 1)", 
         pointBorderColor: "#fff",
         pointRadius: 6,
         pointHoverRadius: 8,
-        tension: 0.4, // Smooth curve
+        tension: 0.4,
         fill: true,
       },
       {
         label: "Gold Card",
         data: [],
-        borderColor: "rgba(54, 162, 235, 1)", // Blue
+        borderColor: "rgba(54, 162, 235, 1)", 
         backgroundColor: "rgba(54, 162, 235, 0.2)",
-        pointBackgroundColor: "rgba(54, 162, 235, 1)", // Blue for points
+        pointBackgroundColor: "rgba(54, 162, 235, 1)", 
         pointBorderColor: "#fff",
         pointRadius: 6,
         pointHoverRadius: 8,
-        tension: 0.4, // Smooth curve
+        tension: 0.4,
         fill: true,
       },
      
@@ -49,8 +49,8 @@ const CreditCardManagerDashboard = () => {
     const monthIndex = Linedata.labels.indexOf(e.month);
   
     if (monthIndex !== -1) {
-      Linedata.datasets[0].data[monthIndex] = e.silver ?? 0; // Silver Card
-      Linedata.datasets[1].data[monthIndex] = e.gold ?? 0;   // Gold Card
+      Linedata.datasets[0].data[monthIndex] = e.silver ?? 0;
+      Linedata.datasets[1].data[monthIndex] = e.gold ?? 0;  
     }
   });
 
