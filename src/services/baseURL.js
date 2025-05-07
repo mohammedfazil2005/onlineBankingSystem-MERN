@@ -1,3 +1,3 @@
-const baseURL="http://localhost:3000"
+const baseURL="https://onlinebankingsystem-backend.onrender.com"
 
 export default baseURL;
